@@ -1,0 +1,207 @@
+p {
+    line-height: 1.6em;
+}
+
+.hero {
+    text-align: center;
+    margin: 8em 0 3em;
+}
+    .hero h1 {
+        font-size: 800%;
+        margin: 0;
+        padding: 0;
+        color: #1f8dd6;
+        font-weight: 100;
+    }
+    .hero h2 {
+        font-weight: 100;
+        font-size: 260%;
+        margin: 0.02em 0 0.8em;
+        color: #666;
+    }
+
+.hero-cta pre {
+    padding: 1em;
+    font-size: 100%;
+}
+
+a.pure-button-cta,
+a.pure-button-secondary {
+    font-size: 120%;
+    font-weight: bold;
+    margin: 0.25em 0;
+}
+
+a.pure-button-cta {
+    background: #1f8dd6;
+    color: white;
+    border: 1px solid #1f8dd6;
+}
+
+a.pure-button-secondary {
+    background: #fff;
+    color: #666;
+    border: 1px solid #ddd;
+}
+
+.size-chart {
+    width: 100%;
+}
+
+    .size-chart-item {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .size-chart-base {
+        background: #0e90d2;
+    }
+        .size-chart-base span {
+            color: rgb(103, 194, 240);
+        }
+
+    .size-chart-grids {
+        background: rgb(128, 88, 165);
+    }
+        .size-chart-grids span {
+            color: rgb(200, 131, 255);
+        }
+    .size-chart-forms {
+        background: #5eb95e;
+    }
+
+        .size-chart-forms span {
+            color: rgb(161, 240, 137);
+        }
+
+    .size-chart-buttons {
+        background: #dd514c;
+    }
+
+        .size-chart-buttons span {
+            color: rgb(236, 164, 154);
+        }
+
+    .size-chart-menus {
+        background: rgb(250, 210, 50);
+    }
+        .size-chart-menus span {
+            color: rgb(255, 240, 134);
+        }
+    .size-chart-tables {
+        background: rgb(243, 123, 29);
+    }
+        .size-chart-tables span {
+            color: rgb(255, 190, 129);
+        }
+
+    a.size-chart-label {
+        display: block;
+        color: #fff;
+        padding: 0.5em;
+        text-decoration: none;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .size-chart-size {
+        display: block;
+    }
+
+.marketing-ribbon {
+    border-bottom: 1px solid #eee;
+    padding: 1em 0;
+}
+
+    .marketing-ribbon h3 {
+        font-size: 1.47em;
+        font-weight: normal;
+    }
+
+.sample-buttons .pure-button {
+    width: 30%;
+    margin: 0.2em;
+}
+.sample-buttons p {
+    margin: 0.5em;
+}
+
+
+.pure-button-a {
+    background: #e1f2fa;
+    color: #5992aa;
+}
+
+.pure-button-b {
+    background: #fcebbd;
+    color: #af9540;
+}
+
+.pure-button-c,
+.pure-button-d,
+.pure-button-e {
+    border-radius: 8px;
+}
+
+.pure-button-f,
+.pure-button-g,
+.pure-button-h {
+    border-radius: 20px;
+}
+
+.pure-button-c {
+    background: #333;
+    color: #fff;
+}
+.pure-button-d {
+    background: #d3eda3;
+    color: #72962e;
+}
+
+.pure-button-e {
+    background: #f5ab9e;
+    color: #8c3a2b;
+}
+.pure-button-f {
+    background: #ddaeff;
+    color: #8156a7;
+}
+
+.pure-button-g {
+    background: #f57b00;
+    color: #ffca95;
+}
+
+.pure-button-h {
+    background: #008ed4;
+    color: #fff;
+}
+
+
+@media (max-width: 767px) {
+    .hero {
+        margin: 2em 0 1.5em;
+        padding: 0.6em;
+    }
+        .hero h1 {
+            font-size: 250%;
+            font-weight: 300; /* slightly thicker to compensate for font-size */
+        }
+        .hero h2 {
+            font-size: 165%;
+        }
+
+    /* by default l-hbox becomes padding: 1.3em; at <= 767px. However, this makes the heading
+    too far away from the content, so adding this in here. */
+    h3.l-hbox,
+    p.l-hbox {
+        padding: 0 1.3em;
+    }
+
+    a.size-chart-label {
+        font-size: 0.75em;
+        padding: 0.6667em;
+    }
+}

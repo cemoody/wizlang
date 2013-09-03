@@ -1,0 +1,409 @@
+body {
+    font-family: sans-serif;
+    color: #777;
+}
+
+
+/* Add transition to containers so they can push in and out */
+#layout,
+#menu,
+.pure-menu-link {
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -ms-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+}
+
+
+/* --------------------------
+ * Element Styles
+ * --------------------------
+*/
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    color: rgb(75, 75, 75);
+}
+h3 {
+    font-size: 1.25em;
+}
+h4 {
+    font-size: 1.125em;
+}
+
+a {
+    color: #3b8bba; /* block-background-text-normal */
+    text-decoration: none;
+}
+
+a:visited {
+    color: #265778; /* block-normal-text-normal */
+}
+
+dt {
+    font-weight: bold;
+}
+dd {
+    margin: 0 0 10px 0;
+}
+
+/* --------------------------
+ * Layout Styles
+ * --------------------------
+*/
+
+#layout {
+    padding-left: 150px; /* left col width "#menu" */
+    left: 0;
+}
+
+
+/* Apply the .box class on the immediate parent of any grid element (pure-u-*) to apply some padding. */
+.l-box {
+    padding: 1.3em;
+}
+
+.l-vbox {
+    padding: 1.3em 0;
+}
+
+.l-hbox {
+    padding: 0 1.3em;
+}
+
+.l-centered {
+    text-align: center;
+}
+
+
+/* --------------------------
+ * Header Module Styles
+ * --------------------------
+*/
+.header {
+     min-height: 80px;
+     margin: 0;
+     color: #333;
+     padding: 1em;
+     text-align: center;
+     border-bottom: 1px solid #eee;
+     background: #fff;
+ }
+    .header h1 {
+        margin: 0.2em 0;
+        font-size: 3em;
+        font-weight: 300;
+    }
+     .header h2 {
+        font-weight: 300;
+        margin: 0;
+        color: #ccc;
+    }
+
+aside {
+    background: #1f8dd6; /* same color as selected state on site menu */
+    padding: 0.3em 1em;
+    border-radius: 3px;
+    color: #fff;
+}
+    aside a, aside a:visited {
+        color: rgb(169, 226, 255);
+    }
+
+
+ /* --------------------------
+  * Content Module Styles
+  * --------------------------
+ */
+
+/* The content div is placed as a wrapper around all the docs */
+.content {
+    margin: 0 auto;
+    width: 70%;
+    margin-bottom:50px;
+}
+    .content p {
+        line-height: 1.6em;
+        font-size: 1.125em;
+    }
+
+    .content .content-subhead {
+        margin: 50px 0 20px 0;
+        font-weight: 300;
+        color: #888;
+    }
+
+    .content .content-spaced {
+        line-height: 1.8em;
+    }
+
+    /* A code snippet that has been syntax highlighted */
+    .content .snippet {
+        margin: 1.3em 0 1em;
+        padding: 1.3em;
+    }
+
+    .content .content-quote {
+        font-family: "Georgia", serif;
+        color: #666;
+        font-style: italic;
+        line-height: 1.8em;
+        border-left: 5px solid #ddd;
+        padding-left: 1.5em;
+    }
+
+
+
+/* --------------------------
+ * Footer Module Styles
+ * --------------------------
+*/
+.legal {
+    font-size: 80%;
+    border-top: 1px solid #eee;
+    padding: 0.5em 0;
+    background: rgb(250, 250, 250);
+}
+
+    .legal-license,
+    .legal-copyright {
+        margin: 0;
+    }
+
+    .legal-copyright,
+    .legal-links {
+        text-align: right;
+    }
+
+    .legal-links {
+        list-style: none;
+        margin: 0;
+    }
+
+    .legal-logo {
+        text-align: center;
+    }
+
+/* --------------------------
+ * Main Navigation Bar Styles
+ * --------------------------
+*/
+
+#menu {
+    margin-left: -150px; /* "#menu" width */
+    width: 150px;
+    position: fixed;
+    top: 0;
+    left: 150px;
+    bottom: 0;
+    z-index: 1000; /* so the menu or its navicon stays above all content */
+    background: #191818;
+    overflow-y: auto;
+    -webkit-overflow-scroll: touch;
+}
+    #menu a {
+        color: #999;
+        border: none;
+        white-space: normal;
+        padding: 0.6em 0 0.6em 0.6em;
+    }
+
+    #menu .pure-menu-open {
+        background: transparent;
+        border: 0;
+    }
+
+    #menu .pure-menu ul {
+        border: none;
+        background: transparent;
+    }
+
+    #menu .pure-menu ul,
+    #menu .pure-menu .menu-item-divided {
+        border-top: 1px solid #333;
+    }
+
+        #menu .pure-menu li a:hover,
+        #menu .pure-menu li a:focus {
+            background: #333;
+        }
+
+    .pure-menu-link {
+        display: none; /* show this only on small screens */
+        top: 0;
+        left: 150px; /* "#menu width" */
+        background: #000;
+        background: rgba(0,0,0,0.7);
+        font-size: 10px; /* change this value to increase/decrease button size */
+        z-index: 10;
+        width: 2em;
+        height: auto;
+        padding: 2.1em 1.6em;
+    }
+
+        .pure-menu-link:hover,
+        .pure-menu-link:focus {
+            background: #000;
+        }
+
+        .pure-menu-link span {
+            position: relative;
+            display: block;
+        }
+
+        .pure-menu-link span,
+        .pure-menu-link span:before,
+        .pure-menu-link span:after {
+            background-color: #fff;
+            width: 100%;
+            height: .2em;
+            -webkit-transition: all 0.8s;
+               -moz-transition: all 0.8s;
+                -ms-transition: all 0.8s;
+                 -o-transition: all 0.8s;
+                    transition: all 0.8s;
+        }
+
+            .pure-menu-link span:before,
+            .pure-menu-link span:after {
+                position: absolute;
+                margin-top: -.6em;
+                content: " ";
+            }
+
+            .pure-menu-link span:after {
+                margin-top: .6em;
+            }
+
+        .pure-menu-link.active span {
+            background: transparent;
+        }
+
+            .pure-menu-link.active span:before {
+                -webkit-transform: rotate(45deg) translate(.5em, .4em);
+                   -moz-transform: rotate(45deg) translate(.5em, .4em);
+                    -ms-transform: rotate(45deg) translate(.5em, .4em);
+                     -o-transform: rotate(45deg) translate(.5em, .4em);
+                        transform: rotate(45deg) translate(.5em, .4em);
+            }
+
+            .pure-menu-link.active span:after {
+                -webkit-transform: rotate(-45deg) translate(.45em, -.35em);
+                   -moz-transform: rotate(-45deg) translate(.45em, -.35em);
+                    -ms-transform: rotate(-45deg) translate(.45em, -.35em);
+                     -o-transform: rotate(-45deg) translate(.45em, -.35em);
+                        transform: rotate(-45deg) translate(.45em, -.35em);
+            }
+
+    #menu .pure-menu-heading {
+        font-size: 110%;
+        color: #fff;
+    }
+    #menu .pure-menu-heading:hover,
+    #menu .pure-menu-heading:focus {
+        color: #999;
+    }
+
+    #menu .pure-menu-selected {
+        background: #1f8dd6;
+    }
+
+        #menu .pure-menu-selected a {
+            color: #fff;
+        }
+
+        #menu li.pure-menu-selected a:hover,
+        #menu li.pure-menu-selected a:focus {
+            background: none;
+        }
+
+
+
+/* ---------------------
+ * Smaller Module Styles
+ * ---------------------
+*/
+
+/* example code blocks */
+.example-snippet {
+    margin: 2em 0;
+    font-size: 85%;
+}
+
+/* green call to action button class */
+.notice {
+    background-color: #61B842;
+    color: white;
+}
+
+.pure-button {
+    font-family: inherit;
+}
+a.pure-button-primary {
+    color: white;
+}
+
+.muted {
+    color: #ccc;
+}
+
+/* --------------------------
+ * Responsive Styles
+ * --------------------------
+*/
+
+@media (max-width: 870px) {
+
+    /* Navigation Push Styles */
+    #layout {
+        position: relative;
+        padding-left: 0;
+    }
+        #layout.active {
+            position: relative;
+            left: 150px;
+        }
+            #layout.active #menu {
+                left: 150px;
+                width: 150px;
+            }
+
+    #menu {
+        left: 0;
+    }
+
+    .pure-menu-link {
+        position: fixed;
+        left: 0;
+        display: block;
+    }
+
+    #layout.active .pure-menu-link {
+        left: 150px;
+    }
+}
+
+@media (max-width: 767px) {
+
+    .content {
+        width: 95%;
+        font-size: 90%;
+    }
+
+    .legal-links {
+        padding:1em 0;
+    }
+    .legal-license,
+    .legal-copyright,
+    .legal-links,
+    .legal-links li {
+        text-align: center;
+    }
+
+    /* normalize paddings on small screens*/
+    .l-hbox {
+        padding: 1.3em;
+    }
+}
