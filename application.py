@@ -1,15 +1,15 @@
-from flask import render_template
+from flask import render_template, Flask
  
-app = flask.Flask(__name__,  static_folder='static', 
-                  template_folder='templates')
+app = Flask(__name__,  static_folder='static', 
+            static_url_path='', template_folder='templates')
 
-@app.route('/')
+@app.route('/index.html')
 def main():
     return render_template('index.html')
 
 @app.route('/search/<search>')
-def results():
+def results(search):
     return render_template('results.html')
 
 if __name__ == '__main__':
-    application.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', debug=True)
