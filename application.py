@@ -1,14 +1,15 @@
-import flask
+from flask import render_template
  
-application = flask.Flask(__name__)
+app = flask.Flask(__name__,  static_folder='static', 
+                  template_folder='templates')
 
-#Set application.debug=true to enable tracebacks on Beanstalk log output. 
-#Make sure to remove this line before deploying to production.
-application.debug=True
- 
-@application.route('/')
-def hello_world():
-    return "Hello world, from Chris!"
- 
+@app.route('/')
+def main():
+    return render_template('index.html')
+
+@app.route('/search/<search>')
+def results():
+    return render_template('results.html')
+
 if __name__ == '__main__':
     application.run(host='0.0.0.0')
