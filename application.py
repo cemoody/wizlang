@@ -1,14 +1,10 @@
-from flask import render_template, Flask, escape
+from flask import *
 import re
 import urllib2
 import json
  
 app = Flask(__name__,  static_folder='static', 
             static_url_path='', template_folder='templates')
-
-@app.route('/index.html')
-def main():
-    return render_template('index.html')
 
 def get_omdb(name, google_images=False):
     """Search for the most relevant movie name on OMDB,
@@ -35,7 +31,7 @@ def movie_passthrough(name, *args, **kwargs):
         return {}
     result['original'] = name
     query_text = name + ' '.join(args)
-    reps = dict(query_text=query_text, results=[result, result])
+    reps = dict(query_text=query_text, results=[result])
     return reps
 
 def parse(query):
@@ -46,11 +42,26 @@ def parse(query):
     kwargs = {}
     return action, args, kwargs
 
-@app.route('/search/<query>')
-def results(query):
+@app.route('/results.html', methods=['GET', 'POST'])
+@app.route('/search/<query>', methods=['GET', 'POST'])
+def results(query="Jurassic Park"):
+    if request.method == 'POST':
+        query = request.form['query']
+        quote = str(urllib2.quote(query))
+        url = "/search/%s" % quote
+        return redirect(url)
     action, args, kwargs = parse(query)
     reps = action(*args, **kwargs)
     return render_template('results.html', **reps)
+
+@app.route('/index.html', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        query = request.form['query']
+        quote = str(urllib2.quote(query))
+        url = "/search/%s" % quote
+        return redirect(url)
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)

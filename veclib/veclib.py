@@ -5,9 +5,9 @@ import numpy as np
 """ A library to lookup word vectors, reduce the vector list to a subset and
 calculate the nearest word given a vector"""
 
-fnw = '%s/vectors.bin.008.words'
-fnv = '%s/vectors.bin.008.num'
-fnc = 'movies_canonical'
+fnw = '%s/vectors.bin.008.words' % '.'
+fnv = '%s/vectors.bin.008.num' % '.'
+fnc = 'data/movies_canonical'
 def distance(v1, v2, axis=None):
     if type(v1) is str:
         v1 = lookup_vector(v1)
