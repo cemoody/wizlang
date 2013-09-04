@@ -5,7 +5,7 @@
 <h2 class="pure-u-3-4 l-centered" style="font-size:150%">Amazing language relationships for movies</h2>
 <form class="pure-form">
 <fieldset>
-    <input type="text" placeholder="Independence Day - Goofy + Epic" 
+    <input type="text" placeholder="{{ query_text }}" 
             style="width: 350px; height:43px; font-size:20px">
     <button type="submit" class="pure-button pure-button-primary"
        style="font-size:20px; height:43px">Search</button>
@@ -15,20 +15,43 @@
 </div>
 {% endblock %}
 {% block mid %}
-<p>Search results</p>
-<div class="legal pure-g-r">
-  <div class="pure-u-1-5"> </div>
-  <div class="pure-u-1-5">
-    <a ><img src="/movie.jpg" alt="Generic Movie Logo" /></a>
+{% if results %}
+  <p>Search results</p>
+  {% for result in results %}
+    <div class="legal pure-g-r" >
+        <div class="pure-u-2-5" style="text-align:center">
+            <a ><img href="http://www.imdb.com/title/{{ result.imdbid }}"
+              style="height:300px"
+              src="{{ result.poster }}" alt="{{ result.title }}" /></a>
+      </div>
+      <div class="pure-u-3-5">
+          <a href="http://www.imdb.com/title/{{ result.imdbid }}">
+              <u><h2>{{ result.title }} ({{ result.year }})</h2></u>
+          </a>
+        </a>
+        <p style="font-size:14px">{{ result.plot }}</p>
+        {% if result.themes %}
+          <p><b>Similarities:</b> <a href=""> {{ result.original }} </a> 
+            and <a href=""> {{ result.title }} </a>
+            have common themes of: 
+            {% for theme in result.themes %} {{ theme }}, {% endfor %}
+        {% endif %}
+        </p>
+      </div>
+    </div>
+  {% endfor %}
+{% else %}
+  <div class="content">
+    <h2 class="content-subhead"> Bad Query </h2>
+    <p> 
+        <i>Yikes!</i> Looks like an error happened and we couldn't 
+        any search results your way. Why not 
+        <a href="/search/Jurassic%20Park%20-%20Dinosaur%20+%20Alien"> <b>try</b> </a>
+        a query like
+        <a href="/search/Jurassic%20Park%20-%20Dinosaur%20+%20Alien">
+          <code> Jurassic Park - Dinosaur + Alien </code>
+        </a>?
+    </p> 
   </div>
-  <div class="pure-u-1-5"></div>
-  <div class="pure-u-2-5">
-    <h3>Blade Runner</h3> 
-    Movie in which blah happens to blah.
-    <p><b>Similarities:</b> <a href=""> Independence Day</a> and 
-    <a href="">Blade Runner</a> 
-    have common themes of:
-    <i>sci-fi</i>, <i>futuristic</i>
-  </div>
-</div>
+{% endif %}
 {% endblock %}
