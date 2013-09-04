@@ -24,18 +24,20 @@
               style="height:300px"
               src="{{ result.poster }}" alt="{{ result.title }}" /></a>
       </div>
-      <div class="pure-u-3-5">
-          <a href="http://www.imdb.com/title/{{ result.imdbid }}">
-              <u><h2>{{ result.title }} ({{ result.year }})</h2></u>
-          </a>
-        </a>
-        <p style="font-size:14px">{{ result.plot }}</p>
-        {% if result.themes %}
-          <p><b>Similarities:</b> <a href=""> {{ result.original }} </a> 
-            and <a href=""> {{ result.title }} </a>
-            have common themes of: 
-            {% for theme in result.themes %} {{ theme }}, {% endfor %}
-        {% endif %}
+      <div class="pure-u-3-5 ">
+          <div class="content">
+              <a href="http://www.imdb.com/title/{{ result.imdbid }}">
+                  <h1 class="content-subhead">{{ result.title }} ({{ result.year }})</h1>
+              </a>
+            </a>
+            <p style="font-size:14px">{{ result.plot }}</p>
+            {% if result.themes %}
+              <p><b>Similarities:</b> <a href=""> {{ result.original }} </a> 
+                and <a href=""> {{ result.title }} </a>
+                have common themes of: 
+                {% for theme in result.themes %} {{ theme }}, {% endfor %}
+                {% endif %}
+          </div>
         </p>
       </div>
     </div>

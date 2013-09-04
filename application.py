@@ -19,6 +19,9 @@ def get_omdb(name, google_images=False):
     url = r"http://www.omdbapi.com/?t=%s" % urllib2.quote(name)
     response = urllib2.urlopen(url)
     odata = json.load(response)
+    if 'Error' in odata.keys():
+        print 'OMDB Error: %s' % name
+        return None
     data = {k.lower():v for k, v in odata.iteritems()}
     return data
 
@@ -28,9 +31,11 @@ def movie_passthrough(name, *args, **kwargs):
     and return a 'result' of the same 
     movie """
     result = get_omdb(name)
+    if result is None:
+        return {}
     result['original'] = name
     query_text = name + ' '.join(args)
-    reps = dict(query_text=query_text, results=[result])
+    reps = dict(query_text=query_text, results=[result, result])
     return reps
 
 def parse(query):
