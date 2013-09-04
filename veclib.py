@@ -1,6 +1,7 @@
 from difflib import get_close_matches
 import pandas as pd
 import numpy as np
+from sets import Set
 
 """ A library to lookup word vectors, reduce the vector list to a subset and
 calculate the nearest word given a vector"""
@@ -53,13 +54,27 @@ def lookup_vector(word, vector_lib, fuzzy=True):
     key = get_close_matches(word, keys, 1)
     return vector_lib[key]
 
-def reduce_vectorlib(vector_lib, word2index, text):
+def read_canon_text(fn):
+    canon = Set()
+    with open(fn) as fh:
+        text = fh.read()
+        text = text.replace('\r', ' ')
+        text = text.replace('\t', ' ')
+        text = text.translate(None, string.digits)
+        for line in text.split('\n'):
+            canon.add(line)
+    return canon, text 
+
+def reduce_vectorlib(vector_lib, word2index, canon):
     indices = []
+    w2i, i2w = {}, {}
     for name, index in word2index.iteritems():
-        if name in text:
+        if name in canon:
             indices.append(index)
+            w2i[name] = index
+            i2w[index] = name
     rvl = vector_lib[indices]
-    return rvl
+    return rvl, w2i, i2w
 
 def get_names(fn=fnc):
     names = [x.replace('\n', '').strip() for x in fh.readlines()]
