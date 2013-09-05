@@ -4,7 +4,7 @@ import numpy as np
 import os.path
 import string
 import difflib
-from sets import Set
+from sets import Set 
 
 """ A library to lookup word vectors, reduce the vector list to a subset and
 calculate the nearest word given a vector"""
@@ -32,70 +32,37 @@ def reshape(v1):
 def mag(x):
     return np.sqrt(np.sum(x**2.0, axis=1))
 
-def chunks(l, n):
-    """ Yield successive n-sized chunks from l.
-    """
-    for i in xrange(0, len(l), n):
-        yield l[i:i+n]
+mag2 = lambda x: np.sqrt(np.sum(x**2.0, axis=1))
+mag1 = lambda x: np.sqrt(np.sum(x**2.0, axis=0))
+def similarity(svec, total):
+    smv = np.reshape(total, (1, total.shape[0]))
+    top = svec * smv
+    denom = mag2(svec) * mag1(total)
+    denom = np.reshape(denom, (denom.shape[0], 1))
+    sim = np.sum(top / denom, axis=1)
+    return sim
 
-def sim(v, v2, dtype=np.float64, chunksize=1e4):
-    vs = []
-    for v1 in chunks(v, long(chunksize)):
-        i = (v1.astype(dtype) * v2.astype(dtype))
-        d = (mag(v1.astype(dtype)) * mag(v2.astype(dtype)))
-        d = np.reshape(d, [d.shape[0], 1])
-        i /= d
-        vs.append(i)
-        del d, i
-    i = np.vstack(vs)
-    return i
-
-def dot(v1, v2, axis=1):
-    if type(v1) is str:
-        v1 = lookup_vector(v1)
-    if type(v2) is str:
-        v2 = lookup_vector(v2)
-    v1 = reshape(v1)
-    v2 = reshape(v2)
-    print v1.shape, v2.shape
-    try: 
-        dtype = np.float16
-        i = sim(v1, v2, dtype)
-    except MemoryError:
-        dtype = np.float8
-        i = sim(v1, v2, dtype)
-    print i.shape
-    similarity = np.sum(i, axis=axis, dtype=np.float128)
-    print similarity.shape
-    return similarity
-
-def nearest_word(vector, vector_lib, index2word):
-    if type(vector) is str:
-        vector = lookup_vector(vector)
-    d = dot(vector_lib, vector)
-    idx =  np.argsort(d)[2] #First two entries always the input keys
-    return index2word[idx]
+def nearest_word(vector, vector_lib, index2word, n=5, skip=0):
+    d = similarity(vector_lib, vector)
+    words = []
+    da = np.argsort(d)[::-1]
+    for i in range(n):
+        idx = da[i]
+        words.append(index2word[idx])
+    return words
 
 def lookup_vector(word, vector_lib, w2i, fuzzy=True):
     keys = w2i.keys()
     key, = get_close_matches(word, keys, 1)
+    print 'Lookup: %s -> %s' % (word, key)
     return vector_lib[w2i[key]]
-
-def read_canon_text(fn):
-    canon = Set()
-    with open(fn) as fh:
-        text = fh.read()
-        text = text.replace('\r', ' ')
-        text = text.replace('\t', ' ')
-        text = text.translate(None, string.digits)
-        for line in text.split('\n'):
-            canon.add(line.strip().strip('_'))
-    return canon, text 
 
 def get_canon_rep(fn):
     c2f, f2c = {}, {}
     with open(fn) as fh:
         for line in fh.readlines():
+            line = line.strip()
+            line = line.replace('  ', ' ')
             f, c = line.rsplit(',', 1)
             f, c = f.strip(), c.strip()
             c2f[c] = f
@@ -110,17 +77,22 @@ def canonize(phrase, c2f):
     for i in range(5):
         phrase = phrase.replace('  ', ' ')
     phrase = phrase.replace(' ', '_')
-    phrase, = difflib.get_close_matches(phrase, c2f.keys(), 1)
+    phrase, = difflib.get_close_matches(phrase, c2f, 1)
     return phrase
 
 def reduce_vectorlib(vector_lib, word2index, canon):
     indices = []
     w2i, i2w = {}, {}
-    for name, index in word2index.iteritems():
-        if name in canon:
-            indices.append(index)
-            w2i[name] = index
-            i2w[index] = name
+    outindex = 0
+    words = Set(word2index.keys())
+    common = Set(canon).intersection(words)
+    for name in common:
+        index = word2index[name]
+        indices.append(index)
+        w2i[name] = outindex
+        i2w[outindex] = name
+        outindex += 1
+    indices = np.array(indices)
     rvl = vector_lib[indices]
     return rvl, w2i, i2w
 
@@ -130,14 +102,19 @@ def get_names(fn=fnc):
     text = text.replace('\n', '')
     return text
 
-def get_words(fn=fnw):
-    words = pd.read_csv(fn, skiprows=3, dtype='str', na_filter=False,
-                        usecols=[0], squeeze=True)
+def get_words(fn=fnw, subsample=None):
+    words = open(fn).readlines()
     word2index = {}
     index2word = {}
-    for k, v in words.iteritems():
-        index2word[k] = v
-        word2index[v] = k
+    for v, k in enumerate(words):
+        k = k.strip().replace('\n', '')
+        if v < 2:
+            print k, v
+        if subsample:
+            if v > subsample - 1:
+                break
+        index2word[v] = k
+        word2index[k] = v
     return word2index, index2word
 
 def get_vector_lib(fn=fnv):
@@ -150,4 +127,6 @@ def get_vector_lib(fn=fnv):
         return data
     else:
         vectors = np.load(fn)
+        print vectors[0,:10]
+        print vectors[1,:10]
         return vectors
