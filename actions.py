@@ -201,7 +201,7 @@ class Nearest(Expression):
     def evaluate(self, *args, **kwargs):
         movie, = args
         vector = veclib.lookup_vector(movie, self.cvl, self.cw2i)
-        movies = veclib.nearest_word(vector, self.cvl, self.ci2w, n=50)
+        movies = veclib.nearest_word(vector, self.cvl, self.ci2w, n=5)
         print "Result: ", movies
         results = []
         for movie in movies:
