@@ -42,13 +42,34 @@ def similarity(svec, total):
     sim = np.sum(top / denom, axis=1)
     return sim
 
-def nearest_word(vector, vector_lib, index2word, n=5, skip=0):
-    d = similarity(vector_lib, vector)
+def chunks(l, n):
+    for i in xrange(0, len(l), n):
+        yield l[i:i+n]
+
+def in_between(vectora, vectorb, vector_lib, index2word, n=10):
+    #Measure rough dispersion in each dimension
+    dispersion = np.abs(vectorb - vectora)
+    vectora = np.reshape(vectora, (1, vectora.shape[0]))
+    vectorb = np.reshape(vectorb, (1, vectorb.shape[0]))
+    dist = np.min(np.abs(vector_lib - vectora),
+                  np.abs(vector_lib - vectorb), axis=1)
+    idx = np.argsort(dist)
+    words = [index2word[idx[i]] for i in range(n)]
+    return dist / dispersion
+
+def nearest_word(vector, vector_lib, index2word, n=5, skip=0, 
+                 chunk_size=100000):
     words = []
-    da = np.argsort(d)[::-1]
-    for i in range(n):
-        idx = da[i]
-        words.append(index2word[idx])
+    sims = []
+    for vl in chunks(vector_lib, chunk_size):
+        d = similarity(vl, vector)
+        da = np.argsort(d)[::-1]
+        for i in range(n):
+            idx = da[i]
+            words.append(index2word[idx])
+            sims.append(d[idx])
+    idx = np.argsort(sims)[::-1]
+    words = [words[i] for i in idx]
     return words
 
 def lookup_vector(word, vector_lib, w2i, fuzzy=True):
@@ -108,14 +129,19 @@ def get_words(fn=fnw, subsample=None):
     index2word = {}
     for v, k in enumerate(words):
         k = k.strip().replace('\n', '')
-        if v < 2:
-            print k, v
         if subsample:
             if v > subsample - 1:
                 break
         index2word[v] = k
         word2index[k] = v
     return word2index, index2word
+
+def get_english(fn):
+    words = []
+    with open(fn) as fh:
+        for line in fh.readlines():
+            words.append(line.strip())
+    return words
 
 def get_vector_lib(fn=fnv):
     fnvn = fn.replace('.npy', '')
@@ -127,6 +153,4 @@ def get_vector_lib(fn=fnv):
         return data
     else:
         vectors = np.load(fn)
-        print vectors[0,:10]
-        print vectors[1,:10]
         return vectors

@@ -99,23 +99,28 @@ class Passthrough(Actor):
 
 class Expression(Actor):
     name = "Expression"
-    def __init__(self, preloaded_actor=None, subsampling=True):
+    def __init__(self, preloaded_actor=None, subsample=True):
         """We need to load and preprocess all of the vectors into the 
            memory and persist them to cut down on IO costs"""
         if not preloaded_actor:
             fnv = './data/vectors.bin.005.num.npy'
             fnw = './data/vectors.bin.005.words'
             fnr = './data/movies_rep'
+            fne = './data/english'
             self.vl = veclib.get_vector_lib(fnv)
-            if subsampling:
-                print "WARNING SUBSAMPLING!"
-                n = int(self.vl.shape[0] * 0.10)
-                self.vl = self.vl[:n]
-            else:
-                n = None
-            self.vw2i , self.vi2w = veclib.get_words(fnw, subsample=n)
+            self.vw2i , self.vi2w = veclib.get_words(fnw)
             assert self.vl.shape[0] == len(self.vw2i.keys())
             self.rc2f, self.rf2c = veclib.get_canon_rep(fnr)
+            if subsample:
+                english = sets.Set(veclib.get_english(fne))
+                print len(english)
+                english = english.union(sets.Set(self.rc2f.keys()))
+                print len(english)
+                rets = veclib.reduce_vectorlib(self.vl, self.vw2i, 
+                                               english)
+                self.vl, self.vw2i, self.vi2w = rets
+                print "Subsampling to %i words out of %i english words" \
+                        % (len(self.vl), len(english))
             rets = veclib.reduce_vectorlib(self.vl, self.vw2i, 
                                            sets.Set(self.rc2f.keys()))
             self.cvl, self.cw2i, self.ci2w = rets
@@ -162,22 +167,36 @@ class Expression(Actor):
         print 'Words (post): ', words
         base = [self.cvl[self.cw2i[words[0]]]]
         vecs = [self.vl[self.vw2i[w]] for w in words[1:]]
-        return [signs, base + vecs], {'query':query}
+        return [signs, base + vecs], {'query':query, 'words':words}
     
     def evaluate(self, *args, **kwargs):
         signs, vecs = args
+        words = kwargs['words']
         total = signs[0] * vecs[0]
         for s, v in zip(signs, vecs):
             total += s * v
-        movies = veclib.nearest_word(total, self.cvl, self.ci2w, n=5)
-        print "Result: ", movies
+        similar = veclib.nearest_word(vecs[0], self.cvl, self.ci2w, n=5)
+        swords = Set(veclib.nearest_word(vecs[0], self.vl, self.vi2w, n=20))
+        movies = veclib.nearest_word(total, self.cvl, self.ci2w, n=10)
+        print "Nearby words: ", swords
+        print "Similar: ", similar
+        print "Expression: ", movies
         results = []
         full_movies = []
         for movie in movies:
+            if movie in similar:
+                print "Skipping similar %s" % movie
+                continue
             full_movie = self.rc2f[movie]
             result = get_omdb(full_movie)
             if result is not None:
                 results.append(result)
+                if len(results) > 4: break
+            vec = self.cvl[self.cw2i[movie]]
+            mwords = Set(veclib.nearest_word(vec, self.vl, self.vi2w, n=20))
+            print "In common:", mwords.intersection(swords)
+            print "In between:", veclib.in_between(vecs[0], vec, self.vl, 
+                                                   self.vi2w)
             full_movies.append(full_movie)
         print "Non-Canonical: ", full_movies
         if len(results) ==0 :
@@ -201,7 +220,7 @@ class Nearest(Expression):
     def evaluate(self, *args, **kwargs):
         movie, = args
         vector = veclib.lookup_vector(movie, self.cvl, self.cw2i)
-        movies = veclib.nearest_word(vector, self.cvl, self.ci2w, n=5)
+        movies = veclib.nearest_word(vector, self.cvl, self.ci2w, n=50)
         print "Result: ", movies
         results = []
         for movie in movies:
@@ -209,6 +228,7 @@ class Nearest(Expression):
             result = get_omdb(full_word)
             if result is not None:
                 results.append(result)
+                if len(results) > 4: break
         print " "
         if len(results)==0:
             return {}

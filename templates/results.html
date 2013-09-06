@@ -32,12 +32,14 @@
               </a>
             </a>
             <p style="font-size:14px">{{ result.plot }}</p>
+            <p><b>Similarities:</b> <a href=""> {{ result.original }} </a> 
             {% if result.themes %}
-              <p><b>Similarities:</b> <a href=""> {{ result.original }} </a> 
                 and <a href=""> {{ result.title }} </a>
                 have common themes of: 
                 {% for theme in result.themes %} {{ theme }}, {% endfor %}
                 {% endif %}
+            <p> Watch Trailer </[>
+            <p> Play in Netflix</p> 
           </div>
         </p>
       </div>

@@ -13,14 +13,10 @@ def results(query="Jurassic Park"):
         url = "/search/%s" % quote
         return redirect(url)
     else:
-        print 'Query: %s' % query
         for actor in criteria:
             if actor.validate(query):
-                print 'Accepted Actor: %s' % actor.name
                 reps = actor.run(query)
                 break
-            else:
-                print 'Rejected Actor: %s' % actor.name
         return render_template('results.html', **reps)
 
 @app.route('/index.html', methods=['GET', 'POST'])
@@ -34,4 +30,4 @@ def index():
         return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True, use_reloader=False)
+    app.run(host='0.0.0.0', debug=False)
