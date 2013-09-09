@@ -9,8 +9,9 @@ from sets import Set
 """ A library to lookup word vectors, reduce the vector list to a subset and
 calculate the nearest word given a vector"""
 
-fnw = '%s/vectors.bin.008.words' % '.'
-fnv = '%s/vectors.bin.008.num' % '.'
+trained = "/u/cmoody3/data2/ids/trained"
+fnw = '%s/vectors.bin.008.words' % trained
+fnv = '%s/vectors.bin.008.num' % trained
 fnc = 'data/movies_canonical'
 def distance(v1, v2, axis=None):
     if type(v1) is str:
@@ -51,8 +52,8 @@ def in_between(vectora, vectorb, vector_lib, index2word, n=10):
     dispersion = np.abs(vectorb - vectora)
     vectora = np.reshape(vectora, (1, vectora.shape[0]))
     vectorb = np.reshape(vectorb, (1, vectorb.shape[0]))
-    dist = np.min(np.abs(vector_lib - vectora),
-                  np.abs(vector_lib - vectorb), axis=1)
+    dist = np.minimum(np.abs(vector_lib - vectora),
+                      np.abs(vector_lib - vectorb))
     idx = np.argsort(dist)
     words = [index2word[idx[i]] for i in range(n)]
     return dist / dispersion
@@ -69,7 +70,7 @@ def nearest_word(vector, vector_lib, index2word, n=5, skip=0,
             words.append(index2word[idx])
             sims.append(d[idx])
     idx = np.argsort(sims)[::-1]
-    words = [words[i] for i in idx]
+    words = [words[i] for i in idx[:n]]
     return words
 
 def lookup_vector(word, vector_lib, w2i, fuzzy=True):
@@ -90,7 +91,7 @@ def get_canon_rep(fn):
             f2c[f] = c
     return c2f, f2c
 
-def canonize(phrase, c2f):
+def canonize(phrase, c2f, match=False):
     phrase = phrase.strip().lower()
     phrase = phrase.replace('\n','').replace('\t','').replace('\r','')
     phrase = phrase.translate(string.digits)
@@ -98,7 +99,8 @@ def canonize(phrase, c2f):
     for i in range(5):
         phrase = phrase.replace('  ', ' ')
     phrase = phrase.replace(' ', '_')
-    phrase, = difflib.get_close_matches(phrase, c2f, 1)
+    if match:
+        phrase, = difflib.get_close_matches(phrase, c2f, 1)
     return phrase
 
 def reduce_vectorlib(vector_lib, word2index, canon):
@@ -146,7 +148,7 @@ def get_english(fn):
 def get_vector_lib(fn=fnv):
     fnvn = fn.replace('.npy', '')
     if not os.path.exists(fn) and os.path.exists(fnvn):
-        data = pd.read_csv('./data/vectors.bin.007.num', sep=' ',
+        data = pd.read_csv(fn, sep=' ',
                            dtype='f4', na_filter=False)
         data = np.array(data, dtype=np.float32)
         np.save(fn, data)

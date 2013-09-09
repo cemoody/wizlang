@@ -8,33 +8,6 @@ import urlparse
 import sets
 from sets import Set
 
-def exists(url):
-    request = urllib2.Request(url)
-    request.get_method = lambda : 'HEAD'
-    try:
-        response = urllib2.urlopen(request)
-        return True
-    except:
-        return False
-
-def get_omdb(name, google_images=False):
-    """Search for the most relevant movie name on OMDB,
-    then using that IMDB ID lookup get the rest of the
-    information: description, actors, etc. Optionally 
-    search Google Images for the poster image and hotlink
-    it"""
-    url = r"http://www.omdbapi.com/?t=%s" % urllib2.quote(name)
-    response = urllib2.urlopen(url)
-    odata = json.load(response)
-    if 'Error' in odata.keys():
-        print 'OMDB Error: %s' % name
-        return None
-    if not exists(odata['Poster']):
-        print "IMDB Image not Found for %s" % name
-        return None
-    data = {k.lower():v for k, v in odata.iteritems()}
-    return data
-
 def eval_sign(query):
     """ This is a dumb parser that assign + or - to every character
         in an expression. We can then use this to lookup the sign of
@@ -99,27 +72,26 @@ class Passthrough(Actor):
 
 class Expression(Actor):
     name = "Expression"
-    def __init__(self, preloaded_actor=None, subsample=True):
+    def __init__(self, preloaded_actor=None, subsample=False):
         """We need to load and preprocess all of the vectors into the 
            memory and persist them to cut down on IO costs"""
         if not preloaded_actor:
-            fnv = './data/vectors.bin.005.num.npy'
-            fnw = './data/vectors.bin.005.words'
-            fnr = './data/movies_rep'
-            fne = './data/english'
+            trained = "/u/cmoody3/data2/ids/trained" 
+            fnv = '%s/vectors.wiki.1000.num.npy' % trained
+            fnw = '%s/vectors.wiki.1000.words' % trained
+            fnr = '%s/articles.dict' % './data'
+            fne = '%s/english' % './data'
             self.vl = veclib.get_vector_lib(fnv)
             self.vw2i , self.vi2w = veclib.get_words(fnw)
             assert self.vl.shape[0] == len(self.vw2i.keys())
             self.rc2f, self.rf2c = veclib.get_canon_rep(fnr)
             if subsample:
                 english = sets.Set(veclib.get_english(fne))
-                print len(english)
                 english = english.union(sets.Set(self.rc2f.keys()))
-                print len(english)
                 rets = veclib.reduce_vectorlib(self.vl, self.vw2i, 
                                                english)
                 self.vl, self.vw2i, self.vi2w = rets
-                print "Subsampling to %i words out of %i english words" \
+                print "SUBSAMPLING! to %i words out of %i english words" \
                         % (len(self.vl), len(english))
             rets = veclib.reduce_vectorlib(self.vl, self.vw2i, 
                                            sets.Set(self.rc2f.keys()))
@@ -147,7 +119,7 @@ class Expression(Actor):
             self.rset = preloaded_actor.rset
 
     def validate(self, query):
-        return '+' in query and '-' in query
+        return '+' in query or '-' in query
 
     def parse(self, query, kwargs=None):
         print "Query: ", query
@@ -173,36 +145,48 @@ class Expression(Actor):
         signs, vecs = args
         words = kwargs['words']
         total = signs[0] * vecs[0]
-        for s, v in zip(signs, vecs):
-            total += s * v
-        similar = veclib.nearest_word(vecs[0], self.cvl, self.ci2w, n=5)
-        swords = Set(veclib.nearest_word(vecs[0], self.vl, self.vi2w, n=20))
-        movies = veclib.nearest_word(total, self.cvl, self.ci2w, n=10)
-        print "Nearby words: ", swords
+        translated = ''
+        for s, v, w in zip(signs, vecs, words):
+            if s > 0:
+                sign = '+'
+                total += s * v
+            else:
+                sign = '-'
+                total += s * v
+            translated += ' %s %s' % (sign, w)
+        similar = veclib.nearest_word(vecs[0], self.cvl, self.ci2w, n=1)
+        swords = veclib.nearest_word(vecs[0], self.vl, self.vi2w, n=100)
+        movies = veclib.nearest_word(total, self.cvl, self.ci2w, n=50)
+        print "Nearby words: ", swords, len(swords)
         print "Similar: ", similar
         print "Expression: ", movies
+        swords = Set(swords)
         results = []
         full_movies = []
         for movie in movies:
+            if len(results) >= 3: break
             if movie in similar:
                 print "Skipping similar %s" % movie
                 continue
             full_movie = self.rc2f[movie]
             result = get_omdb(full_movie)
+            vec = self.cvl[self.cw2i[movie]]
+            nwords = veclib.nearest_word(vec, self.vl, self.vi2w, n=100)
+            themes = Set(nwords).intersection(swords).difference(Set(movies))
+            print "In common %s:" % movie, themes
+            result['themes'] = [t.replace('_',' ') for t in list(themes)]
+            #import pdb; pdb.set_trace()
+            #print "In between:", veclib.in_between(vecs[0], vec, self.vl, 
+            #                                       self.vi2w)
             if result is not None:
                 results.append(result)
-                if len(results) > 4: break
-            vec = self.cvl[self.cw2i[movie]]
-            mwords = Set(veclib.nearest_word(vec, self.vl, self.vi2w, n=20))
-            print "In common:", mwords.intersection(swords)
-            print "In between:", veclib.in_between(vecs[0], vec, self.vl, 
-                                                   self.vi2w)
             full_movies.append(full_movie)
         print "Non-Canonical: ", full_movies
         if len(results) ==0 :
             return {}
         query_text = kwargs['query']
-        reps = dict(query_text=query_text, results=results)
+        reps = dict(query_text=query_text, results=results, 
+                    translated=translated)
         return reps
 
 class Nearest(Expression):

@@ -15,6 +15,7 @@ def results(query="Jurassic Park"):
     else:
         for actor in criteria:
             if actor.validate(query):
+                print "Using Actor %s" % actor.name
                 reps = actor.run(query)
                 break
         return render_template('results.html', **reps)
