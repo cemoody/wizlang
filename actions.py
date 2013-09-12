@@ -8,6 +8,7 @@ import sets
 import cPickle
 import os.path
 import time
+import sharedmem
 import multiprocessing
 from multiprocessing import Manager
 from sets import Set
@@ -99,12 +100,15 @@ class Expression(Actor):
             # a= 'all'
             # w='wikipedia'
             trained = "/u/cmoody3/data2/ids/trained" 
+            trained = "/home/ubuntu/data" 
             if fast:
                 fnv = '%s/vectors.bin.005.num.npy' % trained
                 fnw = '%s/vectors.bin.005.words' % trained
             else:
                 fnv = '%s/vectors.wiki.1000.num.npy' % trained
                 fnw = '%s/vectors.wiki.1000.words' % trained
+                fnv = '%s/vectors.fullwiki.1000.s100.num.npy' % trained
+                fnw = '%s/vectors.fullwiki.1000.s100.words' % trained
             wc2t = '%s/c2t' % './data'
             wt2c = '%s/t2c' % './data'
             # all word vecotor lib VL
@@ -131,14 +135,23 @@ class Expression(Actor):
                 avl, self.aw2i, self.ai2w = veclib.subsample(avl, self.aw2i, 
                                                              self.ai2w, wl, n)
                 assert max(self.ai2w.keys()) == len(wl) + 1
-            self.avl = veclib.normalize(avl)
+            savl = sharedmem.empty((npavl.shape), dtype='f4')
+            avl[:] = avl
+            self.npavl = veclib.normalize(avl)
             del avl
             # # of words better be the same in both the vectors
             # and the list of words
-            assert self.avl.shape[0] == len(self.ai2w.keys())
-            rets = veclib.reduce_vectorlib(self.avl, self.aw2i, 
+            rets = veclib.reduce_vectorlib(self.npavl, self.aw2i, 
                                            sets.Set(self.wc2t.keys()))
-            self.wvl, self.ww2i, self.wi2w = rets
+            self.npwvl, self.ww2i, self.wi2w = rets
+            self.npwvl = self.npwvl.astype('f4')
+            if True:
+                self.wvl = sharedmem.empty(self.npwvl.shape, dtype='f4')
+                self.wvl[:] = self.npwvl
+                self.avl = sharedmem.empty(self.npavl.shape, dtype='f4')
+                self.avl[:] = self.npavl
+            assert self.avl.shape[0] == len(self.ai2w.keys())
+                
             # now let's test loading a word and finding its index
             if test:
                 import numpy as np
