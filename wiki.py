@@ -1,6 +1,10 @@
 import urllib2
 import json
-import beautifulsoup
+import nltk
+import unicodedata
+import sets
+from BeautifulSoup import BeautifulSoup
+from utils import *
 
 def exists(url):
     request = urllib2.Request(url)
@@ -29,18 +33,87 @@ def get_omdb(name, google_images=False, check=False):
     data = {k.lower():v for k, v in odata.iteritems()}
     return data
 
-def get_wiki(name):
-    """Get the wikipedia text for this article"""
-    url = (r"http://en.wikipedia.org/w/api.php?action=parse&page=%s" % name) + 
-           r"&format=json&prop=text&section=0"
+def to_title(title):
+    out = ""
+    for word in title.split(' '):
+        word = word[0].upper() + word[1:]
+        out += word + " "
+    return out
+
+def get_wiki_name(name):
+    """Use the WP API to get the most likely diambiguation"""
+    url = r"http://en.wikipedia.org/w/api.php?action=opensearch&search=" +\
+          urllib2.quote(name) + \
+          r"&limit=1&format=json"
     response = urllib2.urlopen(url)
     odata = json.load(response)
-    if 'error' in odata.keys():
-        return None
-    return data['parse']['text']
+    ptitle = odata[1][0]
+    ptitle = unicodedata.normalize('NFKD', ptitle).encode('ascii','ignore')
+    return ptitle
 
-def process_wiki(text):
+def get_wiki_html(name):
+    url = r"http://en.wikipedia.org/w/api.php?action=parse&page=" + \
+            urllib2.quote(name) +\
+            "&format=json&prop=text&section=0"
+    response = json.load(urllib2.urlopen(url))
+    return response
+
+def process_wiki(name, length=20):
     """Remove excess paragraphs, break out the images, etc."""
-    # Also remove the infobox
+    #This gets the first section, gets the text of to a number of words
+    # and gets the main image
+    response = get_wiki_html(name)
+    html = response['parse']['text']['*']
+    valid_tags = ['p']
+    soup = BeautifulSoup(html)  
+    newhtml = ''
+    for tag in soup.findAll(recursive=False):
+        if len(newhtml.split(' ')) > length:
+            continue
+        if 'p' == tag.name:
+            for c in tag.contents:
+                newhtml += ' ' +unicode(c)
+    description = nltk.clean_html(newhtml)
+    soup = BeautifulSoup(html)  
+    newhtml = ''
+    for tag in soup.findAll(recursive=False):
+        good = True
+        if 'div' == tag.name:
+            if len(tag.attrs) > 0:
+                if any(['class' in a for a in tag.attrs]):
+                    if 'meta' in tag['class']:
+                        good = False
+        if good:
+            for c in tag.contents:
+                newhtml += ' ' +unicode(c)
+    img = "http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png"
+    for tag in BeautifulSoup(newhtml).findAll(recursive=True):
+        if 'img' == tag.name:
+            if tag['width'] > 70:
+                img = "http:" + tag['src']
+                break
+    url = "http://en.wikipedia.org/wiki/" + name
+    title = to_title(name)
+    cleaned = dict(img=img, description=description, url=url,
+                   title=title, name=name)   
     return cleaned
 
+def get_freebase_types(name, trying = True):
+    name = urllib2.quote(name)
+    badtypes = sets.Set(['Topic'])
+    url = r"https://www.googleapis.com/freebase/v1/search?indent=true&filter=%28all+name" +\
+            "%3A%22" + name + "%22%29&output=%28type%29"
+    try:
+        response = json.load(urllib2.urlopen(url))
+    except:
+        print 'Failed in freebase for %s' % name
+        return None, []
+    try:
+        notable = response['result'][0]['notable']['name']
+    except:
+        notable = None
+    types = [x['name'] for x in response['result'][0]['output']['type']["/type/object/type"]]
+    types = sets.Set(types)
+    types = sets.Set([t for t in types if 'topic' not in t.lower()])
+    types = sets.Set([t for t in types if 'ontology' not in t.lower()])
+    return notable, types

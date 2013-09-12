@@ -1,12 +1,20 @@
 import urllib2
 import json
-import veclib
 import string
 import re
 import httplib
 import urlparse
 import sets
+import cPickle
+import os.path
+import time
+import multiprocessing
+from multiprocessing import Manager
 from sets import Set
+import numexpr as ne
+from wiki import *
+from utils import *
+import veclib
 
 def eval_sign(query):
     """ This is a dumb parser that assign + or - to every character
@@ -28,6 +36,7 @@ class Actor(object):
         and then parse and evaluate the query, which is usually called 
         through run"""
     name = 'Actor'
+    pool = None
 
     def validate(self, query):
         """Is the given query suitable for this Action"""
@@ -43,10 +52,16 @@ class Actor(object):
            Defaults to a pass-through to OMDB"""
         return {}
 
+    @timer
     def run(self, query):
+        if self.pool is None:
+            self.pool = multiprocessing.Pool()
+        start = time.time()
         args, kwargs = self.parse(query)
         reps = self.evaluate(*args, **kwargs)
         reps['actor'] = self.name
+        stop = time.time()
+        reps['query_time'] = "%1.1f" %(stop - start)
         return reps
 
 class Passthrough(Actor):
@@ -63,64 +78,95 @@ class Passthrough(Actor):
         return [args[0]], kwargs
 
     def evaluate(self, arg, **kwargs):
-        result = get_omdb(arg)
+        #result = get_omdb(arg)
+        result = process_wiki(arg)
         if result is None:
             return {}
         query_text = kwargs['query']
+        print result.keys()
         reps = dict(query_text=query_text, results=[result])
         return reps
 
 class Expression(Actor):
     name = "Expression"
-    def __init__(self, preloaded_actor=None, subsample=False):
+
+    @timer
+    def __init__(self, preloaded_actor=None, subsampling=False, 
+                 fast=False, test=True):
         """We need to load and preprocess all of the vectors into the 
            memory and persist them to cut down on IO costs"""
         if not preloaded_actor:
+            # a= 'all'
+            # w='wikipedia'
             trained = "/u/cmoody3/data2/ids/trained" 
-            fnv = '%s/vectors.wiki.1000.num.npy' % trained
-            fnw = '%s/vectors.wiki.1000.words' % trained
-            fnr = '%s/articles.dict' % './data'
-            fne = '%s/english' % './data'
-            self.vl = veclib.get_vector_lib(fnv)
-            self.vw2i , self.vi2w = veclib.get_words(fnw)
-            assert self.vl.shape[0] == len(self.vw2i.keys())
-            self.rc2f, self.rf2c = veclib.get_canon_rep(fnr)
-            if subsample:
-                english = sets.Set(veclib.get_english(fne))
-                english = english.union(sets.Set(self.rc2f.keys()))
-                rets = veclib.reduce_vectorlib(self.vl, self.vw2i, 
-                                               english)
-                self.vl, self.vw2i, self.vi2w = rets
-                print "SUBSAMPLING! to %i words out of %i english words" \
-                        % (len(self.vl), len(english))
-            rets = veclib.reduce_vectorlib(self.vl, self.vw2i, 
-                                           sets.Set(self.rc2f.keys()))
-            self.cvl, self.cw2i, self.ci2w = rets
-            # All movies at this point should exist in the 
-            # canon set and in the vector set
-            self.vset = sets.Set(self.vw2i.keys()) #from vector libs, is lowered
-            self.rset = sets.Set(self.rc2f.keys()) #from reps, only canonical form
-            self.cset = sets.Set(self.cw2i.keys()) #common word list
-            assert len(self.cset) == len(self.cset.intersection(self.vset))
-            assert len(self.cset) == len(self.cset.intersection(self.rset))
-            print "Loaded in vector libs"
-            import gc; gc.collect()
+            if fast:
+                fnv = '%s/vectors.bin.005.num.npy' % trained
+                fnw = '%s/vectors.bin.005.words' % trained
+            else:
+                fnv = '%s/vectors.wiki.1000.num.npy' % trained
+                fnw = '%s/vectors.wiki.1000.words' % trained
+            wc2t = '%s/c2t' % './data'
+            wt2c = '%s/t2c' % './data'
+            # all word vecotor lib VL
+            self.wc2t = cPickle.load(open(wc2t))
+            self.wt2c = cPickle.load(open(wt2c))
+            ks, vs  = [], []
+            for k, v in self.wc2t.iteritems():
+                k = veclib.canonize(k, {}, match=False)
+                ks.append(k)
+                vs.append(v)
+            for k, v in zip(ks, vs):
+                self.wc2t[k] = v
+            avl = veclib.get_vector_lib(fnv)
+            # all words, word to index mappings w2i
+            if os.path.exists(fnw + '.pickle'):
+                self.aw2i , self.ai2w = cPickle.load(open(fnw + '.pickle'))
+            else:
+                self.aw2i , self.ai2w = veclib.get_words(fnw)
+                cPickle.dump([self.aw2i, self.ai2w], open(fnw + '.pickle','w'))
+            if subsampling:
+                n = long(1e6) # keep top one million words
+                print "subsampling %1.1e elements" % n
+                wl = sets.Set(self.wc2t.keys())
+                avl, self.aw2i, self.ai2w = veclib.subsample(avl, self.aw2i, 
+                                                             self.ai2w, wl, n)
+                assert max(self.ai2w.keys()) == len(wl) + 1
+            self.avl = veclib.normalize(avl)
+            del avl
+            # # of words better be the same in both the vectors
+            # and the list of words
+            assert self.avl.shape[0] == len(self.ai2w.keys())
+            rets = veclib.reduce_vectorlib(self.avl, self.aw2i, 
+                                           sets.Set(self.wc2t.keys()))
+            self.wvl, self.ww2i, self.wi2w = rets
+            # now let's test loading a word and finding its index
+            if test:
+                import numpy as np
+                idx = self.ww2i.values()[0]
+                vec = self.wvl[idx]
+                idx2 = np.argmin(np.sum(np.abs(self.wvl - \
+                                np.reshape(vec, (1, vec.shape[0]))), axis=1))
+                assert idx2 == idx
+            print "%1.1e vectors, %1.1e articles and %1.1e common" % \
+                    (len(self.avl), len(self.wc2t.keys()), 
+                     len(self.wvl))
         else:
-            self.vl   = preloaded_actor.vl
-            self.vw2i = preloaded_actor.vw2i
-            self.vi2w = preloaded_actor.vi2w
-            self.rc2f = preloaded_actor.rc2f
-            self.rf2c = preloaded_actor.rf2c
-            self.cvl  = preloaded_actor.cvl
-            self.cw2i = preloaded_actor.cw2i
-            self.ci2w = preloaded_actor.ci2w
-            self.cset = preloaded_actor.cset
-            self.vset = preloaded_actor.vset
-            self.rset = preloaded_actor.rset
+            # Wikipedia articles and their canonical transformations
+            self.wc2t = preloaded_actor.wc2t #Wiki dump article titles
+            self.wt2c = preloaded_actor.wt2c
+            # All vectors from word2vec
+            self.avl  = preloaded_actor.avl #All word2vec
+            self.aw2i = preloaded_actor.aw2i
+            self.ai2w = preloaded_actor.ai2w
+            # Just wikipedia vectors, indices
+            self.wvl  = preloaded_actor.wvl # Intersection of word2vec
+            self.ww2i = preloaded_actor.ww2i # and wikipedia dump
+            self.wi2w = preloaded_actor.wi2w
 
     def validate(self, query):
         return '+' in query or '-' in query
 
+    @timer
     def parse(self, query, kwargs=None):
         print "Query: ", query
         words = query.replace('+', '|').replace('-', '|')
@@ -130,20 +176,32 @@ class Expression(Actor):
         signs.extend([sign[match.start() + 1] \
                   for match in re.finditer('\|', words)])
         signs = [1.0 if s=='+' else -1.0 for s in signs]
-        print 'Words (pre) : ', words
-        print 'Signs : ', signs
         words = words.split('|')
-        movie = [veclib.canonize(words[0], self.cset)]
-        nonmovie = [veclib.canonize(a, self.vset) for a in words[1:]]
-        words = movie + nonmovie
-        print 'Words (post): ', words
-        base = [self.cvl[self.cw2i[words[0]]]]
-        vecs = [self.vl[self.vw2i[w]] for w in words[1:]]
-        return [signs, base + vecs], {'query':query, 'words':words}
+        prewords  = words
+        fwords = words
+        ptitle = get_wiki_name(words[0])
+        if len(ptitle) > 0:
+            print "Wiki lookup %s -> %s" %(words[0], ptitle)
+            title = [veclib.canonize(ptitle, self.ww2i, match=False)]
+        else:
+            title = [veclib.canonize(words[0], self.aw2i)]
+        words = [veclib.canonize(a, self.aw2i) for a in words[1:]]
+        words = title + words
+        print 'Words: ',
+        for a, b in zip(prewords, words):
+            print a.strip(), ': ',
+            print b.strip(),
+        print ' '
+        base = [self.wvl[self.ww2i[title[0]]]]
+        vecs = [self.avl[self.aw2i[w]] for w in words[1:]]
+        return [signs, base + vecs], {'query':query, 'words':words,
+                                      'fwords':fwords}
     
+    @timer
     def evaluate(self, *args, **kwargs):
         signs, vecs = args
-        words = kwargs['words']
+        words  = kwargs['words']
+        fwords = kwargs['fwords']
         total = signs[0] * vecs[0]
         translated = ''
         for s, v, w in zip(signs, vecs, words):
@@ -154,39 +212,64 @@ class Expression(Actor):
                 sign = '-'
                 total += s * v
             translated += ' %s %s' % (sign, w)
-        similar = veclib.nearest_word(vecs[0], self.cvl, self.ci2w, n=1)
-        swords = veclib.nearest_word(vecs[0], self.vl, self.vi2w, n=100)
-        movies = veclib.nearest_word(total, self.cvl, self.ci2w, n=50)
-        print "Nearby words: ", swords, len(swords)
-        print "Similar: ", similar
-        print "Expression: ", movies
-        swords = Set(swords)
+        start = time.time()
+        manager = Manager()
+        rv = manager.dict()
+        #expr_ncanon = veclib.nearest_word(total, self.wvl, self.wi2w, n=10)
+        p3 = self.pool.apply_async(veclib.nearest_word,
+                                   (total, self.wvl, self.wi2w),
+                                   dict(n=10))
+        #root_ncanon = veclib.nearest_word(vecs[0], self.wvl, self.wi2w, n=10)
+        p1 = self.pool.apply_async(veclib.nearest_word,
+                                   (vecs[0], self.wvl, self.wi2w),
+                                   dict(n=10))
+        #root_nwords = veclib.nearest_word(vecs[0], self.avl, self.ai2w, n=50)
+        p2 = self.pool.apply_async(veclib.nearest_word,
+                                   (vecs[0], self.avl, self.ai2w),
+                                   dict(n=50))
+        #root_notable, root_types = get_freebase_types(fwords[0])
+        pf = self.pool.apply_async(get_freebase_types, [fwords[0]])
+        #expr_nwords = veclib.nearest_word(total, self.avl, self.ai2w, n=50)
+        p4 = self.pool.apply_async(veclib.nearest_word,
+                                   (total, self.avl, self.ai2w),
+                                   dict(n=50))
+        print "Spawned threads at +%1.1s" % (time.time() - start)
         results = []
-        full_movies = []
-        for movie in movies:
-            if len(results) >= 3: break
-            if movie in similar:
-                print "Skipping similar %s" % movie
-                continue
-            full_movie = self.rc2f[movie]
-            result = get_omdb(full_movie)
-            vec = self.cvl[self.cw2i[movie]]
-            nwords = veclib.nearest_word(vec, self.vl, self.vi2w, n=100)
-            themes = Set(nwords).intersection(swords).difference(Set(movies))
-            print "In common %s:" % movie, themes
-            result['themes'] = [t.replace('_',' ') for t in list(themes)]
-            #import pdb; pdb.set_trace()
-            #print "In between:", veclib.in_between(vecs[0], vec, self.vl, 
-            #                                       self.vi2w)
+        root_types = None
+        expr_ncanon = p3.get()
+        print "Find nearest at +%1.1s" % (time.time() - start)
+        titles = [self.wc2t[c].strip() for c in expr_ncanon]
+        pwfs = []
+        gfts = []
+        for title in titles:
+            pwfs.append(self.pool.apply_async(process_wiki, [title]))
+            gfts.append(self.pool.apply_async(get_freebase_types, [title]))
+        for title, pwf, gft in zip(titles, pwfs, gfts):
+            result = pwf.get()
+            result_notable, result_types = gft.get()
+            result_types = sets.Set(result_types)
+            if root_types is None:
+                root_notable, root_types = pf.get()
+            root_types = sets.Set(root_types)
+            both_types = result_types & root_types 
+            #print "Freebase types to Root:", result_types
+            result['themes'] = both_types
             if result is not None:
                 results.append(result)
-            full_movies.append(full_movie)
-        print "Non-Canonical: ", full_movies
+        print "Finished at +%1.1s" % (time.time() - start)
         if len(results) ==0 :
             return {}
         query_text = kwargs['query']
         reps = dict(query_text=query_text, results=results, 
                     translated=translated)
+        root_ncanon = p1.get()
+        root_nwords = p2.get()
+        expr_ncanon = p3.get()
+        expr_nwords = p4.get()
+        print "Nearby Titles to Root: ", root_ncanon
+        print "Nearby Words  to Root: ", root_nwords
+        print "Nearby Titles to Expression: ", expr_ncanon
+        print "Nearby Words  to Expression: ", expr_nwords
         return reps
 
 class Nearest(Expression):
@@ -197,23 +280,21 @@ class Nearest(Expression):
     def parse(self, query, kwargs=None):
         words = query.replace('+', '|').replace('-', '|')
         word = words.split('|')[0]
-        movie = veclib.canonize(word, self.cset)
-        print "Query: ", query, word, movie
-        return [movie], {'query':query, 'words':words}
+        canon = veclib.canonize(word, self.wc2t)
+        return [canon], {'query':query, 'words':words}
     
     def evaluate(self, *args, **kwargs):
-        movie, = args
-        vector = veclib.lookup_vector(movie, self.cvl, self.cw2i)
-        movies = veclib.nearest_word(vector, self.cvl, self.ci2w, n=50)
-        print "Result: ", movies
+        canon, = args
+        vector = veclib.lookup_vector(canon, self.wvl, self.ww2i)
+        canons = veclib.nearest_word(vector, self.wvl, self.wi2w, n=50)
+        print "Nearest: ", canons
+        full_words = [self.wc2t[c] for c in canons]
+        presults = self.pool.map(process_wiki, full_words)
         results = []
-        for movie in movies:
-            full_word = self.rc2f[movie]
-            result = get_omdb(full_word)
+        for full_word, result in zip(full_words, presults):
             if result is not None:
                 results.append(result)
                 if len(results) > 4: break
-        print " "
         if len(results)==0:
             return {}
         query_text = kwargs['query']
@@ -222,3 +303,4 @@ class Nearest(Expression):
 
 near = Nearest()
 criteria = [Nearest(near), Expression(near), Passthrough()]
+#criteria = [Passthrough()]

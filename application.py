@@ -20,6 +20,13 @@ def results(query="Jurassic Park"):
                 break
         return render_template('results.html', **reps)
 
+@app.route('/wait/<query>')
+def wait(query='', **kwargs):
+    """ Throw up a wait page and immediately 
+        redirect to query page
+    """
+    return render_template('wait.html', **reps)
+
 @app.route('/index.html', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -31,4 +38,4 @@ def index():
         return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=False)
+    app.run(host='0.0.0.0', port=5001, debug=True, use_reloader=False)

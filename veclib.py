@@ -4,7 +4,11 @@ import numpy as np
 import os.path
 import string
 import difflib
+import unicodedata
+import numexpr as ne
+import time
 from sets import Set 
+from utils import *
 
 """ A library to lookup word vectors, reduce the vector list to a subset and
 calculate the nearest word given a vector"""
@@ -43,6 +47,13 @@ def similarity(svec, total):
     sim = np.sum(top / denom, axis=1)
     return sim
 
+@timer
+def normalize(avl):
+    vnorm = ne.evaluate('sum(avl**2.0, axis=1)')
+    vnorm.shape = [vnorm.shape[0], 1]
+    avl = ne.evaluate('avl / sqrt(vnorm)')
+    return avl
+
 def chunks(l, n):
     for i in xrange(0, len(l), n):
         yield l[i:i+n]
@@ -59,26 +70,52 @@ def in_between(vectora, vectorb, vector_lib, index2word, n=10):
     return dist / dispersion
 
 def nearest_word(vector, vector_lib, index2word, n=5, skip=0, 
-                 chunk_size=100000):
+                 chunk_size=100000, use_ne=True):
     words = []
-    sims = []
-    for vl in chunks(vector_lib, chunk_size):
-        d = similarity(vl, vector)
-        da = np.argsort(d)[::-1]
-        for i in range(n):
-            idx = da[i]
-            words.append(index2word[idx])
-            sims.append(d[idx])
-    idx = np.argsort(sims)[::-1]
-    words = [words[i] for i in idx[:n]]
+    if use_ne:
+        d = ne.evaluate('sum(vector_lib * vector, axis=1)')
+        idx = np.argsort(d)[::-1]
+        words = [index2word[i] for i in idx[:n]]
+    else:
+        sims = []
+        offset = 0
+        for vl in chunks(vector_lib, chunk_size):
+            d = similarity(vl, vector)
+            da = np.argsort(d)[::-1]
+            for idx in da[:n]:
+                words.append(index2word[idx + offset])
+                sims.append(d[idx])
+            offset += chunk_size
+        idx = np.argsort(sims)[::-1]
+        words = [words[i] for i in idx[:n]]
     return words
 
+@timer
+def subsample(avl, w2i, i2w, whitelist, n):
+    subw2i = {}
+    subi2w = {}
+    count = 0
+    for i in range(len(avl)):
+        word = i2w[i]
+        if count < n or '_' in word or word in whitelist:
+            subi2w[i] = word
+            subw2i[word] = count
+            count +=1
+    indices = subi2w.keys()
+    subavl = avl[indices]
+    return subavl, subw2i, subi2w
+
+@timer
 def lookup_vector(word, vector_lib, w2i, fuzzy=True):
     keys = w2i.keys()
-    key, = get_close_matches(word, keys, 1)
+    if word not in keys:
+        key, = get_close_matches(word, keys, 1)
+    else:
+        key = word
     print 'Lookup: %s -> %s' % (word, key)
     return vector_lib[w2i[key]]
 
+@timer
 def get_canon_rep(fn):
     c2f, f2c = {}, {}
     with open(fn) as fh:
@@ -91,18 +128,33 @@ def get_canon_rep(fn):
             f2c[f] = c
     return c2f, f2c
 
-def canonize(phrase, c2f, match=False):
-    phrase = phrase.strip().lower()
+def canonize(phrase, c2f, match=True, subset=False):
     phrase = phrase.replace('\n','').replace('\t','').replace('\r','')
-    phrase = phrase.translate(string.digits)
-    phrase = phrase.translate(string.punctuation)
     for i in range(5):
         phrase = phrase.replace('  ', ' ')
+    phrase = phrase.strip()
     phrase = phrase.replace(' ', '_')
-    if match:
-        phrase, = difflib.get_close_matches(phrase, c2f, 1)
+    phrase = phrase.strip().lower()
+    keys = Set(c2f.keys())
+    if phrase in keys: return phrase
+    phrase = phrase.replace('-', '_')
+    for p in string.punctuation:
+        phrase = phrase.replace(p, '')
+    if phrase in keys: return phrase
+    phrase = phrase.replace(' ', '_')
+    if phrase in keys: return phrase
+    if not match:
+        return phrase
+    first = phrase.split(' ')[0]
+    if subset:
+        sub = Set((first in k for k in keys))
+    else:
+        sub = keys
+    phrase, = difflib.get_close_matches(phrase, sub, 1)
+    phrase = unicodedata.normalize('NFKD', unicode(phrase)).encode('ascii','ignore')
     return phrase
 
+@timer
 def reduce_vectorlib(vector_lib, word2index, canon):
     indices = []
     w2i, i2w = {}, {}
@@ -119,12 +171,14 @@ def reduce_vectorlib(vector_lib, word2index, canon):
     rvl = vector_lib[indices]
     return rvl, w2i, i2w
 
+@timer
 def get_names(fn=fnc):
     names = [x.replace('\n', '').strip() for x in fh.readlines()]
     text = ''.join(names)
     text = text.replace('\n', '')
     return text
 
+@timer
 def get_words(fn=fnw, subsample=None):
     words = open(fn).readlines()
     word2index = {}
@@ -136,8 +190,11 @@ def get_words(fn=fnw, subsample=None):
                 break
         index2word[v] = k
         word2index[k] = v
+        k = canonize(k, {}, match=False)
+        word2index[k] = v
     return word2index, index2word
 
+@timer
 def get_english(fn):
     words = []
     with open(fn) as fh:
@@ -145,6 +202,7 @@ def get_english(fn):
             words.append(line.strip())
     return words
 
+@timer
 def get_vector_lib(fn=fnv):
     fnvn = fn.replace('.npy', '')
     if not os.path.exists(fn) and os.path.exists(fnvn):

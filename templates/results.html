@@ -1,8 +1,8 @@
 {% extends "layout.html" %}
 {% block main %}
 <div class="hero" style="margin:0">
-<h1 class="pure-u-1 " style="font-size:500%">WizLang</h1>
-<h2 class="pure-u-3-4 l-centered" style="font-size:150%">Amazing language relationships for movies</h2>
+<h1 class="pure-u-1">ThisPlusThat<font color="red" style="font-size:50%">.me</font></h1>
+<h2 class="pure-u-3-4 l-centered" style="font-size:150%">Amazing language relationships</h2>
 <form class="pure-form" action="" method="post">
 <fieldset>
     <input type="text" name=query placeholder="{{ query_text }}" 
@@ -16,30 +16,34 @@
 {% endblock %}
 {% block mid %}
 {% if results %}
+  {% if translated %}
+    <p>Your query was translated into <i>{{ translated }}</i></p>
+  {% endif %}
   <p>Search results</p>
   {% for result in results %}
     <div class="legal pure-g-r" >
         <div class="pure-u-2-5" style="text-align:center">
-            <a ><img href="http://www.imdb.com/title/{{ result.imdbid }}"
-              style="height:300px"
-              src="{{ result.poster }}" alt="{{ result.title }}" /></a>
+            <a ><img href="{{ result.url }}"
+              src="{{ result.img }}" alt="{{ result.title }}" /></a>
       </div>
       <div class="pure-u-3-5 ">
           <div class="content">
-              <a href="http://www.imdb.com/title/{{ result.imdbid }}">
-                  <h1 class="content-subhead" style="color:#1f8dd6">
-                          {{ result.title }} ({{ result.year }})</h1>
+              <a href="{{ result.url }}">
+                  <h1 class="content-subhead" style="color:#1f8dd6;margin:0px">
+                          {{ result.title }}</h1>
+                  <h2 class="content-subhead" style="margin:0px">
+                      Similarities: 
+                      {% for thme in result.themes %} 
+                        {{ theme }}
+                      {% endfor %}
+                  </h2>
               </a>
             </a>
-            <p style="font-size:14px">{{ result.plot }}</p>
-            <p><b>Similarities:</b> <a href=""> {{ result.original }} </a> 
-            {% if result.themes %}
-                and <a href=""> {{ result.title }} </a>
-                have common themes of: 
-                {% for theme in result.themes %} {{ theme }}, {% endfor %}
-                {% endif %}
-            <p> Watch Trailer </[>
-            <p> Play in Netflix</p> 
+            <p style="font-size:14px">{{ result.description }}</p>
+            <div id="textbox">
+              <p class="alignright">  <a href={{ result.url }}>Read more on Wikipedia</a></p>
+            </div>
+            <div style="clear: both;"></div>
           </div>
         </p>
       </div>
