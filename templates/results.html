@@ -31,19 +31,22 @@
               <a href="{{ result.url }}">
                   <h1 class="content-subhead" style="color:#1f8dd6;margin:0px">
                           {{ result.title }}</h1>
-                  <h2 class="content-subhead" style="margin:0px">
-                      Similarities: 
-                      {% for thme in result.themes %} 
-                        {{ theme }}
-                      {% endfor %}
-                  </h2>
               </a>
+              {% if result.themes %}
+                <h2 class="content-subhead" style="margin:0px">
+                    Similarities: 
+                    {% for theme in result.themes %} 
+                      {{ theme }}
+                    {% endfor %}
+                </h2>
+              {% endif %}
             </a>
             <p style="font-size:14px">{{ result.description }}</p>
+            <!--
             <div id="textbox">
               <p class="alignright">  <a href={{ result.url }}>Read more on Wikipedia</a></p>
             </div>
-            <div style="clear: both;"></div>
+            <div style="clear: both;"></div><-->
           </div>
         </p>
       </div>

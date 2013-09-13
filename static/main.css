@@ -63,7 +63,9 @@ dd {
 
 #layout {
     padding-left: 150px; /* left col width "#menu" */
+    padding-right: 150px; /* left col width "#menu" */
     left: 0;
+    right: 0;
 }
 
 
@@ -128,8 +130,8 @@ aside {
 /* The content div is placed as a wrapper around all the docs */
 .content {
     margin: 0 auto;
-    width: 70%;
-    margin-bottom:50px;
+    width: 85%;
+    margin-bottom:00px;
 }
     .content p {
         line-height: 1.6em;
@@ -367,13 +369,16 @@ a.pure-button-primary {
     #layout {
         position: relative;
         padding-left: 0;
+        padding-right: 0;
     }
         #layout.active {
             position: relative;
             left: 150px;
+            right: 150px;
         }
             #layout.active #menu {
                 left: 150px;
+                right: 150px;
                 width: 150px;
             }
 

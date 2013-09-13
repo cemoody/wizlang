@@ -58,8 +58,11 @@ class Actor(object):
         if self.pool is None:
             self.pool = multiprocessing.Pool()
         start = time.time()
-        args, kwargs = self.parse(query)
-        reps = self.evaluate(*args, **kwargs)
+        try:
+            args, kwargs = self.parse(query)
+            reps = self.evaluate(*args, **kwargs)
+        except:
+            reps = {}
         reps['actor'] = self.name
         stop = time.time()
         reps['query_time'] = "%1.1f" %(stop - start)
@@ -107,8 +110,8 @@ class Expression(Actor):
             else:
                 fnv = '%s/vectors.wiki.1000.num.npy' % trained
                 fnw = '%s/vectors.wiki.1000.words' % trained
-                fnv = '%s/vectors.fullwiki.1000.s100.num.npy' % trained
-                fnw = '%s/vectors.fullwiki.1000.s100.words' % trained
+                fnv = '%s/vectors.fullwiki.1000.s50.num.npy' % trained
+                fnw = '%s/vectors.fullwiki.1000.s50.words' % trained
             wc2t = '%s/c2t' % './data'
             wt2c = '%s/t2c' % './data'
             # all word vecotor lib VL
@@ -135,21 +138,14 @@ class Expression(Actor):
                 avl, self.aw2i, self.ai2w = veclib.subsample(avl, self.aw2i, 
                                                              self.ai2w, wl, n)
                 assert max(self.ai2w.keys()) == len(wl) + 1
-            savl = sharedmem.empty((npavl.shape), dtype='f4')
-            avl[:] = avl
-            self.npavl = veclib.normalize(avl)
+            self.avl = veclib.normalize(avl)
             del avl
             # # of words better be the same in both the vectors
             # and the list of words
-            rets = veclib.reduce_vectorlib(self.npavl, self.aw2i, 
+            rets = veclib.reduce_vectorlib(self.avl, self.aw2i, 
                                            sets.Set(self.wc2t.keys()))
-            self.npwvl, self.ww2i, self.wi2w = rets
-            self.npwvl = self.npwvl.astype('f4')
-            if True:
-                self.wvl = sharedmem.empty(self.npwvl.shape, dtype='f4')
-                self.wvl[:] = self.npwvl
-                self.avl = sharedmem.empty(self.npavl.shape, dtype='f4')
-                self.avl[:] = self.npavl
+            self.wvl, self.ww2i, self.wi2w = rets
+            self.wvl = self.wvl.astype('f4')
             assert self.avl.shape[0] == len(self.ai2w.keys())
                 
             # now let's test loading a word and finding its index
@@ -208,7 +204,7 @@ class Expression(Actor):
         base = [self.wvl[self.ww2i[title[0]]]]
         vecs = [self.avl[self.aw2i[w]] for w in words[1:]]
         return [signs, base + vecs], {'query':query, 'words':words,
-                                      'fwords':fwords}
+                    'fwords':fwords, 'ptitle':ptitle}
     
     @timer
     def evaluate(self, *args, **kwargs):
@@ -228,61 +224,58 @@ class Expression(Actor):
         start = time.time()
         manager = Manager()
         rv = manager.dict()
-        #expr_ncanon = veclib.nearest_word(total, self.wvl, self.wi2w, n=10)
-        p3 = self.pool.apply_async(veclib.nearest_word,
-                                   (total, self.wvl, self.wi2w),
-                                   dict(n=10))
+        expr_ncanon = veclib.nearest_word(total, self.wvl, self.wi2w, n=20)
         #root_ncanon = veclib.nearest_word(vecs[0], self.wvl, self.wi2w, n=10)
-        p1 = self.pool.apply_async(veclib.nearest_word,
-                                   (vecs[0], self.wvl, self.wi2w),
-                                   dict(n=10))
         #root_nwords = veclib.nearest_word(vecs[0], self.avl, self.ai2w, n=50)
-        p2 = self.pool.apply_async(veclib.nearest_word,
-                                   (vecs[0], self.avl, self.ai2w),
-                                   dict(n=50))
-        #root_notable, root_types = get_freebase_types(fwords[0])
-        pf = self.pool.apply_async(get_freebase_types, [fwords[0]])
+        root_notable, root_types = get_freebase_types(fwords[0])
         #expr_nwords = veclib.nearest_word(total, self.avl, self.ai2w, n=50)
-        p4 = self.pool.apply_async(veclib.nearest_word,
-                                   (total, self.avl, self.ai2w),
-                                   dict(n=50))
-        print "Spawned threads at +%1.1s" % (time.time() - start)
         results = []
-        root_types = None
-        expr_ncanon = p3.get()
-        print "Find nearest at +%1.1s" % (time.time() - start)
         titles = [self.wc2t[c].strip() for c in expr_ncanon]
         pwfs = []
         gfts = []
         for title in titles:
+            nwfs.append(self.pool.apply_async(get_wiki_name, [title]))
             pwfs.append(self.pool.apply_async(process_wiki, [title]))
             gfts.append(self.pool.apply_async(get_freebase_types, [title]))
-        for title, pwf, gft in zip(titles, pwfs, gfts):
+        wiki_titles = []
+        for title, pwf, gft, nft in zip(titles, pwfs, gfts, nfts):
+            if title == kwargs['ptitle']:
+                print "Skipping :", title
+            wiki_title = nft.get()
+            if title in words:
+                print "Skipping :", title
             result = pwf.get()
+            if result is not None and result['title'] not in wiki_titles:
+                wiki_titles.append(result['title'])
+            else:
+                print "Repeat ", result['title']
+                continue
+            if reject_result(result):
+                print "Rejected ", result['title']
+                continue
             result_notable, result_types = gft.get()
+            #if result_notable is not None and len(result_notable) > 5:
+            #    result['description'] = result_notable
             result_types = sets.Set(result_types)
-            if root_types is None:
-                root_notable, root_types = pf.get()
             root_types = sets.Set(root_types)
             both_types = result_types & root_types 
-            #print "Freebase types to Root:", result_types
-            result['themes'] = both_types
-            if result is not None:
-                results.append(result)
+            if len(both_types) < 1:
+                continue
+                print "Skipping because not similar"
+            print ("Freebase types to %s: " % title), result_types
+            themes = [str(t) for t in both_types]
+            themes = sorted(themes, key=lambda x: len(x))
+            result['themes'] = themes[-2:]
+            results.append(result)
         print "Finished at +%1.1s" % (time.time() - start)
         if len(results) ==0 :
             return {}
+        self.pool.terminate()
+        del self.pool
+        self.pool = None
         query_text = kwargs['query']
         reps = dict(query_text=query_text, results=results, 
                     translated=translated)
-        root_ncanon = p1.get()
-        root_nwords = p2.get()
-        expr_ncanon = p3.get()
-        expr_nwords = p4.get()
-        print "Nearby Titles to Root: ", root_ncanon
-        print "Nearby Words  to Root: ", root_nwords
-        print "Nearby Titles to Expression: ", expr_ncanon
-        print "Nearby Words  to Expression: ", expr_nwords
         return reps
 
 class Nearest(Expression):
@@ -293,7 +286,13 @@ class Nearest(Expression):
     def parse(self, query, kwargs=None):
         words = query.replace('+', '|').replace('-', '|')
         word = words.split('|')[0]
-        canon = veclib.canonize(word, self.wc2t)
+        ptitle = get_wiki_name(word)
+        if len(ptitle) > 0:
+            print "Wiki lookup %s -> %s" %(word, ptitle)
+            title = [veclib.canonize(ptitle, self.ww2i, match=False)]
+        else:
+            title = [veclib.canonize(words[0], self.aw2i)]
+        canon = veclib.canonize(title[0], self.wc2t)
         return [canon], {'query':query, 'words':words}
     
     def evaluate(self, *args, **kwargs):

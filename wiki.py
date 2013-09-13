@@ -3,6 +3,7 @@ import json
 import nltk
 import unicodedata
 import sets
+import re
 from BeautifulSoup import BeautifulSoup
 from utils import *
 
@@ -58,7 +59,7 @@ def get_wiki_html(name):
     response = json.load(urllib2.urlopen(url))
     return response
 
-def process_wiki(name, length=20):
+def process_wiki(name, length=20, max_char=300):
     """Remove excess paragraphs, break out the images, etc."""
     #This gets the first section, gets the text of to a number of words
     # and gets the main image
@@ -74,11 +75,15 @@ def process_wiki(name, length=20):
             for c in tag.contents:
                 newhtml += ' ' +unicode(c)
     description = nltk.clean_html(newhtml)
+    description = re.sub(r'\([^)]*\)', '', description)
+    description = re.sub(r'\[[^)]*\]', '', description)
+    if len(description) > max_char:
+        description = description[:max_char] + '...'
     soup = BeautifulSoup(html)  
     newhtml = ''
     for tag in soup.findAll(recursive=False):
         good = True
-        if 'div' == tag.name:
+        if 'div' == tag.name or 'table' == tag.name:
             if len(tag.attrs) > 0:
                 if any(['class' in a for a in tag.attrs]):
                     if 'meta' in tag['class']:
@@ -117,3 +122,8 @@ def get_freebase_types(name, trying = True):
     types = sets.Set([t for t in types if 'topic' not in t.lower()])
     types = sets.Set([t for t in types if 'ontology' not in t.lower()])
     return notable, types
+
+def reject_result(result):
+    if len(result['description']) < 100:
+        return True
+    return False
