@@ -202,9 +202,9 @@ class Expression(Actor):
     def evaluate(self, dresults, other):
         previous_titles = []
         results = []
-        for result in dresults:
-            wikiname = result['info']['wikiname']
-            article  = result['info']['article']
+        for dresult in dresults:
+            wikiname = dresult['info']['wikiname']
+            article  = dresult['info']['article']
             if wikiname in other['wikinames']:
                 print 'Skipping direct in query', wikiname
                 continue
@@ -213,9 +213,9 @@ class Expression(Actor):
                 continue
             result = {}
             result.update(article)
-            result.update(result['info'])
+            result.update(dresult['info'])
+            result['themes'] = dresult['info']['types']
             results.append(result)
-            results['themes'] = result['info']['types']
             previous_titles.append(wikiname)
         if len(results) == 0:
             return {}

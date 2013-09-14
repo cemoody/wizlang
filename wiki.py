@@ -157,6 +157,7 @@ def process_wiki(name, length=20, max_char=300, response=None):
 
 apikey = r"AIzaSyA_9a3q72NzxKeAkkER9zSDJ-l0anluQKQ"
 def get_freebase_types(name, trying = True):
+    types = None
     name = urllib2.quote(name)
     url = r"https://www.googleapis.com/freebase/v1/search?filter=%28all+name%3A%22"
     url += name
@@ -179,9 +180,13 @@ def get_freebase_types(name, trying = True):
         notable = response['result'][0]['notable']['name']
     except:
         notable = None
-    types = [x['name'] for x in response['result'][0]['output']['type']["/type/object/type"]]
-    types = [t for t in types if 'topic' not in t.lower()]
-    types = [t for t in types if 'ontology' not in t.lower()]
+    try:
+        types = [x['name'] for x in response['result'][0]['output']['type']["/type/object/type"]]
+        types = [t for t in types if 'topic' not in t.lower()]
+        types = [t for t in types if 'ontology' not in t.lower()]
+    except:
+        print name, response
+        print sys.exc_info()
     return notable, types
 
 def reject_result(result, kwargs):
