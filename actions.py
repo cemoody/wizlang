@@ -100,7 +100,7 @@ class Passthrough(Actor):
 def result_chain(canonical, c2t):
     """Chain the decanonization, wiki lookup,
        wiki article lookup, and freebase all together"""
-    wikiname, response=  wiki_decanonize(canonical, c2t)
+    wikiname, response =  wiki_decanonize(canonical, c2t)
     article = process_wiki(wikiname, response)
     notable, types = get_freebase_types(wikiname)
     return dict(wikiname=wikiname, article=article, notable=notable,
@@ -165,19 +165,20 @@ class Expression(Actor):
         canon = self.aw2i.keys()
         if parallel:
             wc = lambda x: wiki_canonize(x, canon)
-            canonizeds, wikinames = zip(pool.map(wc, words))
+            rets = pool.map(wc, words)
         else:
-            canonizeds, wikinames = zip([wiki_canonize(w, canon) for w in words])
+            rets = [wiki_canonize(w, canon) for w in words]
+        rets = rets[:1]
+        canonizeds, wikinames = zip(*rets)
         # Make the translated query string
         translated = ""
         for sign, canonized in zip(signs, canonizeds):
-            translated += "%1.1f %s " %(sign, canonized)
+            translated += "%+1.0f %s " %(sign, canonized)
+        print 'translated: ', translated
         # Format the vector lib request
         args = []
-        word2canon = {}
         for sign, word, canonical in zip(signs, words, canonizeds):
             args.append([sign, canonical])
-            word2canon[word] = canonical
         send = json.dumps(dict(args=args))
         url = backend_url + urllib2.quote(send)
         response = json.load(urllib2.urlopen(url))
@@ -185,16 +186,16 @@ class Expression(Actor):
         # Decanonize the results and get freebase, article info
         results = []
         if parallel:
-            rc = lambda x: result_chain(x, self.c2t)
+            rc = lambda x: result_chain(x, self.wc2t)
             rv = pool.map(rc, response['result'])
         else:
-            rv = [result_chain(c, self.c2t) for x in response['result']]
+            rv = [result_chain(x, self.wc2t) for x in response['result']]
         for c, n, v in zip(response['result'], response['args_neighbors'], rv):
             results.append(dict(canonical=c, neighbors=n, info=v))
         pool.close()
         pool.terminate()
         del pool
-        other = dict(query=query, translated=translated, wikinames)
+        other = dict(query=query, translated=translated, wikinames=wikinames)
         return results, other
     
     @timer
@@ -205,15 +206,16 @@ class Expression(Actor):
             wikiname = result['info']['wikiname']
             article  = result['info']['article']
             if wikiname in other['wikinames']:
-                print 'Skipping direct in query', wiki
+                print 'Skipping direct in query', wikiname
                 continue
             if wikiname in previous_titles: 
-                print 'Skipping previous', wiki
+                print 'Skipping previous', wikiname
                 continue
             result = {}
             result.update(article)
-            result.update(info)
+            result.update(result['info'])
             results.append(result)
+            results['themes'] = result['info']['types']
             previous_titles.append(wikiname)
         if len(results) == 0:
             return {}

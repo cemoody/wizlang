@@ -3,6 +3,7 @@ import json
 import nltk
 import unicodedata
 import sets
+import sys
 import re
 import time
 import difflib
@@ -63,7 +64,7 @@ def get_wiki_name(name, get_response=False):
             return None
     ptitle = odata[1][0]
     ptitle = unicodedata.normalize('NFKD', ptitle).encode('ascii','ignore')
-    if get_response
+    if get_response:
         return ptitle, response
     else:
         return ptitle
@@ -89,12 +90,12 @@ def wiki_canonize(phrase, canon, n=1):
     phrases = [unicodedata.normalize('NFKD', unicode(phrase)).encode('ascii','ignore') for phrase in phrases]
     return phrases[0], wiki
 
-def wiki_decanonize(phrase, c2t, response=True):
-    if phrase in c2t: return c2t[phrase]
+def wiki_decanonize(phrase, c2t, response=True, n=2):
+    if phrase in c2t: return c2t[phrase], None
     phrase = phrase.replace('_', ' ')
-    if phrase in c2t: return c2t[phrase]
+    if phrase in c2t: return c2t[phrase], None
     phrase = phrase.capitalize()
-    if phrase in c2t: return c2t[phrase]
+    if phrase in c2t: return c2t[phrase], None
     wiki, response= get_wiki_name(phrase, get_response=True)
     if wiki is not None:
         return wiki, response 
@@ -154,24 +155,33 @@ def process_wiki(name, length=20, max_char=300, response=None):
                    title=title, name=name)   
     return cleaned
 
+apikey = r"AIzaSyA_9a3q72NzxKeAkkER9zSDJ-l0anluQKQ"
 def get_freebase_types(name, trying = True):
     name = urllib2.quote(name)
-    badtypes = sets.Set(['Topic'])
-    url = r"https://www.googleapis.com/freebase/v1/search?indent=true&filter=%28all+name" +\
-            "%3A%22" + name + "%22%29&output=%28type%29"
+    url = r"https://www.googleapis.com/freebase/v1/search?filter=%28all+name%3A%22"
+    url += name
+    url += r"%22%29&output=%28type%29&key=AIzaSyA_9a3q72NzxKeAkkER9zSDJ-l0anluQKQ&limit=1"
     try:
-        response = json.load(urllib2.urlopen(url))
+        fh = urllib2.urlopen(url)
+    except:
+        print "Failed in getting freebase url for %s" % name
+        print sys.exc_info()
+        print url
+        return None, []
+    try:
+        response = json.load(fh)
     except:
         print 'Failed in freebase for %s' % name
+        print sys.exc_info()
+        print fh
         return None, []
     try:
         notable = response['result'][0]['notable']['name']
     except:
         notable = None
     types = [x['name'] for x in response['result'][0]['output']['type']["/type/object/type"]]
-    types = sets.Set(types)
-    types = sets.Set([t for t in types if 'topic' not in t.lower()])
-    types = sets.Set([t for t in types if 'ontology' not in t.lower()])
+    types = [t for t in types if 'topic' not in t.lower()]
+    types = [t for t in types if 'ontology' not in t.lower()]
     return notable, types
 
 def reject_result(result, kwargs):
