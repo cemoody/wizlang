@@ -37,15 +37,18 @@ def nearest(raw_query='{"args": [[1.0, "jurassic_park"]]}'):
         args_neighbors = []
         for sign, word in query['args']:
             vector = avl[aw2i[word]]
-            canon, vectors = veclib.nearest_word(vector, avl, ai2w, n=20)
-            args_neighbors.append(canon)
+            if False:
+                canon, vectors, sim = veclib.nearest_word(vector, avl, ai2w, n=20)
+                args_neighbors.append(canon)
             if total is None:
-                total = vectors[0]
+                total = vector * sign
             else:
-                total += vectors[0]
-        canon, vectors = veclib.nearest_word(vector, avl, ai2w, n=20)
+                total += vector * sign
+        canon, vectors, sim = veclib.nearest_word(total, avl, ai2w, n=20)
         resp['result'] = canon
+        resp['similarity'] = [float(s) for s in sim]
         resp['args_neighbors'] = args_neighbors
+        print resp
         text = json.dumps(resp)
         print "RESPONSE"
         print json.dumps(resp, sort_keys=True,indent=4, separators=(',', ': '))

@@ -190,8 +190,10 @@ class Expression(Actor):
             rv = pool.map(rc, response['result'])
         else:
             rv = [result_chain(x, self.wc2t) for x in response['result']]
-        for c, n, v in zip(response['result'], response['args_neighbors'], rv):
-            results.append(dict(canonical=c, neighbors=n, info=v))
+        args = response['result'], response['args_neighbors'], \
+               response['similarity'], rv
+        for c, n, v, s in zip(*args):
+            results.append(dict(canonical=c, neighbors=n, info=v, similarity=s))
         pool.close()
         pool.terminate()
         del pool
@@ -215,8 +217,10 @@ class Expression(Actor):
             result.update(article)
             result.update(dresult['info'])
             result['themes'] = dresult['info']['types']
+            result.update(dresult)
             results.append(result)
             previous_titles.append(wikiname)
+        print json.dumps(result, indent=4)
         if len(results) == 0:
             return {}
         else:

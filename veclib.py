@@ -89,7 +89,8 @@ def nearest_word(vector, vector_lib, index2word, n=5, skip=0,
         idx = np.argsort(sims)[::-1]
         words = [words[i] for i in idx[:n]]
     vectors = idx[:n] 
-    return words, vectors
+    sim = [d[i] for i in idx[:n]]
+    return words, vectors, sim
 
 @timer
 def subsample(avl, w2i, i2w, whitelist, n):
