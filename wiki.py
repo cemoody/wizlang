@@ -123,7 +123,22 @@ def get_freebase_types(name, trying = True):
     types = sets.Set([t for t in types if 'ontology' not in t.lower()])
     return notable, types
 
-def reject_result(result):
-    if len(result['description']) < 100:
+def reject_result(result, kwargs):
+    if len(result['description']) < 10:
+        print "Short description"
         return True
+    title = result['title'].lower()
+    if 'blacklist' in kwargs:
+        if '_' in result:
+            for word in title.split('_'):
+                for black in kwargs['blacklist']:
+                    if black in word or black==word:
+                        print "skipping", black, word
+                        return True
+        else:
+            word = title
+            for black in kwargs['blacklist']:
+                if black in word or black==word:
+                    print "skipping", black, word
+                    return True
     return False

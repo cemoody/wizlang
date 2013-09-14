@@ -10,6 +10,7 @@ import os.path
 import time
 import sharedmem
 import multiprocessing
+import traceback
 from multiprocessing import Manager
 from sets import Set
 import numexpr as ne
@@ -37,7 +38,6 @@ class Actor(object):
         and then parse and evaluate the query, which is usually called 
         through run"""
     name = 'Actor'
-    pool = None
 
     def validate(self, query):
         """Is the given query suitable for this Action"""
@@ -55,14 +55,17 @@ class Actor(object):
 
     @timer
     def run(self, query):
-        if self.pool is None:
-            self.pool = multiprocessing.Pool()
         start = time.time()
-        try:
+        if False:
+            try:
+                args, kwargs = self.parse(query)
+                reps = self.evaluate(*args, **kwargs)
+            except:
+                traceback.print_exc()
+                reps = {}
+        else:
             args, kwargs = self.parse(query)
             reps = self.evaluate(*args, **kwargs)
-        except:
-            reps = {}
         reps['actor'] = self.name
         stop = time.time()
         reps['query_time'] = "%1.1f" %(stop - start)
@@ -190,24 +193,38 @@ class Expression(Actor):
         fwords = words
         ptitle = get_wiki_name(words[0])
         if len(ptitle) > 0:
-            print "Wiki lookup %s -> %s" %(words[0], ptitle)
             title = [veclib.canonize(ptitle, self.ww2i, match=False)]
+            title = veclib.canonize(title[0], self.ww2i, match=True, n=5)
+            print "Wiki lookup %s -> %s -> %s" %(words[0], ptitle, title)
+            if type(title) is list:
+                title = [title[0]]
+            else:
+                title = [title]
         else:
             title = [veclib.canonize(words[0], self.aw2i)]
         words = [veclib.canonize(a, self.aw2i) for a in words[1:]]
         words = title + words
         print 'Words: ',
         for a, b in zip(prewords, words):
-            print a.strip(), ': ',
+            print a.strip(), ':',
             print b.strip(),
         print ' '
         base = [self.wvl[self.ww2i[title[0]]]]
         vecs = [self.avl[self.aw2i[w]] for w in words[1:]]
+        blacklist = []
+        for word in words:
+            if '_' in word:
+                splits = word.split('_')
+                for split in splits:
+                    blacklist.append(split)
+            else:
+                blacklist.append(word)
         return [signs, base + vecs], {'query':query, 'words':words,
-                    'fwords':fwords, 'ptitle':ptitle}
+                'fwords':fwords, 'ptitle':ptitle, 'blacklist':blacklist}
     
     @timer
     def evaluate(self, *args, **kwargs):
+        pool = multiprocessing.Pool()
         signs, vecs = args
         words  = kwargs['words']
         fwords = kwargs['fwords']
@@ -231,12 +248,13 @@ class Expression(Actor):
         #expr_nwords = veclib.nearest_word(total, self.avl, self.ai2w, n=50)
         results = []
         titles = [self.wc2t[c].strip() for c in expr_ncanon]
+        nfts = []
         pwfs = []
         gfts = []
         for title in titles:
-            nwfs.append(self.pool.apply_async(get_wiki_name, [title]))
-            pwfs.append(self.pool.apply_async(process_wiki, [title]))
-            gfts.append(self.pool.apply_async(get_freebase_types, [title]))
+            nfts.append(pool.apply_async(get_wiki_name, [title]))
+            pwfs.append(pool.apply_async(process_wiki, [title]))
+            gfts.append(pool.apply_async(get_freebase_types, [title]))
         wiki_titles = []
         for title, pwf, gft, nft in zip(titles, pwfs, gfts, nfts):
             if title == kwargs['ptitle']:
@@ -244,16 +262,26 @@ class Expression(Actor):
             wiki_title = nft.get()
             if title in words:
                 print "Skipping :", title
-            result = pwf.get()
-            if result is not None and result['title'] not in wiki_titles:
-                wiki_titles.append(result['title'])
-            else:
-                print "Repeat ", result['title']
+            if wiki_title in wiki_titles:
+                print "Skipping :", wiki_title
                 continue
-            if reject_result(result):
+            result = pwf.get()
+            if result is None:
+                continue
+            if reject_result(result, kwargs):
                 print "Rejected ", result['title']
                 continue
-            result_notable, result_types = gft.get()
+            try:
+                rv = gft.get()
+            except:
+                print "FB get failed for %s" % title
+                rv = None
+            if rv is not None:
+                result_notable, result_types = rv
+            else:
+                result_notable = None
+            if result_notable is not None and len(result['description']) < 10:
+                result['description'] = result_notable
             #if result_notable is not None and len(result_notable) > 5:
             #    result['description'] = result_notable
             result_types = sets.Set(result_types)
@@ -267,15 +295,15 @@ class Expression(Actor):
             themes = sorted(themes, key=lambda x: len(x))
             result['themes'] = themes[-2:]
             results.append(result)
+            wiki_titles.append(result['title'])
         print "Finished at +%1.1s" % (time.time() - start)
         if len(results) ==0 :
             return {}
-        self.pool.terminate()
-        del self.pool
-        self.pool = None
         query_text = kwargs['query']
         reps = dict(query_text=query_text, results=results, 
                     translated=translated)
+        pool.terminate()
+        pool.join()
         return reps
 
 class Nearest(Expression):
@@ -287,21 +315,23 @@ class Nearest(Expression):
         words = query.replace('+', '|').replace('-', '|')
         word = words.split('|')[0]
         ptitle = get_wiki_name(word)
+        ptitle = ptitle.replace(' ','_')
         if len(ptitle) > 0:
-            print "Wiki lookup %s -> %s" %(word, ptitle)
             title = [veclib.canonize(ptitle, self.ww2i, match=False)]
+            print "Wiki lookup %s -> %s -> %s" %(word, ptitle, title)
         else:
             title = [veclib.canonize(words[0], self.aw2i)]
         canon = veclib.canonize(title[0], self.wc2t)
         return [canon], {'query':query, 'words':words}
     
     def evaluate(self, *args, **kwargs):
+        pool = multiprocessing.Pool()
         canon, = args
         vector = veclib.lookup_vector(canon, self.wvl, self.ww2i)
         canons = veclib.nearest_word(vector, self.wvl, self.wi2w, n=50)
         print "Nearest: ", canons
         full_words = [self.wc2t[c] for c in canons]
-        presults = self.pool.map(process_wiki, full_words)
+        presults = pool.map(process_wiki, full_words)
         results = []
         for full_word, result in zip(full_words, presults):
             if result is not None:
@@ -312,7 +342,3 @@ class Nearest(Expression):
         query_text = kwargs['query']
         reps = dict(query_text=query_text, results=results)
         return reps
-
-near = Nearest()
-criteria = [Nearest(near), Expression(near), Passthrough()]
-#criteria = [Passthrough()]

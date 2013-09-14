@@ -1,6 +1,7 @@
 from flask import *
 from actions import *
 from werkzeug.contrib.profiler import ProfilerMiddleware
+import sys
  
 app = Flask(__name__,  static_folder='static', 
             static_url_path='', template_folder='templates')
@@ -41,4 +42,10 @@ def index():
 if __name__ == '__main__':
     #app.config['PROFILE'] = True
     #app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions = [30])
-    app.run(host='0.0.0.0', port=5001, debug=True, use_reloader=False)
+    port = 5001
+    try:
+        port = int(sys.argv[-1])
+        print "Serving port %i" % port
+    except:
+        pass
+    app.run(host='0.0.0.0', port=port, debug=True, use_reloader=False)

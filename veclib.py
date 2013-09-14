@@ -128,7 +128,7 @@ def get_canon_rep(fn):
             f2c[f] = c
     return c2f, f2c
 
-def canonize(phrase, c2f, match=True, subset=False):
+def canonize(phrase, c2f, match=True, subset=False, n=1):
     phrase = phrase.replace('\n','').replace('\t','').replace('\r','')
     for i in range(5):
         phrase = phrase.replace('  ', ' ')
@@ -150,9 +150,9 @@ def canonize(phrase, c2f, match=True, subset=False):
         sub = Set((first in k for k in keys))
     else:
         sub = keys
-    phrase, = difflib.get_close_matches(phrase, sub, 1)
-    phrase = unicodedata.normalize('NFKD', unicode(phrase)).encode('ascii','ignore')
-    return phrase
+    phrases = difflib.get_close_matches(phrase, sub, n)
+    phrases = [unicodedata.normalize('NFKD', unicode(phrase)).encode('ascii','ignore') for phrase in phrases]
+    return phrases
 
 @timer
 def reduce_vectorlib(vector_lib, word2index, canon):
