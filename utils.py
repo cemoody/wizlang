@@ -21,7 +21,7 @@ def fail_print(func):
 
 class dummy_async():
     """This is faking an async result for debugging purposes"""
-    def __init__(val):
+    def __init__(self, val):
         self.val = val
-    def get():
+    def get(self):
         return self.val

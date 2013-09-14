@@ -4,6 +4,7 @@ import nltk
 import unicodedata
 import sets
 import re
+import time
 from BeautifulSoup import BeautifulSoup
 from utils import *
 
@@ -29,8 +30,8 @@ def get_omdb(name, google_images=False, check=False):
         print 'OMDB Error: %s' % name
         return None
     if check and not exists(odata['Poster']):
-            print "IMDB Image not Found for %s" % name
-            return None
+        print "IMDB Image not Found for %s" % name
+        return None
     data = {k.lower():v for k, v in odata.iteritems()}
     return data
 
@@ -43,11 +44,18 @@ def to_title(title):
 
 def get_wiki_name(name):
     """Use the WP API to get the most likely diambiguation"""
-    url = r"http://en.wikipedia.org/w/api.php?action=opensearch&search=" +\
-          urllib2.quote(name) + \
-          r"&limit=1&format=json"
-    response = urllib2.urlopen(url)
-    odata = json.load(response)
+    for _ in range(3):
+        url = r"http://en.wikipedia.org/w/api.php?action=opensearch&search=" +\
+              urllib2.quote(name) + \
+              r"&limit=1&format=json"
+        response = urllib2.urlopen(url)
+        odata = json.load(response)
+        if len(odata[1]) > 1:
+            break
+        else:
+            time.sleep(0.1)
+    else:
+        return name
     ptitle = odata[1][0]
     ptitle = unicodedata.normalize('NFKD', ptitle).encode('ascii','ignore')
     return ptitle

@@ -5,7 +5,7 @@ import sys
  
 app = Flask(__name__,  static_folder='static', 
             static_url_path='', template_folder='templates')
-
+criteria = [Expression()]
 @app.route('/results.html', methods=['GET', 'POST'])
 @app.route('/search/<query>', methods=['GET', 'POST'])
 def results(query="Jurassic Park"):

@@ -66,8 +66,8 @@ class Actor(object):
                 traceback.print_exc()
                 reps = {}
         else:
-            args, kwargs = self.parse(query)
-            reps = self.evaluate(*args, **kwargs)
+            args = self.parse(query)
+            reps = self.evaluate(*args)
         reps['actor'] = self.name
         stop = time.time()
         reps['query_time'] = "%1.1f" %(stop - start)
@@ -148,7 +148,10 @@ class Expression(Actor):
                   for match in re.finditer('\|', words)])
         signs = [1.0 if s=='+' else -1.0 for s in signs]
         words = words.split('|')
-        wiki_words = pool.map(get_wiki_name, words)
+        try:
+            wiki_words = pool.map(get_wiki_name, words)
+        except:
+            wiki_words = [get_wiki_name(w) for w in words]
         funcs = {}
         word2wiki = {}
         for word, wiki in zip(words, wiki_words):
@@ -166,11 +169,11 @@ class Expression(Actor):
         args = []
         word2canon = {}
         for sign, word in zip(signs, words):
-            word2canon[word] = canonical
             canonical = funcs[word][0].get()
+            word2canon[word] = canonical
             args.append([sign, canonical])
         send = json.dumps(dict(args=args))
-        url = backend_url + send
+        url = backend_url + urllib2.quote(send)
         response = json.load(urllib2.urlopen(url))
         response['query'] = query
         word2fb= {}
@@ -181,28 +184,31 @@ class Expression(Actor):
         for word in words:
             article = funcs[word][1].get()
             word2article[word] = article
-        pool.join()
-        pool.terminate()
         pool.close()
+        pool.terminate()
         del pool
         return response, word2wiki, word2canon, word2fb, word2article
     
     @timer
-    def evaluate(self, *args, **kwargs):
-        response, word2wiki, word2canon, word2fb, word2article = args
+    def evaluate(self, response, word2wiki, word2canon, word2fb, word2article):
         words = word2wiki.keys()
         results = []
+        previous_titles = []
         for word in words:
             wiki = word2wiki[word]
             canon = word2canon[word]
             fb = word2fb[word]
             article = word2article[word]
+            if wiki in word2wiki.values(): 
+                print 'Skipping obvious ', wiki
+            if wiki in previous_titles: 
+                print 'Skipping previous', wiki
             result = {}
-            result.update(wiki)
+            result.update(article)
             fbnotable, fbtypes = fb
             result['notable'] = fbnotable
             results.append(result)
-            wiki_titles.append(result['title'])
+            previous_titles.append(result['title'])
         if len(results) == 0:
             return {}
         else:
