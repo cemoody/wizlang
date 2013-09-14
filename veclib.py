@@ -75,7 +75,7 @@ def nearest_word(vector, vector_lib, index2word, n=5, skip=0,
     if use_ne:
         d = ne.evaluate('sum(vector_lib * vector, axis=1)')
         idx = np.argsort(d)[::-1]
-        words = [index2word[i] for i in idx[:n]]
+        words   = [index2word[i] for i in idx[:n]]
     else:
         sims = []
         offset = 0
@@ -88,7 +88,8 @@ def nearest_word(vector, vector_lib, index2word, n=5, skip=0,
             offset += chunk_size
         idx = np.argsort(sims)[::-1]
         words = [words[i] for i in idx[:n]]
-    return words
+    vectors = idx[:n] 
+    return words, vectors
 
 @timer
 def subsample(avl, w2i, i2w, whitelist, n):
