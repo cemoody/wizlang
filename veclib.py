@@ -129,6 +129,7 @@ def get_canon_rep(fn):
             f2c[f] = c
     return c2f, f2c
 
+
 def canonize(phrase, c2f, match=True, n=1):
     phrase = phrase.replace('\n','').replace('\t','').replace('\r','')
     phrase = phrase.strip()

@@ -5,6 +5,8 @@ import unicodedata
 import sets
 import re
 import time
+import difflib
+import string
 from BeautifulSoup import BeautifulSoup
 from utils import *
 
@@ -42,7 +44,7 @@ def to_title(title):
         out += word + " "
     return out
 
-def get_wiki_name(name):
+def get_wiki_name(name, get_response=False):
     """Use the WP API to get the most likely diambiguation"""
     for _ in range(3):
         url = r"http://en.wikipedia.org/w/api.php?action=opensearch&search=" +\
@@ -55,10 +57,50 @@ def get_wiki_name(name):
         else:
             time.sleep(0.1)
     else:
-        return name
+        if get_response:
+            return None, None
+        else:
+            return None
     ptitle = odata[1][0]
     ptitle = unicodedata.normalize('NFKD', ptitle).encode('ascii','ignore')
-    return ptitle
+    if get_response
+        return ptitle, response
+    else:
+        return ptitle
+
+def wiki_canonize(phrase, canon, n=1):
+    phrase = phrase.replace('\n','').replace('\t','').replace('\r','')
+    phrase = phrase.strip()
+    wiki = get_wiki_name(phrase)
+    if wiki is not None:
+        phrase = wiki
+    phrase = phrase.replace(' ', '_')
+    phrase = phrase.strip().lower()
+    for i in range(5):
+        phrase = phrase.replace('  ', ' ')
+    if phrase in canon: return phrase, wiki
+    phrase = phrase.replace('-', '_')
+    for p in string.punctuation:
+        phrase = phrase.replace(p, '')
+    if phrase in canon: return phrase, wiki
+    phrase = phrase.replace(' ', '_')
+    if phrase in canon: return phrase, wiki
+    phrases = difflib.get_close_matches(phrase, sub, n)
+    phrases = [unicodedata.normalize('NFKD', unicode(phrase)).encode('ascii','ignore') for phrase in phrases]
+    return phrases[0], wiki
+
+def wiki_decanonize(phrase, c2t, response=True):
+    if phrase in c2t: return c2t[phrase]
+    phrase = phrase.replace('_', ' ')
+    if phrase in c2t: return c2t[phrase]
+    phrase = phrase.capitalize()
+    if phrase in c2t: return c2t[phrase]
+    wiki, response= get_wiki_name(phrase, get_response=True)
+    if wiki is not None:
+        return wiki, response 
+    else:
+        phrases = difflib.get_close_matches(phrase, c2t.values(), n)
+        return phrases[0], None
 
 def get_wiki_html(name):
     url = r"http://en.wikipedia.org/w/api.php?action=parse&page=" + \
@@ -67,11 +109,12 @@ def get_wiki_html(name):
     response = json.load(urllib2.urlopen(url))
     return response
 
-def process_wiki(name, length=20, max_char=300):
+def process_wiki(name, length=20, max_char=300, response=None):
     """Remove excess paragraphs, break out the images, etc."""
     #This gets the first section, gets the text of to a number of words
     # and gets the main image
-    response = get_wiki_html(name)
+    if response is None:
+        response = get_wiki_html(name)
     html = response['parse']['text']['*']
     valid_tags = ['p']
     soup = BeautifulSoup(html)  

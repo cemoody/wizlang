@@ -42,7 +42,7 @@ def index():
 if __name__ == '__main__':
     #app.config['PROFILE'] = True
     #app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions = [30])
-    port = 5001
+    port = 5010
     try:
         port = int(sys.argv[-1])
         print "Serving port %i" % port

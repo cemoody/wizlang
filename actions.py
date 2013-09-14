@@ -34,6 +34,7 @@ def eval_sign(query):
         out += sign
     return out
 
+
 class Actor(object):
     """ This encapsulates all of the actions associated with a results 
         page. We test multiple Actor objects until validate(query) is True
@@ -96,6 +97,15 @@ class Passthrough(Actor):
         reps = dict(query_text=query_text, results=[result])
         return reps
 
+def result_chain(canonical, c2t):
+    """Chain the decanonization, wiki lookup,
+       wiki article lookup, and freebase all together"""
+    wikiname, response=  wiki_decanonize(canonical, c2t)
+    article = process_wiki(wikiname, response)
+    notable, types = get_freebase_types(wikiname)
+    return dict(wikiname=wikiname, article=article, notable=notable,
+                types=types)
+
 class Expression(Actor):
     name = "Expression"
 
@@ -140,7 +150,10 @@ class Expression(Actor):
 
     @timer
     def parse(self, query, parallel=False, kwargs=None):
+        """Debug with parallel=False, production use
+        switch to multiprocessing"""
         pool = multiprocessing.Pool()
+        # Split the query and find the signs of every word
         words = query.replace('+', '|').replace('-', '|')
         sign  = eval_sign(query)
         signs = ['+',]
@@ -148,72 +161,65 @@ class Expression(Actor):
                   for match in re.finditer('\|', words)])
         signs = [1.0 if s=='+' else -1.0 for s in signs]
         words = words.split('|')
-        try:
-            wiki_words = pool.map(get_wiki_name, words)
-        except:
-            wiki_words = [get_wiki_name(w) for w in words]
-        funcs = {}
-        word2wiki = {}
-        for word, wiki in zip(words, wiki_words):
-            if parallel:
-                cano_func = lambda x: veclib.canonize(x, self.aw2i)
-                fc = pool.apply_async(cano_func, [wiki])
-                fw = pool.apply_async(process_wiki, [wiki])
-                ff = pool.apply_async(get_freebase_types, [wiki])
-            else:
-                fc = dummy_async(veclib.canonize(wiki, self.aw2i))
-                fw = dummy_async(process_wiki(wiki))
-                ff = dummy_async(get_freebase_types(wiki))
-            funcs[word] = [fc, fw, ff]
-            word2wiki[word] = wiki
+        # Get the canonical names for the query
+        canon = self.aw2i.keys()
+        if parallel:
+            wc = lambda x: wiki_canonize(x, canon)
+            canonizeds, wikinames = zip(pool.map(wc, words))
+        else:
+            canonizeds, wikinames = zip([wiki_canonize(w, canon) for w in words])
+        # Make the translated query string
+        translated = ""
+        for sign, canonized in zip(signs, canonizeds):
+            translated += "%1.1f %s " %(sign, canonized)
+        # Format the vector lib request
         args = []
         word2canon = {}
-        for sign, word in zip(signs, words):
-            canonical = funcs[word][0].get()
-            word2canon[word] = canonical
+        for sign, word, canonical in zip(signs, words, canonizeds):
             args.append([sign, canonical])
+            word2canon[word] = canonical
         send = json.dumps(dict(args=args))
         url = backend_url + urllib2.quote(send)
         response = json.load(urllib2.urlopen(url))
         response['query'] = query
-        word2fb= {}
-        for word in words:
-            fb = funcs[word][2].get()
-            word2fb[word] = fb
-        word2article= {}
-        for word in words:
-            article = funcs[word][1].get()
-            word2article[word] = article
+        # Decanonize the results and get freebase, article info
+        results = []
+        if parallel:
+            rc = lambda x: result_chain(x, self.c2t)
+            rv = pool.map(rc, response['result'])
+        else:
+            rv = [result_chain(c, self.c2t) for x in response['result']]
+        for c, n, v in zip(response['result'], response['args_neighbors'], rv):
+            results.append(dict(canonical=c, neighbors=n, info=v))
         pool.close()
         pool.terminate()
         del pool
-        return response, word2wiki, word2canon, word2fb, word2article
+        other = dict(query=query, translated=translated, wikinames)
+        return results, other
     
     @timer
-    def evaluate(self, response, word2wiki, word2canon, word2fb, word2article):
-        words = word2wiki.keys()
-        results = []
+    def evaluate(self, dresults, other):
         previous_titles = []
-        for word in words:
-            wiki = word2wiki[word]
-            canon = word2canon[word]
-            fb = word2fb[word]
-            article = word2article[word]
-            if wiki in word2wiki.values(): 
-                print 'Skipping obvious ', wiki
-            if wiki in previous_titles: 
+        results = []
+        for result in dresults:
+            wikiname = result['info']['wikiname']
+            article  = result['info']['article']
+            if wikiname in other['wikinames']:
+                print 'Skipping direct in query', wiki
+                continue
+            if wikiname in previous_titles: 
                 print 'Skipping previous', wiki
+                continue
             result = {}
             result.update(article)
-            fbnotable, fbtypes = fb
-            result['notable'] = fbnotable
+            result.update(info)
             results.append(result)
-            previous_titles.append(result['title'])
+            previous_titles.append(wikiname)
         if len(results) == 0:
             return {}
         else:
-            reps = dict(query_text=response['query'], 
-                        results=results)
+            reps = dict(results=results)
+            reps.update(other)
             return reps
 
 class Nearest(Expression):
