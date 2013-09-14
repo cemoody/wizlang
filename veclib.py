@@ -129,14 +129,14 @@ def get_canon_rep(fn):
             f2c[f] = c
     return c2f, f2c
 
-def canonize(phrase, c2f, match=True, subset=False, n=1):
+def canonize(phrase, c2f, match=True, n=1):
     phrase = phrase.replace('\n','').replace('\t','').replace('\r','')
-    for i in range(5):
-        phrase = phrase.replace('  ', ' ')
     phrase = phrase.strip()
     phrase = phrase.replace(' ', '_')
     phrase = phrase.strip().lower()
     keys = Set(c2f.keys())
+    for i in range(5):
+        phrase = phrase.replace('  ', ' ')
     if phrase in keys: return phrase
     phrase = phrase.replace('-', '_')
     for p in string.punctuation:
@@ -146,14 +146,9 @@ def canonize(phrase, c2f, match=True, subset=False, n=1):
     if phrase in keys: return phrase
     if not match:
         return phrase
-    first = phrase.split(' ')[0]
-    if subset:
-        sub = Set((first in k for k in keys))
-    else:
-        sub = keys
     phrases = difflib.get_close_matches(phrase, sub, n)
     phrases = [unicodedata.normalize('NFKD', unicode(phrase)).encode('ascii','ignore') for phrase in phrases]
-    return phrases
+    return phrases[0]
 
 @timer
 def reduce_vectorlib(vector_lib, word2index, canon):

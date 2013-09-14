@@ -19,3 +19,9 @@ def fail_print(func):
         return rv
     return wrapped
 
+class dummy_async():
+    """This is faking an async result for debugging purposes"""
+    def __init__(val):
+        self.val = val
+    def get():
+        return self.val

@@ -18,6 +18,8 @@ from wiki import *
 from utils import *
 import veclib
 
+backend_url = r'http://localhost:5005/nearest/'
+
 def eval_sign(query):
     """ This is a dumb parser that assign + or - to every character
         in an expression. We can then use this to lookup the sign of
@@ -105,16 +107,8 @@ class Expression(Actor):
         if not preloaded_actor:
             # a= 'all'
             # w='wikipedia'
-            trained = "/u/cmoody3/data2/ids/trained" 
             trained = "/home/ubuntu/data" 
-            if fast:
-                fnv = '%s/vectors.bin.005.num.npy' % trained
-                fnw = '%s/vectors.bin.005.words' % trained
-            else:
-                fnv = '%s/vectors.wiki.1000.num.npy' % trained
-                fnw = '%s/vectors.wiki.1000.words' % trained
-                fnv = '%s/vectors.fullwiki.1000.s50.num.npy' % trained
-                fnw = '%s/vectors.fullwiki.1000.s50.words' % trained
+            fnw = '%s/vectors.fullwiki.1000.s50.words' % trained
             wc2t = '%s/c2t' % './data'
             wt2c = '%s/t2c' % './data'
             # all word vecotor lib VL
@@ -127,184 +121,94 @@ class Expression(Actor):
                 vs.append(v)
             for k, v in zip(ks, vs):
                 self.wc2t[k] = v
-            avl = veclib.get_vector_lib(fnv)
             # all words, word to index mappings w2i
             if os.path.exists(fnw + '.pickle'):
                 self.aw2i , self.ai2w = cPickle.load(open(fnw + '.pickle'))
             else:
                 self.aw2i , self.ai2w = veclib.get_words(fnw)
                 cPickle.dump([self.aw2i, self.ai2w], open(fnw + '.pickle','w'))
-            if subsampling:
-                n = long(1e6) # keep top one million words
-                print "subsampling %1.1e elements" % n
-                wl = sets.Set(self.wc2t.keys())
-                avl, self.aw2i, self.ai2w = veclib.subsample(avl, self.aw2i, 
-                                                             self.ai2w, wl, n)
-                assert max(self.ai2w.keys()) == len(wl) + 1
-            self.avl = veclib.normalize(avl)
-            del avl
-            # # of words better be the same in both the vectors
-            # and the list of words
-            rets = veclib.reduce_vectorlib(self.avl, self.aw2i, 
-                                           sets.Set(self.wc2t.keys()))
-            self.wvl, self.ww2i, self.wi2w = rets
-            self.wvl = self.wvl.astype('f4')
-            assert self.avl.shape[0] == len(self.ai2w.keys())
-                
-            # now let's test loading a word and finding its index
-            if test:
-                import numpy as np
-                idx = self.ww2i.values()[0]
-                vec = self.wvl[idx]
-                idx2 = np.argmin(np.sum(np.abs(self.wvl - \
-                                np.reshape(vec, (1, vec.shape[0]))), axis=1))
-                assert idx2 == idx
-            print "%1.1e vectors, %1.1e articles and %1.1e common" % \
-                    (len(self.avl), len(self.wc2t.keys()), 
-                     len(self.wvl))
         else:
             # Wikipedia articles and their canonical transformations
             self.wc2t = preloaded_actor.wc2t #Wiki dump article titles
             self.wt2c = preloaded_actor.wt2c
             # All vectors from word2vec
-            self.avl  = preloaded_actor.avl #All word2vec
             self.aw2i = preloaded_actor.aw2i
             self.ai2w = preloaded_actor.ai2w
-            # Just wikipedia vectors, indices
-            self.wvl  = preloaded_actor.wvl # Intersection of word2vec
-            self.ww2i = preloaded_actor.ww2i # and wikipedia dump
-            self.wi2w = preloaded_actor.wi2w
 
     def validate(self, query):
-        return '+' in query or '-' in query
+        return len(query) > 3
 
     @timer
-    def parse(self, query, kwargs=None):
-        print "Query: ", query
+    def parse(self, query, parallel=False, kwargs=None):
+        pool = multiprocessing.Pool()
         words = query.replace('+', '|').replace('-', '|')
         sign  = eval_sign(query)
-        print "Sign : ", sign
         signs = ['+',]
         signs.extend([sign[match.start() + 1] \
                   for match in re.finditer('\|', words)])
         signs = [1.0 if s=='+' else -1.0 for s in signs]
         words = words.split('|')
-        prewords  = words
-        fwords = words
-        ptitle = get_wiki_name(words[0])
-        if len(ptitle) > 0:
-            title = [veclib.canonize(ptitle, self.ww2i, match=False)]
-            title = veclib.canonize(title[0], self.ww2i, match=True, n=5)
-            print "Wiki lookup %s -> %s -> %s" %(words[0], ptitle, title)
-            if type(title) is list:
-                title = [title[0]]
+        wiki_words = pool.map(get_wiki_name, words)
+        funcs = {}
+        word2wiki = {}
+        for word, wiki in zip(words, wiki_words):
+            if parallel:
+                cano_func = lambda x: veclib.canonize(x, self.aw2i)
+                fc = pool.apply_async(cano_func, [wiki])
+                fw = pool.apply_async(process_wiki, [wiki])
+                ff = pool.apply_async(get_freebase_types, [wiki])
             else:
-                title = [title]
-        else:
-            title = [veclib.canonize(words[0], self.aw2i)]
-        words = [veclib.canonize(a, self.aw2i) for a in words[1:]]
-        words = title + words
-        print 'Words: ',
-        for a, b in zip(prewords, words):
-            print a.strip(), ':',
-            print b.strip(),
-        print ' '
-        base = [self.wvl[self.ww2i[title[0]]]]
-        vecs = [self.avl[self.aw2i[w]] for w in words[1:]]
-        blacklist = []
+                fc = dummy_async(veclib.canonize(wiki, self.aw2i))
+                fw = dummy_async(process_wiki(wiki))
+                ff = dummy_async(get_freebase_types(wiki))
+            funcs[word] = [fc, fw, ff]
+            word2wiki[word] = wiki
+        args = []
+        word2canon = {}
+        for sign, word in zip(signs, words):
+            word2canon[word] = canonical
+            canonical = funcs[word][0].get()
+            args.append([sign, canonical])
+        send = json.dumps(dict(args=args))
+        url = backend_url + send
+        response = json.load(urllib2.urlopen(url))
+        response['query'] = query
+        word2fb= {}
         for word in words:
-            if '_' in word:
-                splits = word.split('_')
-                for split in splits:
-                    blacklist.append(split)
-            else:
-                blacklist.append(word)
-        return [signs, base + vecs], {'query':query, 'words':words,
-                'fwords':fwords, 'ptitle':ptitle, 'blacklist':blacklist}
+            fb = funcs[word][2].get()
+            word2fb[word] = fb
+        word2article= {}
+        for word in words:
+            article = funcs[word][1].get()
+            word2article[word] = article
+        pool.join()
+        pool.terminate()
+        pool.close()
+        del pool
+        return response, word2wiki, word2canon, word2fb, word2article
     
     @timer
     def evaluate(self, *args, **kwargs):
-        pool = multiprocessing.Pool()
-        signs, vecs = args
-        words  = kwargs['words']
-        fwords = kwargs['fwords']
-        total = signs[0] * vecs[0]
-        translated = ''
-        for s, v, w in zip(signs, vecs, words):
-            if s > 0:
-                sign = '+'
-                total += s * v
-            else:
-                sign = '-'
-                total += s * v
-            translated += ' %s %s' % (sign, w)
-        start = time.time()
-        manager = Manager()
-        rv = manager.dict()
-        expr_ncanon = veclib.nearest_word(total, self.wvl, self.wi2w, n=20)
-        #root_ncanon = veclib.nearest_word(vecs[0], self.wvl, self.wi2w, n=10)
-        #root_nwords = veclib.nearest_word(vecs[0], self.avl, self.ai2w, n=50)
-        root_notable, root_types = get_freebase_types(fwords[0])
-        #expr_nwords = veclib.nearest_word(total, self.avl, self.ai2w, n=50)
+        response, word2wiki, word2canon, word2fb, word2article = args
+        words = word2wiki.keys()
         results = []
-        titles = [self.wc2t[c].strip() for c in expr_ncanon]
-        nfts = []
-        pwfs = []
-        gfts = []
-        for title in titles:
-            nfts.append(pool.apply_async(get_wiki_name, [title]))
-            pwfs.append(pool.apply_async(process_wiki, [title]))
-            gfts.append(pool.apply_async(get_freebase_types, [title]))
-        wiki_titles = []
-        for title, pwf, gft, nft in zip(titles, pwfs, gfts, nfts):
-            if title == kwargs['ptitle']:
-                print "Skipping :", title
-            wiki_title = nft.get()
-            if title in words:
-                print "Skipping :", title
-            if wiki_title in wiki_titles:
-                print "Skipping :", wiki_title
-                continue
-            result = pwf.get()
-            if result is None:
-                continue
-            if reject_result(result, kwargs):
-                print "Rejected ", result['title']
-                continue
-            try:
-                rv = gft.get()
-            except:
-                print "FB get failed for %s" % title
-                rv = None
-            if rv is not None:
-                result_notable, result_types = rv
-            else:
-                result_notable = None
-            if result_notable is not None and len(result['description']) < 10:
-                result['description'] = result_notable
-            #if result_notable is not None and len(result_notable) > 5:
-            #    result['description'] = result_notable
-            result_types = sets.Set(result_types)
-            root_types = sets.Set(root_types)
-            both_types = result_types & root_types 
-            if len(both_types) < 1:
-                continue
-                print "Skipping because not similar"
-            print ("Freebase types to %s: " % title), result_types
-            themes = [str(t) for t in both_types]
-            themes = sorted(themes, key=lambda x: len(x))
-            result['themes'] = themes[-2:]
+        for word in words:
+            wiki = word2wiki[word]
+            canon = word2canon[word]
+            fb = word2fb[word]
+            article = word2article[word]
+            result = {}
+            result.update(wiki)
+            fbnotable, fbtypes = fb
+            result['notable'] = fbnotable
             results.append(result)
             wiki_titles.append(result['title'])
-        print "Finished at +%1.1s" % (time.time() - start)
-        if len(results) ==0 :
+        if len(results) == 0:
             return {}
-        query_text = kwargs['query']
-        reps = dict(query_text=query_text, results=results, 
-                    translated=translated)
-        pool.terminate()
-        pool.join()
-        return reps
+        else:
+            reps = dict(query_text=response['query'], 
+                        results=results)
+            return reps
 
 class Nearest(Expression):
     name = "Nearest"
