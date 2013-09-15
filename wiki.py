@@ -69,12 +69,14 @@ def get_wiki_name(name, get_response=False):
     else:
         return ptitle
 
-def wiki_canonize(phrase, canon, n=1):
+def wiki_canonize(phrase, canon, n=1, use_wiki=True):
     phrase = phrase.replace('\n','').replace('\t','').replace('\r','')
     phrase = phrase.strip()
-    wiki = get_wiki_name(phrase)
-    if wiki is not None:
-        phrase = wiki
+    wiki = ""
+    if use_wiki:
+        wiki = get_wiki_name(phrase)
+        if wiki is not None:
+            phrase = wiki
     phrase = phrase.replace(' ', '_')
     phrase = phrase.strip().lower()
     for i in range(5):

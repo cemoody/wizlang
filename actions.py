@@ -106,6 +106,7 @@ def result_chain(canonical, c2t):
     except:
         print "Error in ", canonical
         wikiname, article = None, None
+    notable, types = None, []
     for search in (wikiname, title):
         try:
             notable, types = get_freebase_types(search)
@@ -158,10 +159,9 @@ class Expression(Actor):
         return len(query) > 3
 
     @timer
-    def parse(self, query, parallel=False, kwargs=None):
+    def parse(self, query, parallel=True, kwargs=None):
         """Debug with parallel=False, production use
         switch to multiprocessing"""
-        pool = multiprocessing.Pool(4)
         # Split the query and find the signs of every word
         words = query.replace('+', '|').replace('-', '|')
         sign  = eval_sign(query)
@@ -173,11 +173,14 @@ class Expression(Actor):
         # Get the canonical names for the query
         canon = self.aw2i.keys()
         if parallel:
-            wc = lambda x: wiki_canonize(x, canon)
-            rets = parmap(wc, words)
+            wc = lambda x: wiki_canonize(x, canon, use_wiki=False)
+            rets  = [wiki_canonize(words[0], canon, use_wiki=True)]
+            rets += parmap(wc, words[1:])
         else:
-            rets = [wiki_canonize(w, canon) for w in words]
+            rets  = [wiki_canonize(words[0], canon, use_wiki=True)]
+            rets += [wiki_canonize(w, canon, use_wiki=False) for w in words[1:]]
         canonizeds, wikinames = zip(*rets)
+        wikinames = [w if len(w)>0 else c for c, w in zip(canonizeds, wikinames)]
         # Make the translated query string
         translated = ""
         for sign, canonized in zip(signs, canonizeds):
@@ -204,9 +207,6 @@ class Expression(Actor):
             if v['wikiname'] is None:
                 continue
             results.append(dict(canonical=c, similarity=s, info=v))
-        pool.close()
-        pool.terminate()
-        del pool
         other = dict(query=query, translated=translated, wikinames=wikinames)
         return results, other
     
