@@ -40,6 +40,8 @@ def nearest(raw_query='{"args": [[1.0, "jurassic_park"]]}'):
             if False:
                 canon, vectors, sim = veclib.nearest_word(vector, avl, ai2w, n=20)
                 args_neighbors.append(canon)
+            else:
+                args_neighbors.append([None])
             if total is None:
                 total = vector * sign
             else:

@@ -101,7 +101,11 @@ def result_chain(canonical, c2t):
     """Chain the decanonization, wiki lookup,
        wiki article lookup, and freebase all together"""
     wikiname, response =  wiki_decanonize(canonical, c2t)
-    article = process_wiki(wikiname, response)
+    try:
+        article = process_wiki(wikiname)
+    except:
+        print 'failed to get article', wikiname
+        article = {'description':None}
     notable, types = get_freebase_types(wikiname)
     return dict(wikiname=wikiname, article=article, notable=notable,
                 types=types)
@@ -152,7 +156,7 @@ class Expression(Actor):
     def parse(self, query, parallel=False, kwargs=None):
         """Debug with parallel=False, production use
         switch to multiprocessing"""
-        pool = multiprocessing.Pool()
+        pool = multiprocessing.Pool(4)
         # Split the query and find the signs of every word
         words = query.replace('+', '|').replace('-', '|')
         sign  = eval_sign(query)
@@ -165,10 +169,9 @@ class Expression(Actor):
         canon = self.aw2i.keys()
         if parallel:
             wc = lambda x: wiki_canonize(x, canon)
-            rets = pool.map(wc, words)
+            rets = parmap(wc, words)
         else:
             rets = [wiki_canonize(w, canon) for w in words]
-        rets = rets[:1]
         canonizeds, wikinames = zip(*rets)
         # Make the translated query string
         translated = ""
@@ -184,16 +187,16 @@ class Expression(Actor):
         response = json.load(urllib2.urlopen(url))
         response['query'] = query
         # Decanonize the results and get freebase, article info
-        results = []
         if parallel:
             rc = lambda x: result_chain(x, self.wc2t)
-            rv = pool.map(rc, response['result'])
+            rv = parmap(wc, response['result'])
         else:
             rv = [result_chain(x, self.wc2t) for x in response['result']]
-        args = response['result'], response['args_neighbors'], \
-               response['similarity'], rv
-        for c, n, v, s in zip(*args):
-            results.append(dict(canonical=c, neighbors=n, info=v, similarity=s))
+        args = (response['result'], response['similarity'], rv)
+        results = []
+        print args
+        for c, s, v in zip(*args):
+            results.append(dict(canonical=c, info=v, similarity=s))
         pool.close()
         pool.terminate()
         del pool
@@ -204,6 +207,7 @@ class Expression(Actor):
     def evaluate(self, dresults, other):
         previous_titles = []
         results = []
+        print dresults
         for dresult in dresults:
             wikiname = dresult['info']['wikiname']
             article  = dresult['info']['article']

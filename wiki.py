@@ -51,9 +51,9 @@ def get_wiki_name(name, get_response=False):
         url = r"http://en.wikipedia.org/w/api.php?action=opensearch&search=" +\
               urllib2.quote(name) + \
               r"&limit=1&format=json"
-        response = urllib2.urlopen(url)
-        odata = json.load(response)
-        if len(odata[1]) > 1:
+        response = urllib2.urlopen(url).read()
+        odata = json.loads(response)
+        if len(odata) > 1:
             break
         else:
             time.sleep(0.1)
@@ -116,6 +116,15 @@ def process_wiki(name, length=20, max_char=300, response=None):
     # and gets the main image
     if response is None:
         response = get_wiki_html(name)
+    if 'REDIRECT' in response['parse']['text']['*']:
+        print name, response
+        for j in range(5):
+            html = response['parse']['text']['*']
+            soup = BeautifulSoup(html)  
+            newname = soup.findAll('a')[0]['href'].split('/')[-1]
+            response = get_wiki_html(newname)
+            print newname, response
+            if 'REDIRECT' not in response['parse']['text']['*']: break
     html = response['parse']['text']['*']
     valid_tags = ['p']
     soup = BeautifulSoup(html)  
