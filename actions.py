@@ -153,7 +153,7 @@ class Expression(Actor):
         return len(query) > 3
 
     @timer
-    def parse(self, query, parallel=False, kwargs=None):
+    def parse(self, query, parallel=True, kwargs=None):
         """Debug with parallel=False, production use
         switch to multiprocessing"""
         pool = multiprocessing.Pool(4)
@@ -189,14 +189,13 @@ class Expression(Actor):
         # Decanonize the results and get freebase, article info
         if parallel:
             rc = lambda x: result_chain(x, self.wc2t)
-            rv = parmap(wc, response['result'])
+            rv = parmap(rc, response['result'])
         else:
             rv = [result_chain(x, self.wc2t) for x in response['result']]
         args = (response['result'], response['similarity'], rv)
         results = []
-        print args
         for c, s, v in zip(*args):
-            results.append(dict(canonical=c, info=v, similarity=s))
+            results.append(dict(canonical=c, similarity=s, info=v))
         pool.close()
         pool.terminate()
         del pool

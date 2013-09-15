@@ -86,7 +86,7 @@ def wiki_canonize(phrase, canon, n=1):
     if phrase in canon: return phrase, wiki
     phrase = phrase.replace(' ', '_')
     if phrase in canon: return phrase, wiki
-    phrases = difflib.get_close_matches(phrase, sub, n)
+    phrases = difflib.get_close_matches(phrase, canon, n)
     phrases = [unicodedata.normalize('NFKD', unicode(phrase)).encode('ascii','ignore') for phrase in phrases]
     return phrases[0], wiki
 
@@ -117,13 +117,11 @@ def process_wiki(name, length=20, max_char=300, response=None):
     if response is None:
         response = get_wiki_html(name)
     if 'REDIRECT' in response['parse']['text']['*']:
-        print name, response
         for j in range(5):
             html = response['parse']['text']['*']
             soup = BeautifulSoup(html)  
             newname = soup.findAll('a')[0]['href'].split('/')[-1]
             response = get_wiki_html(newname)
-            print newname, response
             if 'REDIRECT' not in response['parse']['text']['*']: break
     html = response['parse']['text']['*']
     valid_tags = ['p']
