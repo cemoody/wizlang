@@ -106,9 +106,36 @@ def wiki_decanonize(phrase, c2t, response=True, n=2):
 def get_wiki_html(name):
     url = r"http://en.wikipedia.org/w/api.php?action=parse&page=" + \
             urllib2.quote(name) +\
-            "&format=json&prop=text&section=0"
-    response = json.load(urllib2.urlopen(url))
+            "&format=json&prop=text&section=0&redirects"
+    text = urllib2.urlopen(url).read()
+    response = json.loads(text)
     return response
+
+def get_wiki_spell(name):
+    url2  = r"http://en.wikipedia.org/w/api.php?action=opensearch&search="
+    url2 += urllib2.quote(name)
+    url2 += r"&format=json&callback=spellcheck"
+    text = urllib2.urlopen(url2).read()
+    text = text.strip(')').replace('spellcheck(','')
+    response = json.loads(text)
+    return response
+
+def pick_wiki(name):
+    candidates = get_wiki_spell(name)
+    if len(candidates[1]) == 0:
+        return None, None
+    for candidate in candidates[1]:
+        cleaned = process_wiki(candidate)
+        text = cleaned['description']
+        if 'Look up' in text:
+            print 'skipped wiki look up', candidate
+            continue
+        elif 'may refer to' in text:
+            print 'skipped wiki disambiguation', candidate
+            continue            
+        else:
+            break
+    return candidate, cleaned
 
 def process_wiki(name, length=20, max_char=300, response=None):
     """Remove excess paragraphs, break out the images, etc."""
@@ -116,16 +143,9 @@ def process_wiki(name, length=20, max_char=300, response=None):
     # and gets the main image
     if response is None:
         response = get_wiki_html(name)
-    if 'REDIRECT' in response['parse']['text']['*']:
-        for j in range(5):
-            html = response['parse']['text']['*']
-            soup = BeautifulSoup(html)  
-            newname = soup.findAll('a')[0]['href'].split('/')[-1]
-            response = get_wiki_html(newname)
-            if 'REDIRECT' not in response['parse']['text']['*']: break
     html = response['parse']['text']['*']
     valid_tags = ['p']
-    soup = BeautifulSoup(html)  
+    soup = BeautifulSoup(html)
     newhtml = ''
     for tag in soup.findAll(recursive=False):
         if len(newhtml.split(' ')) > length:
@@ -136,9 +156,11 @@ def process_wiki(name, length=20, max_char=300, response=None):
     description = nltk.clean_html(newhtml)
     description = re.sub(r'\([^)]*\)', '', description)
     description = re.sub(r'\[[^)]*\]', '', description)
+    description = description.replace(' ,', ',')
+    description = description.replace(' .', '.')
     if len(description) > max_char:
         description = description[:max_char] + '...'
-    soup = BeautifulSoup(html)  
+    soup = BeautifulSoup(html)
     newhtml = ''
     for tag in soup.findAll(recursive=False):
         good = True
@@ -159,7 +181,7 @@ def process_wiki(name, length=20, max_char=300, response=None):
     url = "http://en.wikipedia.org/wiki/" + name
     title = to_title(name)
     cleaned = dict(img=img, description=description, url=url,
-                   title=title, name=name)   
+                   title=title, name=name)
     return cleaned
 
 apikey = r"AIzaSyA_9a3q72NzxKeAkkER9zSDJ-l0anluQKQ"
@@ -169,31 +191,12 @@ def get_freebase_types(name, trying = True):
     url = r"https://www.googleapis.com/freebase/v1/search?filter=%28all+name%3A%22"
     url += name
     url += r"%22%29&output=%28type%29&key=AIzaSyA_9a3q72NzxKeAkkER9zSDJ-l0anluQKQ&limit=1"
-    try:
-        fh = urllib2.urlopen(url)
-    except:
-        print "Failed in getting freebase url for %s" % name
-        print sys.exc_info()
-        print url
-        return None, []
-    try:
-        response = json.load(fh)
-    except:
-        print 'Failed in freebase for %s' % name
-        print sys.exc_info()
-        print fh
-        return None, []
-    try:
-        notable = response['result'][0]['notable']['name']
-    except:
-        notable = None
-    try:
-        types = [x['name'] for x in response['result'][0]['output']['type']["/type/object/type"]]
-        types = [t for t in types if 'topic' not in t.lower()]
-        types = [t for t in types if 'ontology' not in t.lower()]
-    except:
-        print name, response
-        print sys.exc_info()
+    fh = urllib2.urlopen(url)
+    response = json.load(fh)
+    notable = response['result'][0]['notable']['name']
+    types = [x['name'] for x in response['result'][0]['output']['type']["/type/object/type"]]
+    types = [t for t in types if 'topic' not in t.lower()]
+    types = [t for t in types if 'ontology' not in t.lower()]
     return notable, types
 
 def reject_result(result, kwargs):

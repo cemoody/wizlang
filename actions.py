@@ -100,13 +100,18 @@ class Passthrough(Actor):
 def result_chain(canonical, c2t):
     """Chain the decanonization, wiki lookup,
        wiki article lookup, and freebase all together"""
-    wikiname, response =  wiki_decanonize(canonical, c2t)
+    title = canonical.replace('_', ' ')
     try:
-        article = process_wiki(wikiname)
+        wikiname, article = pick_wiki(canonical)
     except:
-        print 'failed to get article', wikiname
-        article = {'description':None}
-    notable, types = get_freebase_types(wikiname)
+        print "Error in ", canonical
+        wikiname, article = None, None
+    for search in (wikiname, title):
+        try:
+            notable, types = get_freebase_types(search)
+            break
+        except:
+            pass
     return dict(wikiname=wikiname, article=article, notable=notable,
                 types=types)
 
@@ -153,7 +158,7 @@ class Expression(Actor):
         return len(query) > 3
 
     @timer
-    def parse(self, query, parallel=True, kwargs=None):
+    def parse(self, query, parallel=False, kwargs=None):
         """Debug with parallel=False, production use
         switch to multiprocessing"""
         pool = multiprocessing.Pool(4)
@@ -191,10 +196,13 @@ class Expression(Actor):
             rc = lambda x: result_chain(x, self.wc2t)
             rv = parmap(rc, response['result'])
         else:
-            rv = [result_chain(x, self.wc2t) for x in response['result']]
+            n = 3
+            rv = [result_chain(x, self.wc2t) for x in response['result'][:n]]
         args = (response['result'], response['similarity'], rv)
         results = []
         for c, s, v in zip(*args):
+            if v['wikiname'] is None:
+                continue
             results.append(dict(canonical=c, similarity=s, info=v))
         pool.close()
         pool.terminate()
@@ -206,7 +214,6 @@ class Expression(Actor):
     def evaluate(self, dresults, other):
         previous_titles = []
         results = []
-        print dresults
         for dresult in dresults:
             wikiname = dresult['info']['wikiname']
             article  = dresult['info']['article']
@@ -223,7 +230,7 @@ class Expression(Actor):
             result.update(dresult)
             results.append(result)
             previous_titles.append(wikiname)
-        print json.dumps(result, indent=4)
+        print json.dumps(result, indent=2)
         if len(results) == 0:
             return {}
         else:
