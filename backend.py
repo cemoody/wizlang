@@ -5,6 +5,7 @@ import json
 import sys
 import cPickle
 import os.path
+import numpy as np
 
 import veclib
 from utils import *
@@ -46,6 +47,7 @@ def nearest(raw_query='{"args": [[1.0, "jurassic_park"]]}'):
                 total = vector * sign
             else:
                 total += vector * sign
+        total /= np.sum(total**2.0)
         canon, vectors, sim = veclib.nearest_word(total, avl, ai2w, n=20)
         resp['result'] = canon
         resp['similarity'] = [float(s) for s in sim]

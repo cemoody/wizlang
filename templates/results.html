@@ -42,11 +42,11 @@
               {% endif %}
             </a>
             <p style="font-size:14px">{{ result.description }}</p>
-            <!--
             <div id="textbox">
-              <p class="alignright">  <a href={{ result.url }}>Read more on Wikipedia</a></p>
+              <p class="alignleft">  <a href={{ result.url }}> {{result.notable }} </a></p>
+              <p class="alignright">  <a href={{ result.url }}>Score: {{ result.similarity }} </a></p>
             </div>
-            <div style="clear: both;"></div><-->
+            <div style="clear: both;"></div>
           </div>
         </p>
       </div>

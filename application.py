@@ -29,6 +29,7 @@ def wait(query='', **kwargs):
     """
     return render_template('wait.html', **reps)
 
+@app.route('/', methods=['GET', 'POST'])
 @app.route('/index.html', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -42,7 +43,7 @@ def index():
 if __name__ == '__main__':
     #app.config['PROFILE'] = True
     #app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions = [30])
-    port = 5010
+    port = 8080
     try:
         port = int(sys.argv[-1])
         print "Serving port %i" % port

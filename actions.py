@@ -215,6 +215,7 @@ class Expression(Actor):
         previous_titles = []
         results = []
         for dresult in dresults:
+            if len(results) > 2: break
             wikiname = dresult['info']['wikiname']
             article  = dresult['info']['article']
             if wikiname in other['wikinames']:
@@ -228,6 +229,7 @@ class Expression(Actor):
             result.update(dresult['info'])
             result['themes'] = dresult['info']['types']
             result.update(dresult)
+            result['similarity'] = "%1.2f" % result['similarity']
             results.append(result)
             previous_titles.append(wikiname)
         print json.dumps(result, indent=2)
