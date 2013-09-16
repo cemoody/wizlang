@@ -115,6 +115,23 @@ def result_chain(canonical, c2t):
             pass
     return dict(wikiname=wikiname, article=article, notable=notable,
                 types=types)
+img = r"http://upload.wikimedia.org/wikipedia/commons/thumb/5/51/"
+img += r"Warren_Buffett_KU_Visit.jpg/220px-Warren_Buffett_KU_Visit.jpg"
+text =  "Warren Edward Buffett (August 30, 1930) is an American "
+text += "business magnate, investor, and philanthropist. He is widely considered "
+text += "the most successful investor of... the 20th century."
+fake_results = [dict(info=dict(wikiname='Warren Buffet', 
+                article=dict(description=text),
+                types=['type1a', 'typ1b']), 
+                themes=['type 1', 'type 2'], 
+                url="http://en.wikipedia.org/wiki/Warren_buffet", 
+                title="Warren Buffet",
+                description=text,
+                notable="Wealthy Person",
+                img=img,
+                similarity=0.56)]
+fake_other   = dict(query='query', translated='translated query',
+                    wikinames=[])
 
 class Expression(Actor):
     name = "Expression"
@@ -163,6 +180,8 @@ class Expression(Actor):
         """Debug with parallel=False, production use
         switch to multiprocessing"""
         # Split the query and find the signs of every word
+        if query == 'None':
+            return fake_results, fake_other
         words = query.replace('+', '|').replace('-', '|')
         sign  = eval_sign(query)
         signs = ['+',]

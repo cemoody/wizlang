@@ -1,11 +1,14 @@
 {% extends "layout.html" %}
 {% block main %}
-<h1 class="splash" style="font-size:400%">ThisPlusThat<font color=#dd514c style="font-size:300%">.me</font></h1>
+<h1 class="splash-small">ThisPlusThat<font color=#dd514c style="font-size:60%">.me</font></h1>
 <h2 class="caption" style="font-size:1.5em"> Amazing language relationships</h2>
 <form class="pure-form form-big" action="" method="post">
-    <input class="pure-input-2-3" type=text
-    placeholder="Independence Day - Goofy + Epic" name=query/>
-<a class="pure-button primary-button" href="/search/query">Search</a> 
+<fieldset>
+    <input type="text" name=query placeholder="{{ query_text }}" 
+            style="width: 350px; height:43px; font-size:20px">
+       <button type="submit" class="pure-button primary-button"
+       style="font-size:20px; height:43px">Search</button>
+</fieldset>
 </form>
 {% endblock %}
 {% block mid %}
@@ -19,34 +22,31 @@
 </div>
 {% if results %}
   {% if translated %}
-    <p>Your query was translated into <i>{{ translated }}</i></p>
+    <p style="text-align:left">Your query was translated into <i>{{ translated }}</i></p>
   {% endif %}
-  <p>Search results</p>
+  <p style="text-align:left">Search results</p>
   {% for result in results %}
-    <div class="pure-g-r" >
-        <div class="pure-u-2-5" style="text-align:center">
+    <div class="pure-g-r result-container" >
+        <div class="pure-u-2-5" style="text-align:center; padding-top:2em">
             <a ><img href="{{ result.url }}"
               src="{{ result.img }}" alt="{{ result.title }}" /></a>
       </div>
       <div class="pure-u-3-5 ">
-          <div class="content">
-              <a href="{{ result.url }}">
-                  <h1 class="content-subhead" style="color:#1f8dd6;margin:0px">
-                          {{ result.title }}</h1>
-              </a>
+          <div class="result-content">
+             <h4 class="result-super-title">
+                 {% for theme in result.themes %} 
+                   {{ theme }},
+                 {% endfor %}
+             </h4>
+             <a href="{{ result.url }}">
+               <h3 class="result-title">{{ result.title }}</h3></a>
               {% if result.themes %}
-                <h2 class="content-subhead" style="margin:0px">
-                    Similarities: 
-                    {% for theme in result.themes %} 
-                      {{ theme }},
-                    {% endfor %}
-                </h2>
               {% endif %}
             </a>
             <p style="font-size:14px">{{ result.description }}</p>
-            <div id="textbox">
-              <p class="alignleft">  <a href={{ result.url }}> {{result.notable }} </a></p>
-              <p class="alignright">  <a href={{ result.url }}>Score: {{ result.similarity }} </a></p>
+            <div id="textbox" style="font-weight:100">
+              <p class="alignleft">  {{result.notable }}</p>
+              <p class="alignright">  Score: {{ result.similarity }}</p>
             </div>
             <div style="clear: both;"></div>
           </div>
