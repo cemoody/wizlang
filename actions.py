@@ -213,6 +213,7 @@ class Expression(Actor):
         url = backend_url + urllib2.quote(send)
         response = json.load(urllib2.urlopen(url))
         response['query'] = query
+        print response['result']
         # Decanonize the results and get freebase, article info
         if parallel:
             rc = lambda x: result_chain(x, self.wc2t)
@@ -251,7 +252,6 @@ class Expression(Actor):
             result['similarity'] = "%1.2f" % result['similarity']
             results.append(result)
             previous_titles.append(wikiname)
-        print json.dumps(result, indent=2)
         if len(results) == 0:
             return {}
         else:
