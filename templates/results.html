@@ -1,27 +1,29 @@
 {% extends "layout.html" %}
 {% block main %}
-<div class="hero" style="margin:0">
-<h1 class="pure-u-1">ThisPlusThat<font color="red" style="font-size:50%">.me</font></h1>
-<h2 class="pure-u-3-4 l-centered" style="font-size:150%">Amazing language relationships</h2>
-<form class="pure-form" action="" method="post">
-<fieldset>
-    <input type="text" name=query placeholder="{{ query_text }}" 
-            style="width: 350px; height:43px; font-size:20px">
-    <button type="submit" class="pure-button pure-button-primary"
-       style="font-size:20px; height:43px">Search</button>
-    <a class="pure-button pure-button-secondary" href="/how.html" 
-       style="font-size:20px; height:23px">How it Works</a>
-</fieldset>
-</div>
+<h1 class="splash" style="font-size:400%">ThisPlusThat<font color=#dd514c style="font-size:300%">.me</font></h1>
+<h2 class="caption" style="font-size:1.5em"> Amazing language relationships</h2>
+<form class="pure-form form-big" action="" method="post">
+    <input class="pure-input-2-3" type=text
+    placeholder="Independence Day - Goofy + Epic" name=query/>
+<a class="pure-button primary-button" href="/search/query">Search</a> 
+</form>
 {% endblock %}
 {% block mid %}
+<div class="pure-g-r" style="margin-top:50px">
+    <div class="pure-u color-table" style="width:16%; background:#0e90d2"> Example </div>
+    <div class="pure-u color-table" style="width:16%; background:rgb(128, 88, 165)"> Example </div>
+    <div class="pure-u color-table" style="width:16%; background:#5eb95e"> Example </div>
+    <div class="pure-u color-table" style="width:16%; background:#dd514c"> Example </div>
+    <div class="pure-u color-table" style="width:16%; background:rgb(243, 123, 29)"> Example </div>
+    <div class="pure-u color-table" style="width:16%; background:rgb(250, 210, 50)"> Example </div>
+</div>
 {% if results %}
   {% if translated %}
     <p>Your query was translated into <i>{{ translated }}</i></p>
   {% endif %}
   <p>Search results</p>
   {% for result in results %}
-    <div class="legal pure-g-r" >
+    <div class="pure-g-r" >
         <div class="pure-u-2-5" style="text-align:center">
             <a ><img href="{{ result.url }}"
               src="{{ result.img }}" alt="{{ result.title }}" /></a>

@@ -4,17 +4,6 @@ body {
 }
 
 
-/* Add transition to containers so they can push in and out */
-#layout,
-#menu,
-.pure-menu-link {
-    -webkit-transition: all 0.2s ease-out;
-    -moz-transition: all 0.2s ease-out;
-    -ms-transition: all 0.2s ease-out;
-    -o-transition: all 0.2s ease-out;
-    transition: all 0.2s ease-out;
-}
-
 
 /* --------------------------
  * Element Styles
@@ -32,6 +21,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
     color: rgb(75, 75, 75);
+    font-family: omnes-pro
 }
 h3 {
     font-size: 1.25em;

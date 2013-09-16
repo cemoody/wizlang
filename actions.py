@@ -127,7 +127,7 @@ class Expression(Actor):
         if not preloaded_actor:
             # a= 'all'
             # w='wikipedia'
-            trained = "/home/ubuntu/data" 
+            trained = "data" 
             fnw = '%s/vectors.fullwiki.1000.s50.words' % trained
             wc2t = '%s/c2t' % './data'
             wt2c = '%s/t2c' % './data'

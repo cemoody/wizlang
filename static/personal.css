@@ -1,0 +1,78 @@
+body .primary-button {
+    background: #02a6eb;
+    color: #fff;
+    font-size: 20px;
+}
+
+body .secondary-button {
+    background: #fff;
+    color: #666;
+    border: 1px solid #ddd;
+    font-size: 20px;
+}
+
+body .form-big {
+    font-size: 27px;
+}
+
+body .splash {
+    font-weight:200; 
+    font-size:128px; 
+    color:#1f8dd6; 
+    margin-bottom:0   
+}
+
+body .caption {
+    font-weight:200; 
+    font-size:3em; 
+    color:#666; 
+    margin:10px
+}
+
+body .color-table {
+    font-size:20px; 
+    width:16.6666%; 
+    height:40px; 
+    color:white;    
+}
+
+body .content {
+    font-family: proxima-nova;
+    font-size:120%;
+    text-align: left;
+    padding:80px;
+    color:rgb(119, 119, 119);
+    line-height: 1.6em;
+}
+
+body .subtitle {
+    color:rgb(75, 75, 75);
+    font-size:150%;
+    font-weight:400;
+}
+
+body .footer {
+    padding:40px;
+}
+
+body .footer-tile {
+    background:rgb(245, 245, 245)
+}
+
+body .footer-text-l {
+    font-size:14px;
+    padding-left:1em;
+    padding-right:1em;
+    color: #777;
+    font-family:proxima-nova;
+    text-align:left;
+}
+
+body .footer-text-r {
+    font-size:14px;
+    padding-left:1em;
+    padding-right:1em;
+    color: #777;
+    font-family:proxima-nova;
+    text-align:right;
+}

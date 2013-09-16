@@ -1,61 +1,45 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
   <script type="text/javascript" src="//use.typekit.net/tcl7xzx.js"></script>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ThisPlusThat.me</title>
-  <link rel="stylesheet" href="/pure-min.css" type="text/css" />
-  <link rel="stylesheet" href="/main.css" type="text/css" />
-  <link rel="stylesheet" href="/home.css" type="text/css" />
-  <link rel="stylesheet" href="/baby-blue.css" type="text/css" />
   <script language="javascript" src="/email.js"></script>
+  <link rel="stylesheet" href="personal.css">
+  <title>ThisPlusThat.me</title>
 </head>
 
 <body>
-    <div class="pure-u-4-5-c" id="layout">
-    {% block main %}
-    {% endblock %}
-    {% block mid %}
-    {% endblock %}
-    <div class="legal pure-g-r">
-      <div class="pure-u-2-5">
-        <div class="l-box">
-          <p class="legal-license">This site is built with &lt;3 using
-            <a href="http://purecss.io/"> Pure v0.2.1</a>
-          </p>
-          <p class="legal-license">Stock photos from 
-            <a href="http://www.flickr.com/photos/m4tik/">m4tik</a>
-          </p>
-          <p class="legal-license"> An 
-            <a href="http://insightdatascience.com/">Insight Data Science</a> Project
-          </p>
-        </div>
-      </div>
-      <div class="pure-u-1-5">
-        <div class="l-box legal-logo">
-          <a href=""><img src="/profile_round.jpg"
-          height="96" width="96" alt="YUI logo" /></a>
-        </div>
-      </div>
-      <div class="pure-u-2-5">
-        <div class="l-box">
-          <ul class="legal-links pure-g">
-            <li class="pure-u-1-2"><a href="http://github.com/cemoody/wizlang">GitHub
-            Project</a></li>
-            <li class="pure-u-1-2">
-            <script>mail2("chris.e.moody","gmail",0,"","Contact Me")</script>
-            </li>
-          </ul>
-          <p class="legal-copyright">
-            <a href="http://cemoody.prtflio.eu/"> About me </a>
-          </p>
-          <p class="legal-copyright">&#169; 2013 Christopher Moody. </p>
-          <p class="legal-copyright">All rights reserved. </p>
-        </div>
+    <style>
+    body,
+    .pure-g [class *= "pure-u"],
+    .pure-g-r [class *= "pure-u"] {
+            font-family:omnes-pro;
+            }
+    </style>
+    <div class="pure-g-r">
+      <div class="pure-u-1" style="text-align:center;padding:0 2em;">
+        {% block main %}
+        {% endblock %}
+        {% block mid %}
+        {% endblock %}
       </div>
     </div>
-  </div>
+    
+    <div class="pure-g-r footer">
+      <div class="pure-u-2-5 footer-tile">
+          <p class="footer-text-l">This site was built with <3 using <a href="http://purecss.io/">PureCSS</a></p>
+          <p class="footer-text-l">An <a href="http://insightdatascience.com/">Insight Data Science</a> Project</p>
+      </div>
+      <div class="pure-u-1-5 footer-tile">
+          <img src="profile_round.jpg"/>
+      </div>
+      <div class="pure-u-2-5 footer-tile">
+          <p class="footer-text-r"><a href="http://github.com/cemoody/wizlang">GitHub Repo</a></p>
+          <p class="footer-text-r"><script>mail2("chris.e.moody","gmail",0,"","Contact Me")</script></p>
+          <p class="footer-text-r"> Christopher Erick Moody</p>
+      </div>
+    </div>
 </body>
 </html>
 

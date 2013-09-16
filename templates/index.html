@@ -1,17 +1,26 @@
 {% extends "layout.html" %}
 {% block main %}
-<div class="hero" >
-<h1 class="pure-u-1">ThisPlusThat<font color="red" style="font-size:50%">.me</font></h1>
-<h2 class="pure-u-3-4 l-centered"> Amazing language relationships</h2>
-<form class="pure-form" action="" method="post">
+<h1 class="splash">ThisPlusThat<font color=#dd514c style="font-size:50%">.me</font></h1>
+<h2 class="caption"> Amazing language relationships</h2>
+<form class="pure-form form-big" action="" method="post">
     <input class="pure-input-2-3" type=text
-    placeholder="Independence Day - Goofy + Epic" name=query
-    style='font-size:20px'/><br />
+    placeholder="Independence Day - Goofy + Epic" name=query/>
+<a class="pure-button primary-button" href="/search/query">Search</a> 
 </form>
-<p><a class="pure-button pure-button-cta" href="/search/query">Search</a> 
- <a class="pure-button pure-button-secondary" href="/how.html">How it
-     Works</a></p>
-</div>
 {% endblock %}
 {% block mid %}
+<div class="pure-g-r" style="margin-top:50px">
+    <div class="pure-u color-table" style="width:16%; background:#0e90d2"> Example </div>
+    <div class="pure-u color-table" style="width:16%; background:rgb(128, 88, 165)"> Example </div>
+    <div class="pure-u color-table" style="width:16%; background:#5eb95e"> Example </div>
+    <div class="pure-u color-table" style="width:16%; background:#dd514c"> Example </div>
+    <div class="pure-u color-table" style="width:16%; background:rgb(243, 123, 29)"> Example </div>
+    <div class="pure-u color-table" style="width:16%; background:rgb(250, 210, 50)"> Example </div>
+</div>
+<div class="content">
+    <h3 class="subtitle">Simple, powerful, natural language searching.</h3>
+<p> ThisPlusThat captures the relationships between words. This goes far beyond sentiment analysis, or parts-of-speech tagging -- words, products, and locations are learned from context. Go ahead and try any person, place, or thing +/- some trait. You can average two people. Curious what Bill Gates is like without Microsoft? <a href="http://thisplusthat.me/search/Bill%20Gates%20-%20Microsoft">Try it!</a> Think analogies: <font style="font-family:monospace">King - Man + Woman = Queen</font> is a great example.  In the background every idea is translated into a one vector, these vectors are added or subtracted, and then the words nearest to that vector are returned.  </p>
+
+<p> A vector is constructed for every word.  A recurrent neural network translates every word into a thousand-dimensional vector and tries to guess the vectors that make up the surrounding sentence. Wrong guesses are then back-propagated through the neural network, updating the state of the networ. Vectors are constructed using a recurrent neural network which -- given a word and a context -- tries to estimate what the rest of the sentence looks like. In this case, I've trained on the Wikipedia corpus, which allows ThisPlusThat to predict the relationships between encyclopedia articles. But this isn't limited to encyclopedic texts; you can of course apply this to employee resumes, item listings, or travel guides. Because words are quantified in a meaningful way, it's also fairly easy to give a list of products and pick the odd one out -- great for fraud dectection, for example! </p>
+</div>
 {% endblock %}
