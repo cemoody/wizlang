@@ -11,6 +11,7 @@ import string
 from BeautifulSoup import BeautifulSoup
 from utils import *
 
+
 def exists(url):
     request = urllib2.Request(url)
     request.get_method = lambda : 'HEAD'
@@ -45,6 +46,7 @@ def to_title(title):
         out += word + " "
     return out
 
+@persist_to_file
 def get_wiki_name(name, get_response=False):
     """Use the WP API to get the most likely diambiguation"""
     for _ in range(3):
@@ -69,12 +71,16 @@ def get_wiki_name(name, get_response=False):
     else:
         return ptitle
 
+@persist_to_file
 def wiki_canonize(phrase, canon, n=1, use_wiki=True):
     phrase = phrase.replace('\n','').replace('\t','').replace('\r','')
     phrase = phrase.strip()
     wiki = ""
     if use_wiki:
-        wiki = get_wiki_name(phrase)
+        try:
+            wiki = get_wiki_name(phrase)
+        except:
+            wiki = None
         if wiki is not None:
             phrase = wiki
     phrase = phrase.replace(' ', '_')
@@ -92,6 +98,7 @@ def wiki_canonize(phrase, canon, n=1, use_wiki=True):
     phrases = [unicodedata.normalize('NFKD', unicode(phrase)).encode('ascii','ignore') for phrase in phrases]
     return phrases[0], wiki
 
+@persist_to_file
 def wiki_decanonize(phrase, c2t, response=True, n=2):
     if phrase in c2t: return c2t[phrase], None
     phrase = phrase.replace('_', ' ')
@@ -105,6 +112,7 @@ def wiki_decanonize(phrase, c2t, response=True, n=2):
         phrases = difflib.get_close_matches(phrase, c2t.values(), n)
         return phrases[0], None
 
+@persist_to_file
 def get_wiki_html(name):
     url = r"http://en.wikipedia.org/w/api.php?action=parse&page=" + \
             urllib2.quote(name) +\
@@ -113,6 +121,7 @@ def get_wiki_html(name):
     response = json.loads(text)
     return response
 
+@persist_to_file
 def get_wiki_spell(name):
     url2  = r"http://en.wikipedia.org/w/api.php?action=opensearch&search="
     url2 += urllib2.quote(name)
@@ -122,6 +131,7 @@ def get_wiki_spell(name):
     response = json.loads(text)
     return response
 
+@persist_to_file
 def pick_wiki(name):
     candidates = get_wiki_spell(name)
     if len(candidates[1]) == 0:
@@ -139,6 +149,7 @@ def pick_wiki(name):
             break
     return candidate, cleaned
 
+@persist_to_file
 def process_wiki(name, length=20, max_char=300, response=None):
     """Remove excess paragraphs, break out the images, etc."""
     #This gets the first section, gets the text of to a number of words
@@ -187,6 +198,7 @@ def process_wiki(name, length=20, max_char=300, response=None):
     return cleaned
 
 apikey = r"AIzaSyA_9a3q72NzxKeAkkER9zSDJ-l0anluQKQ"
+@persist_to_file
 def get_freebase_types(name, trying = True):
     types = None
     name = urllib2.quote(name)

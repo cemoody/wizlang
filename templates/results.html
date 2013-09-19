@@ -1,8 +1,9 @@
 {% extends "layout.html" %}
 {% block main %}
-<h1 class="splash-small">ThisPlusThat<font color=#dd514c style="font-size:60%">.me</font></h1>
+<a href="/"><h1 class="splash-small">ThisPlusThat<font color=#dd514c style="font-size:60%">.me</font></h1></a>
 <h2 class="caption" style="font-size:1.5em"> Amazing language relationships</h2>
-<form class="pure-form form-big" action="" method="post">
+<form class="pure-form form-big" action="" method="post" id="formsearch" 
+      onsubmit="return loaddiv();">
 <fieldset>
     <input type="text" name=query placeholder="{{ query_text }}" 
             style="width: 350px; height:43px; font-size:20px">
@@ -52,10 +53,10 @@
     <p> 
         <i>Yikes!</i> Looks like an error happened and we couldn't 
         any search results your way. Why not 
-        <a href="/search/Jurassic%20Park%20-%20Dinosaur%20+%20Alien"> <b>try</b> </a>
+        <a href="/search/the%20matrix%20-%20thoughtful%20%2B%20dumb"> <b>try</b> </a>
         a query like
-        <a href="/search/Jurassic%20Park%20-%20Dinosaur%20+%20Alien">
-          <code> Jurassic Park - Dinosaur + Alien </code>
+        <a href="/search/the%20matrix%20-%20thoughtful%20%2B%20dumb">
+          <code> The Matrix - Thoughtful + Dumb</code>
         </a>?
     </p> 
   </div>

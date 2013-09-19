@@ -83,10 +83,16 @@ body .caption {
     margin:10px
 }
 
+body .color-group {
+    background: rgb(250, 250, 250);
+    border-bottom:2px solid #eee;
+    text-align:center;
+}
+
 body .color-table {
     font-size:20px; 
     width:16.6666%; 
-    height:60px; 
+    height:90px; 
     color:white;    
 }
 

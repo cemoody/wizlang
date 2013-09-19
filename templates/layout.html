@@ -5,8 +5,15 @@
   <script type="text/javascript" src="//use.typekit.net/tcl7xzx.js"></script>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
   <script language="javascript" src="/email.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <link rel="stylesheet" href="/personal.css">
-  <title>ThisPlusThat.me</title>
+  <a href="http://thisplusthat.me/"><title>ThisPlusThat.me</title></a>
+  <script>
+    function loaddiv() {
+        $('#loading_div').show(); // show animation
+        return true;
+    }
+  </script>
 </head>
 
 <body>
@@ -21,27 +28,45 @@
       <div class="pure-u-1" style="text-align:center;padding:0 2em;">
         {% block main %}
         {% endblock %}
+        <div class="pure-g-r" style="display: none" id="loading_div">
+            <div class="pure-u-1-3"></div>
+            <div class="pure-u-1-3 content">
+                <img src="/loading.gif" />
+                <p> Tips on searching:</p>
+                <p> It helps to do <code>Topic - Trait + Trait</code>. This helps 'replace' 
+                     the parts you subtract with a better match insetad of removing
+                     it entirely. </p>
+                <p> Common, single-word topics with little ambiguity work best. 
+                     I've replaced many words with their canonical forms with help
+                     from Freebase and Wikipedia, but ambiguity always lurks. </p>
+            </div>
+            <div class="pure-u-1-3"></div>
+        </div>
         <div class="pure-g-r" style="margin-top:50px">
             <div class="pure-u color-table" style="width:16%; background:#0e90d2"> 
-                <a href="/search/Bill%20Gates%20-%20Microsoft" style="color:white">
-                Bill Gates - Microsoft</a>
+                <a href="/search/the%20matrix%20-%20thoughtful%20%2B%20dumb" style="color:white">
+                    The Matrix - Thoughtful + Dumb</a>
             </div>
             <div class="pure-u color-table" style="width:16%; background:rgb(128, 88, 165)"> 
-                <a href="/search/Han%20Solo%20%2B%20Jedi" style="color:white">
-                Han Solo + Jedi</a>
+                <a href="/search/I%2C%20Robot%20-%20Artificial%20Intelligence" style="color:white">
+                I, Robot - Artificial Intelligence </a>
             </div>
             <div class="pure-u color-table" style="width:16%; background:#5eb95e"> 
-                <a href="/search/Han%20Solo%20%2B%20Sexy" style="color:white">
-                Han Solo + Sexy</a>
+                <a href="/search/The%20Wire%20-%20Baltimore%20%2B%20new%20York%20city" style="color:white">
+                The Wire - Baltimore + New York</a>
             </div>
             <div class="pure-u color-table" style="width:16%; background:#dd514c"> 
-                Example 
+                <a href="/search/mitt%20romney%20-%20experience%20%2B%20celebrity" style="color:white"> 
+                Mitt Romney - Experience + Celebrity
+                </a>
             </div>
             <div class="pure-u color-table" style="width:16%; background:rgb(243, 123, 29)"> 
-                Example 
+                <a href="/search/han%20solo%20%2B%20jedi" style="color:white"> 
+                Han Solo + Jedi</a>
             </div>
             <div class="pure-u color-table" style="width:16%; background:rgb(250, 210, 50)"> 
-                <a href="/search/marriage%20-%20sex" style="color:white">Married - Sex</a>
+                <a href="/search/marriage%20-%20sex" style="color:white">
+                Marriage - Sex</a>
             </div>
         </div>
         {% block mid %}

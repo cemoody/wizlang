@@ -31,7 +31,7 @@ def wait(query='', **kwargs):
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index.html', methods=['GET', 'POST'])
-def index():
+def index(query="Jurassic Park"):
     if request.method == 'POST':
         query = request.form['query']
         quote = str(urllib2.quote(query))

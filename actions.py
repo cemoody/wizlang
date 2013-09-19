@@ -56,7 +56,6 @@ class Actor(object):
            Defaults to a pass-through to OMDB"""
         return {}
 
-    @timer
     def run(self, query):
         start = time.time()
         if False:
@@ -176,6 +175,7 @@ class Expression(Actor):
         return len(query) > 3
 
     @timer
+    @persist_to_file
     def parse(self, query, parallel=True, kwargs=None):
         """Debug with parallel=False, production use
         switch to multiprocessing"""
@@ -199,6 +199,8 @@ class Expression(Actor):
             rets  = [wiki_canonize(words[0], canon, use_wiki=True)]
             rets += [wiki_canonize(w, canon, use_wiki=False) for w in words[1:]]
         canonizeds, wikinames = zip(*rets)
+        if wikinames[0] is None:
+            return [], {}
         wikinames = [w if len(w)>0 else c for c, w in zip(canonizeds, wikinames)]
         # Make the translated query string
         translated = ""
@@ -220,14 +222,21 @@ class Expression(Actor):
             rv = parmap(rc, response['result'])
         else:
             n = 3
-            rv = [result_chain(x, self.wc2t) for x in response['result'][:n]]
-        args = (response['result'], response['similarity'], rv)
+            rv = [result_chain(x, self.wc2t) for x in response['result']]
+        args = (response['result'], response['similarity'], 
+                response['root_similarity'], rv)
+        args = sorted(zip(*args), key=lambda x:x[1])[::-1]
         results = []
-        for c, s, v in zip(*args):
+        print args[:2]
+        for c, s, r, v in args:
+            print '%s %1.2f %s' % (s, r, v['wikiname'])
+            if r > 0.7:
+                continue
             if v['wikiname'] is None:
                 continue
             results.append(dict(canonical=c, similarity=s, info=v))
-        other = dict(query=query, translated=translated, wikinames=wikinames)
+        other = dict(query=query, translated=translated, wikinames=wikinames,
+                     query_text=query)
         return results, other
     
     @timer

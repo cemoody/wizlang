@@ -88,7 +88,7 @@ def nearest_word(vector, vector_lib, index2word, n=5, skip=0,
             offset += chunk_size
         idx = np.argsort(sims)[::-1]
         words = [words[i] for i in idx[:n]]
-    vectors = idx[:n] 
+    vectors = [vector_lib[i] for i in idx[:n] ]
     sim = [d[i] for i in idx[:n]]
     return words, vectors, sim
 

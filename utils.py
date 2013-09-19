@@ -2,6 +2,8 @@ import time
 import sys
 from multiprocessing import Process, Pipe
 from itertools import izip
+import os.path
+import json
 
 # Courtesy of 
 #http://stackoverflow.com/questions/3288595/multiprocessing-using-pool-map-on-a
@@ -37,6 +39,31 @@ def fail_print(func):
             rv = None
         return rv
     return wrapped
+
+def persist_to_file(original_func):
+    """ Each query gets written out to a page
+        Obviously, this is much slower than the save key-values
+        to Redis. But it's quick and doesn't break too much"""
+    n = 100
+    def decorator(*args, **kwargs):
+        file_name = "./cache/"
+        file_name += original_func.__name__
+        for arg in args:
+            file_name += str(arg)[:n]
+        keys = sorted(kwargs.keys())
+        for k in keys:
+            v = kwargs[k]
+            v = str(v)[:n]
+            file_name += "%s_%s-" %(k, v)
+        try:
+            ret = json.load(open(file_name, 'r'))
+        except (IOError, ValueError):
+            ret = None
+        if ret is None:
+            ret = original_func(*args,**kwargs)
+            json.dump(ret, open(file_name, 'w'))
+        return ret
+    return decorator
 
 class dummy_async():
     """This is faking an async result for debugging purposes"""
