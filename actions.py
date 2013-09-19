@@ -257,6 +257,9 @@ class Expression(Actor):
             result.update(article)
             result.update(dresult['info'])
             result['themes'] = dresult['info']['types']
+            if len(result['themes']) == 0:
+                print 'Skipping zero themes'
+                continue
             result.update(dresult)
             result['similarity'] = "%1.2f" % result['similarity']
             results.append(result)

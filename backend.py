@@ -24,6 +24,36 @@ else:
     aw2i, ai2w = veclib.get_words(fnw)
     cPickle.dump([aw2i, ai2w], open(fnw + '.pickle','w'))
 
+@app.route('/farthest/<raw_query>')
+def similarity(raw_query='{"args":["iphone", "ipad", "ipod", "walkman"]}'):
+    """Given a list of arguments, calculate all the N^2 distance matrix
+    and return the item farthest away. The total distance is just the 
+    distance from a node to all other nodes seperately."""
+    print 'QUERY'
+    print raw_query
+    query = json.loads(raw_query.strip("'"))
+    nargs = len(query['args'])
+    N2 = np.zeros((nargs, nargs))
+    resp = {}
+    words = query['args']
+    vectors = {word:avl[aw2i[word]] for word in words}
+    for i, worda in enumerate(words):
+        vectora = vectors[worda]
+        for j, wordb in enumerate(words):
+            if j == i: continue
+            vectorb = vectors[wordb]
+            dist = (vectora * vectorb).sum(dtype=np.float128)
+            N2[i, j] = dist
+            print worda, wordb, dist
+    print N2
+    N1 = np.sum(N2, axis=0)
+    f = words[np.argmin(N1)]
+    resp['N1'] = [float(x) for x in N1]
+    resp['words'] = words
+    resp['similarity'] = (f, float(N1.min()))
+    text = json.dumps(resp)
+    return text
+
 @app.route('/nearest/<raw_query>')
 @timer
 def nearest(raw_query='{"args": [[1.0, "jurassic_park"]]}'):

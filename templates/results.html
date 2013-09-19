@@ -15,7 +15,7 @@
 {% block mid %}
 {% if results %}
   {% if translated %}
-    <p style="text-align:left">Your query was translated into <i>{{ translated }}</i></p>
+    <p style="text-align:left">Your query was disambiguated into <i>{{ translated }}</i></p>
   {% endif %}
   <p style="text-align:left">Search results</p>
   {% for result in results %}
@@ -51,8 +51,9 @@
   <div class="content">
     <h2 class="content-subhead"> Bad Query </h2>
     <p> 
-        <i>Yikes!</i> Looks like an error happened and we couldn't 
-        any search results your way. Why not 
+        <i>Yikes!</i> Looks like an error happened and we couldn't send
+        any search results your way. Your word was likely not common
+        enough to be included in my corpus. Why not 
         <a href="/search/the%20matrix%20-%20thoughtful%20%2B%20dumb"> <b>try</b> </a>
         a query like
         <a href="/search/the%20matrix%20-%20thoughtful%20%2B%20dumb">
