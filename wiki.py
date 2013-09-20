@@ -49,15 +49,17 @@ def to_title(title):
 @persist_to_file
 def get_wiki_name(name, get_response=False):
     """Use the WP API to get the most likely diambiguation"""
-    for i in range(9):
+    for i in range(1, 9):
         url = r"http://en.wikipedia.org/w/api.php?action=opensearch&search=" +\
               urllib2.quote(name) + \
-              r"&limit=%i&format=json" % i
+              r"&limit=" + "%i"%i + "&format=json"
         response = urllib2.urlopen(url).read()
         odata = json.loads(response)
         try:
             ptitle = odata[1][0]
         except:
+            print "failed wikipedia ", i, response, url
+            time.sleep(0.1)
             continue
         if len(odata) > 1:
             break

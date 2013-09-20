@@ -44,6 +44,7 @@ def farthest(raw_query='{"args":["iphone", "ipad", "ipod", "walkman"]}'):
     resp['inner'] = inner
     resp['left'] = left
     resp['right'] = right
+    resp['right_word'] = words[N1.argmin()]
     text = json.dumps(resp)
     return text
 

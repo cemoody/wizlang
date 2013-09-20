@@ -155,7 +155,7 @@ class Expression(Actor):
             self.ai2w = preloaded_actor.ai2w
 
     def validate(self, query):
-        return len(query) > 2 and ',' not in query
+        return ',' not in query
 
     @timer
     def parse(self, query):
@@ -202,6 +202,7 @@ class Expression(Actor):
     @persist_to_file
     def request(self, signs, canonizeds, parallel=True):
         # Format the vector lib request
+        n = 8
         args = []
         for sign, canonical in zip(signs, canonizeds):
             args.append([sign, canonical])
@@ -211,9 +212,9 @@ class Expression(Actor):
         print response['result']
         # Decanonize the results and get freebase, article info
         if parallel:
-            rv = parmap(result_chain, response['result'])
+            rv = parmap(result_chain, response['result'][:n])
         else:
-            rv = [result_chain(x) for x in response['result']]
+            rv = [result_chain(x) for x in response['result'][:n]]
         args = (response['result'], response['similarity'], 
                 response['root_similarity'], rv)
         args = sorted(zip(*args), key=lambda x:x[1])[::-1]
@@ -234,7 +235,7 @@ class Expression(Actor):
     @timer
     def evaluate(self, query, translated, wikinames, results, max=2):
         other = dict(query=query, translated=translated, 
-                          wikinames=wikinames, query_text=query)
+                     wikinames=wikinames, query_text=query)
         previous_titles = []
         rets = []
         for dresult in results:
@@ -249,8 +250,7 @@ class Expression(Actor):
             result = {}
             result['themes'] = dresult['types'][:3]
             if len(result['themes']) == 0:
-                print 'Skipping zero themes'
-                continue
+                print 'Detected zero themes'
             result.update(dresult)
             result['similarity'] = "%1.2f" % result['similarity']
             rets.append(result)
@@ -267,46 +267,50 @@ class Expression(Actor):
         start = time.time()
         signs, words = self.parse(query)
         translated, signs, canonizeds, wikinames = self.canonize(signs, words)
-        results = self.request(signs, canonizeds)
-        reps = self.evaluate(query, translated, wikinames, results)
-        reps['actor'] = self.name
-        stop = time.time()
-        reps['query_time'] = "%1.1f" %(stop - start)
-        return reps
+        if len(wikinames) > 0:
+            results = self.request(signs, canonizeds)
+            reps = self.evaluate(query, translated, wikinames, results)
+            reps['actor'] = self.name
+            stop = time.time()
+            reps['query_time'] = "%1.1f" %(stop - start)
+            return reps
+        else:
+            reps = dict(translated="Wikipedia failed to respond; maybe wait a minute?")
+            return reps
 
 class Fraud(Expression):
     name = "Fraud"
     def validate(self, query):
-        return len(query) > 2 and ',' in query
+        return ',' in query
 
     @timer
     @persist_to_file
     def request(self, signs, canonizeds):
         # Format the vector lib request
+        n = 6
         args = []
         for sign, canonical in zip(signs, canonizeds):
-            args.append([sign, canonical])
+            args.append(canonical)
         send = json.dumps(dict(args=args))
         url = backend_url_farthest + urllib2.quote(send)
         response = json.load(urllib2.urlopen(url))
-        results = []
-        for word, n1 in zip(response['words'], response['N1']):
-            if n1 == response['N1'].min():
-                mark = 'x'
-                common = reponse['right']
-            else:
-                mark = 'o'
-                common = reponse['left']
-            resp = dict(n1=n1, word=word, mark=mark, common=common)
-            results.append(resp)
+        print response['words']
+        # Decanonize the results and get freebase, article info
         if parallel:
-            rv = parmap(result_chain, response['words'])
+            rv = parmap(result_chain, response['words'][:n])
         else:
-            rv = [result_chain(x) for x in response['words']]
-        for word, rci in zip(response['words'], rv):
-            res, = [r for r in results if results['word'] == word]
-            res.update(rci)
+            rv = [result_chain(x) for x in response['words'][:n]]
+        results = []
+        rw = response['right_word']
+        for n1, w, i, l, r, v in zip(response['N1'], response['words'],
+                                  response['inner'], response['left'],
+                                  response['right'], rv):
+            ret = {}
+            ret['mark'] = 'x' if w == rw else 'o'
+            ret['canonized'] = c
+            ret.update(v)
+            ret.update(ret.pop('info'))
+            print ret
+            results.append(ret)
         return results
-
-
 
