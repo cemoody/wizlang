@@ -18,7 +18,8 @@ from wiki import *
 from utils import *
 import veclib
 
-backend_url = r'http://localhost:5005/nearest/'
+backend_url_nearest = r'http://localhost:5005/nearest/'
+backend_url_farthest = r'http://localhost:5005/farthest/'
 
 def eval_sign(query):
     """ This is a dumb parser that assign + or - to every character
@@ -154,7 +155,7 @@ class Expression(Actor):
             self.ai2w = preloaded_actor.ai2w
 
     def validate(self, query):
-        return len(query) > 3
+        return len(query) > 2 and ',' not in query
 
     @timer
     def parse(self, query):
@@ -164,6 +165,7 @@ class Expression(Actor):
         if query == 'None':
             return fake_results, fake_other
         words = query.replace('+', '|').replace('-', '|').replace(',', '|')
+        words = words.replace(',','|')
         sign  = eval_sign(query)
         signs = ['+',]
         signs.extend([sign[match.start() + 1] \
@@ -203,7 +205,7 @@ class Expression(Actor):
         for sign, canonical in zip(signs, canonizeds):
             args.append([sign, canonical])
         send = json.dumps(dict(args=args))
-        url = backend_url + urllib2.quote(send)
+        url = backend_url_nearest + urllib2.quote(send)
         response = json.load(urllib2.urlopen(url))
         print response['result']
         return response
@@ -279,3 +281,28 @@ class Expression(Actor):
 
 class Fraud(Expression):
     name = "Fraud"
+    def validate(self, query):
+        return len(query) > 2 and ',' in query
+
+    @timer
+    @persist_to_file
+    def request(self, signs, canonizeds):
+        # Format the vector lib request
+        args = []
+        for sign, canonical in zip(signs, canonizeds):
+            args.append([sign, canonical])
+        send = json.dumps(dict(args=args))
+        url = backend_url_farthest + urllib2.quote(send)
+        response = json.load(urllib2.urlopen(url))
+        rets = []
+        for word, n1 in zip(response['words'], response['N1']):
+            if n1 == response['N1'].min():
+                mark = 'x'
+                common = reponse['right']
+            else:
+                mark = 'o'
+                common = reponse['left']
+            resp = dict(n1=n1, word=word, mark=mark, common=common)
+            rets.append(resp)
+        return rets, inner
+

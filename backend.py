@@ -26,7 +26,7 @@ else:
 
 @app.route('/farthest/<raw_query>')
 #@json_exception
-def similarity(raw_query='{"args":["iphone", "ipad", "ipod", "walkman"]}'):
+def farthest(raw_query='{"args":["iphone", "ipad", "ipod", "walkman"]}'):
     """Given a list of arguments, calculate all the N^2 distance matrix
     and return the item farthest away. The total distance is just the 
     distance from a node to all other nodes seperately."""
