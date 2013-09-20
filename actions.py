@@ -73,7 +73,10 @@ class Actor(object):
         reps['query_time'] = "%1.1f" %(stop - start)
         return reps
 
-def result_chain(canonical, c2t):
+
+@persist_to_file
+@timer
+def result_chain(canonical):
     """Chain the decanonization, wiki lookup,
        wiki article lookup, and freebase all together"""
     title = canonical.replace('_', ' ')
@@ -91,6 +94,7 @@ def result_chain(canonical, c2t):
             pass
     return dict(wikiname=wikiname, article=article, notable=notable,
                 types=types)
+
 img = r"http://upload.wikimedia.org/wikipedia/commons/thumb/5/51/"
 img += r"Warren_Buffett_KU_Visit.jpg/220px-Warren_Buffett_KU_Visit.jpg"
 text =  "Warren Edward Buffett (August 30, 1930) is an American "
@@ -111,6 +115,7 @@ fake_other   = dict(query='query', translated='translated query',
 
 class Expression(Actor):
     name = "Expression"
+    max = 2
 
     @timer
     def __init__(self, preloaded_actor=None, subsampling=False, 
@@ -152,8 +157,7 @@ class Expression(Actor):
         return len(query) > 3
 
     @timer
-    @persist_to_file
-    def parse(self, query, parallel=True, kwargs=None):
+    def parse(self, query):
         """Debug with parallel=False, production use
         switch to multiprocessing"""
         # Split the query and find the signs of every word
@@ -166,6 +170,11 @@ class Expression(Actor):
                   for match in re.finditer('\|', words)])
         signs = [1.0 if s=='+' else -1.0 for s in signs]
         words = words.split('|')
+        return signs, words
+
+    @timer
+    @persist_to_file
+    def canonize(self, signs, words, parallel=True):
         # Get the canonical names for the query
         canon = self.aw2i.keys()
         if parallel:
@@ -184,45 +193,51 @@ class Expression(Actor):
         for sign, canonized in zip(signs, canonizeds):
             translated += "%+1.0f %s " %(sign, canonized)
         print 'translated: ', translated
+        return translated, signs, canonizeds, wikinames
+
+    @timer
+    @persist_to_file
+    def request(self, signs, canonizeds):
         # Format the vector lib request
         args = []
-        for sign, word, canonical in zip(signs, words, canonizeds):
+        for sign, canonical in zip(signs, canonizeds):
             args.append([sign, canonical])
         send = json.dumps(dict(args=args))
         url = backend_url + urllib2.quote(send)
         response = json.load(urllib2.urlopen(url))
-        response['query'] = query
         print response['result']
+        return response
+
+    @timer
+    @persist_to_file
+    def wikifreebase(self, response,  parallel=True):
         # Decanonize the results and get freebase, article info
         if parallel:
-            rc = lambda x: result_chain(x, self.wc2t)
-            rv = parmap(rc, response['result'])
+            rv = parmap(result_chain, response['result'])
         else:
             n = 3
-            rv = [result_chain(x, self.wc2t) for x in response['result']]
+            rv = [result_chain(x) for x in response['result']]
         args = (response['result'], response['similarity'], 
                 response['root_similarity'], rv)
         args = sorted(zip(*args), key=lambda x:x[1])[::-1]
         results = []
-        print args[:2]
         for c, s, r, v in args:
-            print '%s %1.2f %s' % (s, r, v['wikiname'])
+            print '%1.3f %1.3f %s' % (s, r, v['wikiname'])
             if r > 0.75:
                 continue
             if v['wikiname'] is None:
                 continue
             results.append(dict(canonical=c, similarity=s, info=v))
-        other = dict(query=query, translated=translated, wikinames=wikinames,
-                     query_text=query)
-        return results, other
+        return results
     
     @timer
-    def evaluate(self, dresults, other, max=2):
+    def evaluate(self, query, translated, wikinames, results, max=2):
+        other = dict(query=query, translated=translated, 
+                          wikinames=wikinames, query_text=query)
         previous_titles = []
-        results = []
-        max = results.get('max', max)
-        for dresult in dresults:
-            if len(results) > max: break
+        rets = []
+        for dresult in results:
+            if len(rets) > max: break
             wikiname = dresult['info']['wikiname']
             article  = dresult['info']['article']
             if wikiname in other['wikinames']:
@@ -240,11 +255,27 @@ class Expression(Actor):
                 continue
             result.update(dresult)
             result['similarity'] = "%1.2f" % result['similarity']
-            results.append(result)
+            rets.append(result)
             previous_titles.append(wikiname)
-        if len(results) == 0:
+        if len(rets) == 0:
+            print 'no results kept'
             return {}
         else:
-            reps = dict(results=results)
+            reps = dict(results=rets)
             reps.update(other)
             return reps
+
+    def run(self, query):
+        start = time.time()
+        signs, words = self.parse(query)
+        translated, signs, canonizeds, wikinames = self.canonize(signs, words)
+        response = self.request(signs, canonizeds)
+        results = self.wikifreebase(response)
+        reps = self.evaluate(query, translated, wikinames, results)
+        reps['actor'] = self.name
+        stop = time.time()
+        reps['query_time'] = "%1.1f" %(stop - start)
+        return reps
+
+class Fraud(Expression):
+    name = "Fraud"

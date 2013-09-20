@@ -94,6 +94,7 @@ body .color-table {
     width:16.6666%; 
     height:90px; 
     color:white;    
+    padding:10px;
 }
 
 body .content {
