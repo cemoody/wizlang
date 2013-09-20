@@ -75,8 +75,8 @@ class Actor(object):
         return reps
 
 
-@persist_to_file
 @timer
+@persist_to_file
 def result_chain(canonical):
     """Chain the decanonization, wiki lookup,
        wiki article lookup, and freebase all together"""
@@ -187,8 +187,9 @@ class Expression(Actor):
             rets  = [wiki_canonize(words[0], canon, use_wiki=True)]
             rets += [wiki_canonize(w, canon, use_wiki=False) for w in words[1:]]
         canonizeds, wikinames = zip(*rets)
+        print rets
         if wikinames[0] is None:
-            return [], {}
+            return '', [], [], []
         wikinames = [w if len(w)>0 else c for c, w in zip(canonizeds, wikinames)]
         # Make the translated query string
         translated = ""
@@ -199,7 +200,7 @@ class Expression(Actor):
 
     @timer
     @persist_to_file
-    def request(self, signs, canonizeds):
+    def request(self, signs, canonizeds, parallel=True):
         # Format the vector lib request
         args = []
         for sign, canonical in zip(signs, canonizeds):
@@ -208,16 +209,10 @@ class Expression(Actor):
         url = backend_url_nearest + urllib2.quote(send)
         response = json.load(urllib2.urlopen(url))
         print response['result']
-        return response
-
-    @timer
-    @persist_to_file
-    def wikifreebase(self, response,  parallel=True):
         # Decanonize the results and get freebase, article info
         if parallel:
             rv = parmap(result_chain, response['result'])
         else:
-            n = 3
             rv = [result_chain(x) for x in response['result']]
         args = (response['result'], response['similarity'], 
                 response['root_similarity'], rv)
@@ -229,7 +224,11 @@ class Expression(Actor):
                 continue
             if v['wikiname'] is None:
                 continue
-            results.append(dict(canonical=c, similarity=s, info=v))
+            ret = dict(canonical=c, similarity=s)
+            ret.update(v)
+            ret.update(ret.pop('article'))
+            results.append(ret)
+            #print json.dumps(ret, indent=4)
         return results
     
     @timer
@@ -240,18 +239,15 @@ class Expression(Actor):
         rets = []
         for dresult in results:
             if len(rets) > max: break
-            wikiname = dresult['info']['wikiname']
-            article  = dresult['info']['article']
-            if wikiname in other['wikinames']:
+            wikiname = dresult['wikiname']
+            if dresult['wikiname'] in other['wikinames']:
                 print 'Skipping direct in query', wikiname
                 continue
             if wikiname in previous_titles: 
                 print 'Skipping previous', wikiname
                 continue
             result = {}
-            result.update(article)
-            result.update(dresult['info'])
-            result['themes'] = dresult['info']['types'][:3]
+            result['themes'] = dresult['types'][:3]
             if len(result['themes']) == 0:
                 print 'Skipping zero themes'
                 continue
@@ -271,8 +267,7 @@ class Expression(Actor):
         start = time.time()
         signs, words = self.parse(query)
         translated, signs, canonizeds, wikinames = self.canonize(signs, words)
-        response = self.request(signs, canonizeds)
-        results = self.wikifreebase(response)
+        results = self.request(signs, canonizeds)
         reps = self.evaluate(query, translated, wikinames, results)
         reps['actor'] = self.name
         stop = time.time()
@@ -294,7 +289,7 @@ class Fraud(Expression):
         send = json.dumps(dict(args=args))
         url = backend_url_farthest + urllib2.quote(send)
         response = json.load(urllib2.urlopen(url))
-        rets = []
+        results = []
         for word, n1 in zip(response['words'], response['N1']):
             if n1 == response['N1'].min():
                 mark = 'x'
@@ -303,6 +298,15 @@ class Fraud(Expression):
                 mark = 'o'
                 common = reponse['left']
             resp = dict(n1=n1, word=word, mark=mark, common=common)
-            rets.append(resp)
-        return rets, inner
+            results.append(resp)
+        if parallel:
+            rv = parmap(result_chain, response['words'])
+        else:
+            rv = [result_chain(x) for x in response['words']]
+        for word, rci in zip(response['words'], rv):
+            res, = [r for r in results if results['word'] == word]
+            res.update(rci)
+        return results
+
+
 

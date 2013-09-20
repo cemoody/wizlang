@@ -52,13 +52,13 @@ def persist_to_file(original_func):
             file_name += str(arg)[:n]
         keys = sorted(kwargs.keys())
         for k in keys:
-
             v = kwargs[k]
             v = str(v)[:n]
-            file_name += "%s_%s-" %(k, v)
-        file_name = file_name.replace("'","")
-        file_name = file_name.replace('"',"")
-        file_name = file_name.replace('/',"")
+            temp = "%s_%s-" %(k, v)
+            temp = temp.replace("'","")
+            temp = temp.replace('"',"")
+            temp = temp.replace('/',"")
+            file_name += temp
         try:
             ret = json.load(open(file_name, 'r'))
         except (IOError, ValueError):

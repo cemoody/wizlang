@@ -9,14 +9,17 @@
             style="width: 350px; height:43px; font-size:20px">
        <button type="submit" class="pure-button primary-button"
        style="font-size:20px; height:43px">Search</button>
+       <a class="pure-button secondary-button" onclick="location.href='http://slid.es/christophermoody/thisplusthat'"
+       style="font-size:20px; height:37px; padding-top: 5px; padding-bottom: 0px; padding-left: 10px; padding-right: 10px;">How it Works</a>
+        
 </fieldset>
 </form>
 {% endblock %}
 {% block mid %}
 <div class="content">
     <h3 class="subtitle">Simple, powerful, natural language searching.</h3>
-<p> ThisPlusThat captures the relationships between words. This goes far beyond sentiment analysis, or parts-of-speech tagging -- words, products, and locations are learned from context. Go ahead and try any person, place, or thing +/- some trait. You can average two people. Curious what Bill Gates is like without Microsoft? <a href="http://thisplusthat.me/search/Bill%20Gates%20-%20Microsoft">Try it!</a> Think analogies: <font style="font-family:monospace">King - Man + Woman = Queen</font> is a great example.  In the background every idea is translated into a one vector, these vectors are added or subtracted, and then the words nearest to that vector are returned.  </p>
+<p> ThisPlusThat captures the relationships between words. This goes far beyond sentiment analysis, or parts-of-speech tagging -- words, products, and locations are learned from context. Go ahead and try any person, place, or thing<font style="font-family:monospace"> +/- </font> some trait. You can average two people. Curious what Bill Gates is like without Microsoft? <a href="http://thisplusthat.me/search/Bill%20Gates%20-%20Microsoft">Try it!</a> Think analogies: <font style="font-family:monospace">King - Man + Woman = Queen</font> is a great example.  In the background every idea is translated into a one vector, these vectors are added or subtracted, and then the words nearest to that vector are returned.  </p>
 
-<p> A vector is constructed for every word.  A neural network translates every word into a thousand-dimensional vector and tries to guess the vectors that make up the surrounding sentence. Wrong guesses are then back-propagated through the neural network, updating the state of the networ. Vectors are constructed using a recurrent neural network which -- given a word and a context -- tries to estimate what the rest of the sentence looks like. In this case, I've trained on the Wikipedia corpus, which allows ThisPlusThat to predict the relationships between encyclopedia articles. But this isn't limited to encyclopedic texts; you can of course apply this to employee resumes, item listings, or travel guides. Because words are quantified in a meaningful way, it's also fairly easy to give a list of products and pick the odd one out -- great for fraud dectection, for example! </p>
+<p> A vector is constructed for every word.  A <a href="http://code.google.com/p/word2vec/">neural network</a> translates every word into a thousand-dimensional vector and tries to guess the vectors that make up the surrounding sentence. Wrong guesses are then back-propagated through the neural network, updating the state of the networ. Vectors are constructed using a recurrent neural network which -- given a word and a context -- tries to estimate what the rest of the sentence looks like. In this case, I've trained on the Wikipedia corpus, which allows ThisPlusThat to predict the relationships between encyclopedia articles. But this isn't limited to encyclopedic texts; you can of course apply this to employee resumes, item listings, or travel guides. Because words are quantified in a meaningful way, it's also fairly easy to give a list of products and pick the odd one out -- great for fraud dectection, for example! </p>
 </div>
 {% endblock %}

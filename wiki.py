@@ -49,12 +49,16 @@ def to_title(title):
 @persist_to_file
 def get_wiki_name(name, get_response=False):
     """Use the WP API to get the most likely diambiguation"""
-    for _ in range(3):
+    for i in range(9):
         url = r"http://en.wikipedia.org/w/api.php?action=opensearch&search=" +\
               urllib2.quote(name) + \
-              r"&limit=1&format=json"
+              r"&limit=%i&format=json" % i
         response = urllib2.urlopen(url).read()
         odata = json.loads(response)
+        try:
+            ptitle = odata[1][0]
+        except:
+            continue
         if len(odata) > 1:
             break
         else:
@@ -71,7 +75,6 @@ def get_wiki_name(name, get_response=False):
     else:
         return ptitle
 
-@persist_to_file
 def wiki_canonize(phrase, canon, n=1, use_wiki=True):
     phrase = phrase.replace('\n','').replace('\t','').replace('\r','')
     phrase = phrase.strip()
