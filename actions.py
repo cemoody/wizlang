@@ -73,29 +73,6 @@ class Actor(object):
         reps['query_time'] = "%1.1f" %(stop - start)
         return reps
 
-class Passthrough(Actor):
-    name = "Passthrough"
-
-    def validate(self, query):
-        return True
-
-    def parse(self, query, kwargs=None):
-        if kwargs is None:
-            kwargs = {'query':query}
-        args = query.replace('+','|').replace('-','|')
-        args = args.split('|')
-        return [args[0]], kwargs
-
-    def evaluate(self, arg, **kwargs):
-        #result = get_omdb(arg)
-        result = process_wiki(arg)
-        if result is None:
-            return {}
-        query_text = kwargs['query']
-        print result.keys()
-        reps = dict(query_text=query_text, results=[result])
-        return reps
-
 def result_chain(canonical, c2t):
     """Chain the decanonization, wiki lookup,
        wiki article lookup, and freebase all together"""
@@ -182,7 +159,7 @@ class Expression(Actor):
         # Split the query and find the signs of every word
         if query == 'None':
             return fake_results, fake_other
-        words = query.replace('+', '|').replace('-', '|')
+        words = query.replace('+', '|').replace('-', '|').replace(',', '|')
         sign  = eval_sign(query)
         signs = ['+',]
         signs.extend([sign[match.start() + 1] \
@@ -230,7 +207,7 @@ class Expression(Actor):
         print args[:2]
         for c, s, r, v in args:
             print '%s %1.2f %s' % (s, r, v['wikiname'])
-            if r > 0.7:
+            if r > 0.75:
                 continue
             if v['wikiname'] is None:
                 continue
@@ -240,11 +217,12 @@ class Expression(Actor):
         return results, other
     
     @timer
-    def evaluate(self, dresults, other):
+    def evaluate(self, dresults, other, max=2):
         previous_titles = []
         results = []
+        max = results.get('max', max)
         for dresult in dresults:
-            if len(results) > 2: break
+            if len(results) > max: break
             wikiname = dresult['info']['wikiname']
             article  = dresult['info']['article']
             if wikiname in other['wikinames']:
@@ -256,7 +234,7 @@ class Expression(Actor):
             result = {}
             result.update(article)
             result.update(dresult['info'])
-            result['themes'] = dresult['info']['types']
+            result['themes'] = dresult['info']['types'][:3]
             if len(result['themes']) == 0:
                 print 'Skipping zero themes'
                 continue
@@ -270,40 +248,3 @@ class Expression(Actor):
             reps = dict(results=results)
             reps.update(other)
             return reps
-
-class Nearest(Expression):
-    name = "Nearest"
-    def validate(self, query):
-        return '+' not in query and '-' not in query
-
-    def parse(self, query, kwargs=None):
-        words = query.replace('+', '|').replace('-', '|')
-        word = words.split('|')[0]
-        ptitle = get_wiki_name(word)
-        ptitle = ptitle.replace(' ','_')
-        if len(ptitle) > 0:
-            title = [veclib.canonize(ptitle, self.ww2i, match=False)]
-            print "Wiki lookup %s -> %s -> %s" %(word, ptitle, title)
-        else:
-            title = [veclib.canonize(words[0], self.aw2i)]
-        canon = veclib.canonize(title[0], self.wc2t)
-        return [canon], {'query':query, 'words':words}
-    
-    def evaluate(self, *args, **kwargs):
-        pool = multiprocessing.Pool()
-        canon, = args
-        vector = veclib.lookup_vector(canon, self.wvl, self.ww2i)
-        canons = veclib.nearest_word(vector, self.wvl, self.wi2w, n=50)
-        print "Nearest: ", canons
-        full_words = [self.wc2t[c] for c in canons]
-        presults = pool.map(process_wiki, full_words)
-        results = []
-        for full_word, result in zip(full_words, presults):
-            if result is not None:
-                results.append(result)
-                if len(results) > 4: break
-        if len(results)==0:
-            return {}
-        query_text = kwargs['query']
-        reps = dict(query_text=query_text, results=results)
-        return reps

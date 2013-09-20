@@ -69,6 +69,56 @@ def in_between(vectora, vectorb, vector_lib, index2word, n=10):
     words = [index2word[idx[i]] for i in range(n)]
     return dist / dispersion
 
+def build_n2(words, avl, aw2i):
+    nargs = len(words)
+    N2 = np.zeros((nargs, nargs))
+    vectors = {word:avl[aw2i[word]] for word in words}
+    for i, worda in enumerate(words):
+        vectora = vectors[worda]
+        for j, wordb in enumerate(words):
+            if j == i: continue
+            vectorb = vectors[wordb]
+            dist = (vectora * vectorb).sum(dtype=np.float128)
+            N2[i, j] = dist
+            print worda, wordb, dist
+    N1 = np.sum(N2, axis=0)
+    return N2, N1, vectors
+
+def common_words(words, vectors, avl, aw2i, ai2w, N2, N1, blacklist=None):
+    n = 50
+    f = words[np.argmin(N1)]
+    total = [v for w, v in vectors.iteritems() if not w==f]
+    total = np.sum(total, axis=0)
+    total /= np.sum(np.sqrt(total**2.0))
+    wordsa, vectorsa, sima = nearest_word(total, avl, ai2w, n=n)
+    wordsb, vectorsb, simb = nearest_word(vectors[f], avl, ai2w, n=n)
+    wordsa = [w for w, s in zip(wordsa, sima) if s < 0.75]
+    wordsb = [w for w, s in zip(wordsb, simb) if s < 0.75]
+    if blacklist:
+        wordsa = [w for w in wordsa if w not in blacklist]
+        wordsb = [w for w in wordsb if w not in blacklist]
+    inner = [w for w in wordsa if w in wordsb]
+    left  = [w for w in wordsa if w not in wordsb]
+    right = [w for w in wordsb if w not in wordsa]
+    return inner, left, right
+
+def max_similarity(words, checkwords, avl, aw2i):
+    """
+    For every word, calculate the most similar word
+    in checkwords. Keep that similarity measure.
+    """
+    resp = []
+    for word in words:
+        sim = -1e99
+        if type(word) is str:
+            word = avl[aw2i[word]]
+        for check in checkwords:
+            if type(check) is str:
+                check = avl[aw2i[check]]
+            sim = max(np.sum(word * check), sim)
+        resp.append(sim)
+    return resp
+
 def nearest_word(vector, vector_lib, index2word, n=5, skip=0, 
                  chunk_size=100000, use_ne=True):
     words = []

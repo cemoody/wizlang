@@ -65,6 +65,17 @@ def persist_to_file(original_func):
         return ret
     return decorator
 
+def json_exception(original_func):
+    def wrapper(*args, **kwargs):
+        try:
+            rv = original_func(*args, **kwargs)
+        except:
+            print "ERROR"
+            dv = dict(error=str(sys.exc_info()))
+            rv = json.dumps(dv)
+        return rv
+    return wrapper
+
 class dummy_async():
     """This is faking an async result for debugging purposes"""
     def __init__(self, val):

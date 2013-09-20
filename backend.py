@@ -25,39 +25,26 @@ else:
     cPickle.dump([aw2i, ai2w], open(fnw + '.pickle','w'))
 
 @app.route('/farthest/<raw_query>')
+#@json_exception
 def similarity(raw_query='{"args":["iphone", "ipad", "ipod", "walkman"]}'):
     """Given a list of arguments, calculate all the N^2 distance matrix
     and return the item farthest away. The total distance is just the 
     distance from a node to all other nodes seperately."""
     print 'QUERY'
     print raw_query
-    try:
-        query = json.loads(raw_query.strip("'"))
-        nargs = len(query['args'])
-        N2 = np.zeros((nargs, nargs))
-        resp = {}
-        words = query['args']
-        vectors = {word:avl[aw2i[word]] for word in words}
-        for i, worda in enumerate(words):
-            vectora = vectors[worda]
-            for j, wordb in enumerate(words):
-                if j == i: continue
-                vectorb = vectors[wordb]
-                dist = (vectora * vectorb).sum(dtype=np.float128)
-                N2[i, j] = dist
-                print worda, wordb, dist
-        print N2
-        N1 = np.sum(N2, axis=0)
-        f = words[np.argmin(N1)]
-        resp['N1'] = [float(x) for x in N1]
-        resp['words'] = words
-        resp['similarity'] = (f, float(N1.min()))
-        text = json.dumps(resp)
-    except:
-        print "ERROR"
-        text = dict(error=str(sys.exc_info()))
-        text = json.dumps(text)
-        print text
+    query = json.loads(raw_query.strip("'"))
+    nargs = len(query['args'])
+    words = query['args']
+    N2, N1, vectors = veclib.build_n2(words, avl, aw2i)
+    inner, left, right = veclib.common_words(words, vectors, avl, aw2i, ai2w,
+                                             N2, N1, blacklist=words)
+    resp = {}
+    resp['N1'] = [float(x) for x in N1]
+    resp['words'] = words
+    resp['inner'] = inner
+    resp['left'] = left
+    resp['right'] = right
+    text = json.dumps(resp)
     return text
 
 @app.route('/nearest/<raw_query>')
