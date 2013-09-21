@@ -6,7 +6,8 @@ import sys
  
 app = Flask(__name__,  static_folder='static', 
             static_url_path='', template_folder='templates')
-criteria = [Expression()]
+expr = Expression()
+criteria = [expr, Fraud(expr)]
 @app.route('/results.html', methods=['GET', 'POST'])
 @app.route('/search/<query>', methods=['GET', 'POST'])
 def results(query="Jurassic Park"):
@@ -16,6 +17,7 @@ def results(query="Jurassic Park"):
         url = "/search/%s" % quote
         return redirect(url)
     else:
+        reps = {}
         for actor in criteria:
             if actor.validate(query):
                 print "Using Actor %s" % actor.name
@@ -44,7 +46,7 @@ def index(query="Jurassic Park"):
 if __name__ == '__main__':
     #app.config['PROFILE'] = True
     #app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions = [30])
-    twisted = True
+    twisted = False
     if twisted:
         from twisted.internet import reactor
         from twisted.web.server import Site
@@ -57,7 +59,7 @@ if __name__ == '__main__':
         print "Running"
 
     else:
-        port = 8000
+        port = 5000
         try:
             port = int(sys.argv[-1])
             print "Serving port %i" % port

@@ -238,13 +238,13 @@ class Expression(Actor):
         return results
     
     @timer
-    def evaluate(self, query, translated, wikinames, results, max=2):
+    def evaluate(self, query, translated, wikinames, results):
         other = dict(query=query, translated=translated, 
                      wikinames=wikinames, query_text=query)
         previous_titles = []
         rets = []
         for dresult in results:
-            if len(rets) > max: break
+            if len(rets) > self.max: break
             wikiname = dresult['wikiname']
             if dresult['wikiname'] in other['wikinames']:
                 print 'Skipping direct in query', wikiname
@@ -257,7 +257,12 @@ class Expression(Actor):
             if len(result['themes']) == 0:
                 print 'Detected zero themes'
             result.update(dresult)
-            result['similarity'] = "%1.2f" % result['similarity']
+            if 'similarity' in result:
+                result['similarity'] = "%1.2f" % result['similarity']
+            if 'distance' in result:
+                result['distance'] = "%1.2f" % result['distance']
+            if 'title' not in result or result['title'] is None:
+                result['title'] = resultresult['canonical']
             rets.append(result)
             previous_titles.append(wikiname)
         if len(rets) == 0:
@@ -284,13 +289,14 @@ class Expression(Actor):
             return reps
 
 class Fraud(Expression):
+    max = 2
     name = "Fraud"
     def validate(self, query):
         return ',' in query
 
     @timer
     @persist_to_file
-    def request(self, signs, canonizeds):
+    def request(self, signs, canonizeds, parallel=True):
         # Format the vector lib request
         n = 6
         args = []
@@ -299,23 +305,33 @@ class Fraud(Expression):
         send = json.dumps(dict(args=args))
         url = backend_url_farthest + urllib2.quote(send)
         response = json.load(urllib2.urlopen(url))
-        print response['words']
+        args = response['args']
+        self.max = len(args)
         # Decanonize the results and get freebase, article info
         if parallel:
-            rv = parmap(result_chain, response['words'][:n])
+            rv = parmap(result_chain, args[:n])
         else:
-            rv = [result_chain(x) for x in response['words'][:n]]
+            rv = [result_chain(x) for x in args[:n]]
         results = []
         rw = response['right_word']
-        for n1, w, i, l, r, v in zip(response['N1'], response['words'],
-                                  response['inner'], response['left'],
-                                  response['right'], rv):
+        r  = response['right']
+        l  = response['left']
+        for n1, w, v in zip(response['N1'], response['args'], rv):
             ret = {}
-            ret['mark'] = 'x' if w == rw else 'o'
-            ret['canonized'] = c
+            m = 'x' if w == rw else 'o'
+            print "%s %s %1.1f" % (m, w, n1)
+            ret['mark'] = m
+            ret['canonical'] = w
+            ret['themes'] = r if m == 'x' else l
+            ret['themes'] = ret['themes'][:4]
+            ret['distance'] = n1
+            ret['n1'] = n1
             ret.update(v)
-            ret.update(ret.pop('info'))
-            print ret
+            article = ret.pop('article')
+            if article is not None:
+                ret.update(article)
+            print json.dumps(ret)
             results.append(ret)
+        results = sorted(results, key=lambda x: x['n1'])
         return results
 

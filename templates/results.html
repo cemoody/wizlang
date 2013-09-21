@@ -9,6 +9,8 @@
             style="width: 350px; height:43px; font-size:20px">
        <button type="submit" class="pure-button primary-button"
        style="font-size:20px; height:43px">Search</button>
+       <a class="pure-button secondary-button" onclick="location.href='http://slid.es/christophermoody/thisplusthat'"
+       style="font-size:20px; height:37px; padding-top: 5px; padding-bottom: 0px; padding-left: 10px; padding-right: 10px;">How it Works</a>
 </fieldset>
 </form>
 {% endblock %}
@@ -23,12 +25,6 @@
         <div class="pure-u-2-5" style="text-align:center; padding-top:2em">
             <a ><img href="{{ result.url }}"
               src="{{ result.img }}" alt="{{ result.title }}" /></a>
-            {% if result.mark == 'x' %}
-            <p style="font-size: 64px; color: red;">&#x2717;</p>
-            {% endif %}
-            {% if result.mark == 'c' %}
-            <p style="font-size: 64px; color: green;">&#x2713;</p>
-            {% endif %}
       </div>
       <div class="pure-u-3-5 ">
           <div class="result-content">
@@ -38,14 +34,26 @@
                  {% endfor %}
              </h4>
              <a href="{{ result.url }}">
-               <h3 class="result-title">{{ result.title }}</h3></a>
+               <h3 class="result-title">{{ result.title }} </h3>
               {% if result.themes %}
               {% endif %}
             </a>
             <p style="font-size:14px">{{ result.description }}</p>
             <div id="textbox" style="font-weight:100">
               <p class="alignleft">  {{result.notable }}</p>
-              <p class="alignright">  Score: {{ result.similarity }}</p>
+              {% if result.similarity %}
+                  <p class="alignright">  Score: {{ result.similarity }}</p>
+              {% else %}
+                  <p class="alignright">  Distance: {{ result.distance }}
+                    {% if result.mark == 'o' %}
+                        <font style="margin:10px; font-size: 64px; color: #5eb95e;">&#x2713;</font>
+                    {% endif %}
+                    {% if result.mark == 'x' %}
+                        <font style="margin:10px; font-size: 64px; color: #dd514c;">&#x2717;</font>
+                    {% endif %}
+                </h3></a>
+                  </p>
+              {% endif %}
             </div>
             <div style="clear: both;"></div>
           </div>
