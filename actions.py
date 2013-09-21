@@ -35,6 +35,16 @@ def eval_sign(query):
         out += sign
     return out
 
+def prettify(phrase):
+    phrase = phrase.replace('_', ' ')
+    text = ''
+    for word in phrase.split(' '):
+        word = word[0].upper() + word[1:]
+        text += word + ' '
+    return text
+
+def countdig(word):
+    return sum([w.isdigit() for w in word])
 
 class Actor(object):
     """ This encapsulates all of the actions associated with a results 
@@ -117,6 +127,7 @@ fake_other   = dict(query='query', translated='translated query',
 class Expression(Actor):
     name = "Expression"
     max = 2
+    skip_similar = True
 
     @timer
     def __init__(self, preloaded_actor=None, subsampling=False, 
@@ -235,23 +246,26 @@ class Expression(Actor):
                 results.append(ret)
             n += 8
             iter += 1
-        return results
+        return results, {}
     
     @timer
-    def evaluate(self, query, translated, wikinames, results):
-        other = dict(query=query, translated=translated, 
-                     wikinames=wikinames, query_text=query)
+    def evaluate(self, query, translated, wikinames, results, other):
+        temp = dict(query=query, translated=translated, 
+                     wikinames=wikinames, query_text=query,
+                     actor=self.name)
+        other.update(temp)
         previous_titles = []
         rets = []
         for dresult in results:
             if len(rets) > self.max: break
             wikiname = dresult['wikiname']
-            if dresult['wikiname'] in other['wikinames']:
-                print 'Skipping direct in query', wikiname
-                continue
-            if wikiname in previous_titles: 
-                print 'Skipping previous', wikiname
-                continue
+            if self.skip_similar:
+                if dresult['wikiname'] in other['wikinames']:
+                    print 'Skipping direct in query', wikiname
+                    continue
+                if wikiname in previous_titles: 
+                    print 'Skipping previous', wikiname
+                    continue
             result = {}
             result['themes'] = dresult['types'][:3]
             if len(result['themes']) == 0:
@@ -259,8 +273,8 @@ class Expression(Actor):
             result.update(dresult)
             if 'similarity' in result:
                 result['similarity'] = "%1.2f" % result['similarity']
-            if 'distance' in result:
-                result['distance'] = "%1.2f" % result['distance']
+            if 'n1' in result:
+                result['n1'] = "%1.2f" % result['n1']
             if 'title' not in result or result['title'] is None:
                 result['title'] = resultresult['canonical']
             rets.append(result)
@@ -278,8 +292,8 @@ class Expression(Actor):
         signs, words = self.parse(query)
         translated, signs, canonizeds, wikinames = self.canonize(signs, words)
         if len(wikinames) > 0:
-            results = self.request(signs, canonizeds)
-            reps = self.evaluate(query, translated, wikinames, results)
+            results, other = self.request(signs, canonizeds)
+            reps = self.evaluate(query, translated, wikinames, results, other)
             reps['actor'] = self.name
             stop = time.time()
             reps['query_time'] = "%1.1f" %(stop - start)
@@ -291,6 +305,7 @@ class Expression(Actor):
 class Fraud(Expression):
     max = 2
     name = "Fraud"
+    skip_similar = False
     def validate(self, query):
         return ',' in query
 
@@ -324,7 +339,6 @@ class Fraud(Expression):
             ret['canonical'] = w
             ret['themes'] = r if m == 'x' else l
             ret['themes'] = ret['themes'][:4]
-            ret['distance'] = n1
             ret['n1'] = n1
             ret.update(v)
             article = ret.pop('article')
@@ -333,5 +347,8 @@ class Fraud(Expression):
             print json.dumps(ret)
             results.append(ret)
         results = sorted(results, key=lambda x: x['n1'])
-        return results
+        left  = [prettify(lw) for lw in l if countdig(lw) < 2]
+        right = [prettify(rw) for rw in r if countdig(rw) < 2]
+        other = dict(left=left[:4], right=right[:4])
+        return results, other
 

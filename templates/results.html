@@ -19,8 +19,16 @@
   {% if translated %}
    <p style="text-align:left">Your query was disambiguated into <i>{{ translated }}</i></p>
   {% endif %}
-  <p style="text-align:left">Search results</p>
   {% for result in results %}
+    {% if result.mark == 'x' %}
+        <div class="content" style="padding:10px">Common terms: 
+            <font style="font-family:omnes-pro;color: #dd514c;font-size: 130%;">
+                {% for theme in right %}
+                {{ theme }},
+                {% endfor %}
+            </font>
+        </div>
+    {% endif %}
     <div class="pure-g-r result-container" >
         <div class="pure-u-2-5" style="text-align:center; padding-top:2em">
             <a ><img href="{{ result.url }}"
@@ -28,23 +36,22 @@
       </div>
       <div class="pure-u-3-5 ">
           <div class="result-content">
-             <h4 class="result-super-title">
-                 {% for theme in result.themes %} 
-                   {{ theme }},
-                 {% endfor %}
-             </h4>
+             {% if not actor == 'Fraud' %}
+                 <h4 class="result-super-title">
+                     {% for theme in result.themes %} 
+                       {{ theme }},
+                     {% endfor %}
+                 </h4>
+             {% endif %}
              <a href="{{ result.url }}">
-               <h3 class="result-title">{{ result.title }} </h3>
-              {% if result.themes %}
-              {% endif %}
-            </a>
+               <h3 class="result-title">{{ result.title }} </h3></a>
             <p style="font-size:14px">{{ result.description }}</p>
             <div id="textbox" style="font-weight:100">
               <p class="alignleft">  {{result.notable }}</p>
               {% if result.similarity %}
                   <p class="alignright">  Score: {{ result.similarity }}</p>
               {% else %}
-                  <p class="alignright">  Distance: {{ result.distance }}
+                  <p class="alignright">  Similarity: {{ result.n1}}
                     {% if result.mark == 'o' %}
                         <font style="margin:10px; font-size: 64px; color: #5eb95e;">&#x2713;</font>
                     {% endif %}
@@ -60,6 +67,15 @@
         </p>
       </div>
     </div>
+    {% if result.mark == 'x' %}
+        <div class="content" style="padding:10px">Common terms: 
+            <font style="font-family:omnes-pro;color: #5eb95e;font-size: 130%;">
+                {% for theme in left %}
+                {{ theme }},
+                {% endfor %}
+            </font>
+        </div>
+    {% endif %}
   {% endfor %}
 {% else %}
   <div class="content">
