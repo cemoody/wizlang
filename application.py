@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from flask import *
 from actions import *
 from werkzeug.contrib.profiler import ProfilerMiddleware
@@ -43,10 +44,23 @@ def index(query="Jurassic Park"):
 if __name__ == '__main__':
     #app.config['PROFILE'] = True
     #app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions = [30])
-    port = 8080
-    try:
-        port = int(sys.argv[-1])
-        print "Serving port %i" % port
-    except:
-        pass
-    app.run(host='0.0.0.0', port=port, debug=True, use_reloader=False)
+    twisted = True
+    if twisted:
+        from twisted.internet import reactor
+        from twisted.web.server import Site
+        from twisted.web.wsgi import WSGIResource
+
+        resource = WSGIResource(reactor, reactor.getThreadPool(), app)
+        site = Site(resource)
+        reactor.listenTCP(8080, site, interface="0.0.0.0")
+        reactor.run()
+        print "Running"
+
+    else:
+        port = 8000
+        try:
+            port = int(sys.argv[-1])
+            print "Serving port %i" % port
+        except:
+            pass
+        app.run(host='0.0.0.0', port=port, debug=True, use_reloader=False)

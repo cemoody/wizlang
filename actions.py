@@ -203,33 +203,38 @@ class Expression(Actor):
     def request(self, signs, canonizeds, parallel=True):
         # Format the vector lib request
         n = 8
-        args = []
-        for sign, canonical in zip(signs, canonizeds):
-            args.append([sign, canonical])
-        send = json.dumps(dict(args=args))
-        url = backend_url_nearest + urllib2.quote(send)
-        response = json.load(urllib2.urlopen(url))
-        print response['result']
-        # Decanonize the results and get freebase, article info
-        if parallel:
-            rv = parmap(result_chain, response['result'][:n])
-        else:
-            rv = [result_chain(x) for x in response['result'][:n]]
-        args = (response['result'], response['similarity'], 
-                response['root_similarity'], rv)
-        args = sorted(zip(*args), key=lambda x:x[1])[::-1]
         results = []
-        for c, s, r, v in args:
-            print '%1.3f %1.3f %s' % (s, r, v['wikiname'])
-            if r > 0.75:
-                continue
-            if v['wikiname'] is None:
-                continue
-            ret = dict(canonical=c, similarity=s)
-            ret.update(v)
-            ret.update(ret.pop('article'))
-            results.append(ret)
-            #print json.dumps(ret, indent=4)
+        iter = 0
+        while len(results) < 2 and n < 21:
+            args = []
+            for sign, canonical in zip(signs, canonizeds):
+                args.append([sign, canonical])
+            send = json.dumps(dict(args=args))
+            url = backend_url_nearest + urllib2.quote(send)
+            response = json.load(urllib2.urlopen(url))
+            print response['result']
+            # Decanonize the results and get freebase, article info
+            if parallel:
+                rv = parmap(result_chain, response['result'][:n])
+            else:
+                rv = [result_chain(x) for x in response['result'][:n]]
+            args = (response['result'], response['similarity'], 
+                    response['root_similarity'], rv)
+            args = sorted(zip(*args), key=lambda x:x[1])[::-1]
+            results = []
+            for c, s, r, v in args:
+                print '%1.3f %1.3f %s' % (s, r, v['wikiname'])
+                if r > 0.75 and iter==0:
+                    continue
+                if v['wikiname'] is None:
+                    print 'No wikiname'
+                    continue
+                ret = dict(canonical=c, similarity=s)
+                ret.update(v)
+                ret.update(ret.pop('article'))
+                results.append(ret)
+            n += 8
+            iter += 1
         return results
     
     @timer
