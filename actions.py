@@ -37,9 +37,16 @@ def eval_sign(query):
 
 def prettify(phrase):
     phrase = phrase.replace('_', ' ')
+    phrase = phrase.replace('  ',' ')
+    phrase = phrase.replace('  ',' ')
+    phrase = phrase.replace('  ',' ')
+    phrase = phrase.replace('  ',' ')
     text = ''
     for word in phrase.split(' '):
-        word = word[0].upper() + word[1:]
+        try:
+            word = word[0].upper() + word[1:]
+        except:
+            pass
         text += word + ' '
     return text
 
@@ -144,6 +151,7 @@ class Expression(Actor):
             # all word vecotor lib VL
             self.wc2t = cPickle.load(open(wc2t))
             self.wt2c = cPickle.load(open(wt2c))
+            print "Loading...", 
             ks, vs  = [], []
             for k, v in self.wc2t.iteritems():
                 k = veclib.canonize(k, {}, match=False)
@@ -151,6 +159,7 @@ class Expression(Actor):
                 vs.append(v)
             for k, v in zip(ks, vs):
                 self.wc2t[k] = v
+            print " done."
             # all words, word to index mappings w2i
             if os.path.exists(fnw + '.pickle'):
                 self.aw2i , self.ai2w = cPickle.load(open(fnw + '.pickle'))
@@ -185,8 +194,8 @@ class Expression(Actor):
         words = words.split('|')
         return signs, words
 
-    @timer
     @persist_to_file
+    @timer
     def canonize(self, signs, words, parallel=True):
         # Get the canonical names for the query
         canon = self.aw2i.keys()
@@ -209,8 +218,8 @@ class Expression(Actor):
         print 'translated: ', translated
         return translated, signs, canonizeds, wikinames
 
-    @timer
     @persist_to_file
+    @timer
     def request(self, signs, canonizeds, parallel=True):
         # Format the vector lib request
         n = 8
@@ -223,7 +232,6 @@ class Expression(Actor):
             send = json.dumps(dict(args=args))
             url = backend_url_nearest + urllib2.quote(send)
             response = json.load(urllib2.urlopen(url))
-            print response['result']
             # Decanonize the results and get freebase, article info
             if parallel:
                 rv = parmap(result_chain, response['result'][:n])
@@ -270,6 +278,7 @@ class Expression(Actor):
             result['themes'] = dresult['types'][:3]
             if len(result['themes']) == 0:
                 print 'Detected zero themes'
+                del result['themes']
             result.update(dresult)
             if 'similarity' in result:
                 result['similarity'] = "%1.2f" % result['similarity']
@@ -331,6 +340,9 @@ class Fraud(Expression):
         rw = response['right_word']
         r  = response['right']
         l  = response['left']
+        print response['left_freebase']
+        print response['inner']
+        print response['right_freebase']
         for n1, w, v in zip(response['N1'], response['args'], rv):
             ret = {}
             m = 'x' if w == rw else 'o'
@@ -344,7 +356,6 @@ class Fraud(Expression):
             article = ret.pop('article')
             if article is not None:
                 ret.update(article)
-            print json.dumps(ret)
             results.append(ret)
         results = sorted(results, key=lambda x: x['n1'])
         left  = [prettify(lw) for lw in l if countdig(lw) < 2]

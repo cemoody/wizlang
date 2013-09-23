@@ -6,8 +6,10 @@ import sys
  
 app = Flask(__name__,  static_folder='static', 
             static_url_path='', template_folder='templates')
+print "Loading...", 
 expr = Expression()
 criteria = [expr, Fraud(expr)]
+print " done."
 @app.route('/results.html', methods=['GET', 'POST'])
 @app.route('/search/<query>', methods=['GET', 'POST'])
 def results(query="Jurassic Park"):
@@ -46,7 +48,7 @@ def index(query="Jurassic Park"):
 if __name__ == '__main__':
     #app.config['PROFILE'] = True
     #app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions = [30])
-    twisted = False
+    twisted = True
     if twisted:
         from twisted.internet import reactor
         from twisted.web.server import Site

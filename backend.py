@@ -16,6 +16,7 @@ app = Flask(__name__,  static_folder='static',
 trained = "/home/ubuntu/data" 
 fnv = '%s/vectors.fullwiki.1000.s50.num.npy' % trained
 fnw = '%s/vectors.fullwiki.1000.s50.words' % trained
+ffb = '%s/freebase_types_and_fullwiki.1000.s50.words' % trained
 avl = veclib.get_vector_lib(fnv)
 avl = veclib.normalize(avl)
 if os.path.exists(fnw + '.pickle'):
@@ -23,6 +24,11 @@ if os.path.exists(fnw + '.pickle'):
 else:
     aw2i, ai2w = veclib.get_words(fnw)
     cPickle.dump([aw2i, ai2w], open(fnw + '.pickle','w'))
+fb_words = [word.strip() for word in open(ffb).readlines()]
+idx = [aw2i[word] for word in fb_words]
+fvl = avl[idx]
+fw2i = {w:i for i, w in enumerate(fb_words)}
+fi2w = {i:w for i, w in enumerate(fb_words)}
 
 @app.route('/farthest/<raw_query>')
 #@json_exception
@@ -38,12 +44,17 @@ def farthest(raw_query='{"args":["iphone", "ipad", "ipod", "walkman"]}'):
     N2, N1, vectors = veclib.build_n2(words, avl, aw2i)
     inner, left, right = veclib.common_words(words, vectors, avl, aw2i, ai2w,
                                              N2, N1, blacklist=words)
+    inner_fb, left_fb, right_fb = veclib.common_words(words, vectors, fvl, fw2i, fi2w,
+                                             N2, N1, blacklist=words, n=1000)
     resp = {}
     resp['N1'] = [float(x) for x in N1]
     resp['args'] = words
     resp['inner'] = inner
+    resp['inner_freebase'] = inner_fb[:50]
     resp['left'] = left
+    resp['left_freebase'] = left_fb[:50]
     resp['right'] = right
+    resp['right_freebase'] = right_fb[:50]
     resp['right_word'] = words[N1.argmin()]
     text = json.dumps(resp)
     return text

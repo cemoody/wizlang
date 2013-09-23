@@ -84,8 +84,8 @@ def build_n2(words, avl, aw2i):
     N1 = np.sum(N2, axis=0)
     return N2, N1, vectors
 
-def common_words(words, vectors, avl, aw2i, ai2w, N2, N1, blacklist=None):
-    n = 50
+def common_words(words, vectors, avl, aw2i, ai2w, N2, N1, 
+                 blacklist=None, n=50):
     f = words[np.argmin(N1)]
     total = [v for w, v in vectors.iteritems() if not w==f]
     total = np.sum(total, axis=0)

@@ -1,0 +1,9463 @@
+"&gt;&lt;img src='1.jpg'onerror=javascript:alert(document.domain)&gt;
+"&gt;&lt;img src=1 onerror=alert(2)&gt;
+"&gt;&lt;img src=x onerror=prompt(0)&gt;
+"&gt;&lt;img src=x onerror=prompt(0);&gt;
+"&gt;&lt;img src=x onerror=prompt(03);&gt;
+"&gt;&lt;img src=x onerror=prompt(1)&gt;
+"&gt;&lt;img src=x onerror=prompt(document.cookie);&gt;
+"&gt;&lt;script&gt;alert("xss")&lt;/script&gt;
+"&gt;&lt;script&gt;alert(1337)&lt;/script&gt;
+"&gt;&lt;script&gt;alert(2)&lt;/script&gt;
+"&gt;&lt;script&gt;alert(document.cookie)&lt;/script&gt;
+"/&gt;&lt;/a&gt;&lt;/&gt;&lt;img src=1.gif onerror=alert(1)&gt;
+"everyone is gay"..?
+&lt;script&gt;
+'"&gt;&lt;img src=x onerror=alert(9)&gt;
+';alert(string.fromcharcode(88,83,83))//\';alert(string.fromcharcode(88,83,83))//";alert(string.fromcharcode(88,83,83))//\";alert(string.fromcharcode(88,83,83))//--&gt;&lt;/script&gt;"&gt;'&gt;&lt;script&gt;alert(string.fromcharcode(88,83,83))&lt;/script&gt;
+'my little pony' pony
+.com
+.edu
+.gov
+.org
+/base/aareas/schema/de/district
+/common/topic
+/location/junktype
+/type/int
+/user/jg/hdata/person
+/user/jg/hdata/type
+111
+15min021909
+1632 fictional characters
+1920s movies
+1930s movies
+1940s movies
+1950s movies
+1st stage design
+2
+2000 yard rusher
+2010 fifa world cup team
+2010 world cup qualifications
+2010 world cup spot allocation
+2010world cup athlete
+2011 international year for people of african descent
+2nd stage design
+2nd stage regulator
+3pg data model
+7 things participant
+80s fad
+90s fad
+a
+a-11
+aa flight 383
+aa flight 383 flight crew
+aa flight 383 hikes to crash site
+aa flight 383 passengers
+aa flight 383 witnesses &amp; responders
+aed
+aes candidate
+akc dog breed group
+am
+am terrestrial broadcast facility
+aou edition
+aou supplement
+api
+api provider
+asce wonder of the modern world
+asp event result
+asp world tour
+asp world tour division
+asp world tour event
+asp world tour rating
+atm availability
+atm network
+auv ( autonomous underwater vehicle )
+abbeys in ruins
+abbreviated topic
+abstract
+abstract data structure
+abundance
+abused substance
+academic
+academic institution
+academic post
+academic post title
+acceptance rate
+access
+acclaimant of dishonor
+acclaimant of honor
+accommodation
+accommodation activity
+accommodation amenity
+accommodation amenity charge
+accommodation feature charge
+accommodation feature
+accommodation price range
+accommodation type
+accomodation
+accounting service
+accounting service specialties
+ace attorney character
+ace attorney game
+achievement
+acquisition
+acquittal
+acquitted person
+acre app
+acre app version
+acre doc
+acre handler
+acre patch
+acre patch resolution
+acre testcase
+act of parliament
+act of piracy
+action
+action result
+activism issue
+activist
+activist campaign
+activist campaign subject
+activist event
+activity
+activity charge
+activity profile
+actor
+acts of parliament
+acupunctural treatment method
+acupuncturist
+acupuncturist's office
+ad delivery channel
+ad exchange
+ad network
+ad network region
+ad network type
+ad network vertical
+ad pricing model
+ad size
+ad targeting method
+ad type
+adaptation
+adapted abbeys in use
+adapted tv character
+adapted work
+aday
+addictive substance
+additional cover
+address
+adherents
+adjectified entity
+adjoining relationship
+adjusted money value
+administrative area
+administrative area coding scheme
+administrative division
+administrative division extra
+administrative division/capital relationship
+admired thing
+admires
+adopted person
+adopter
+adoption
+adult entertainer
+adult entertainment facility
+adult entertainment type
+adult media
+adventure
+adventure game
+advertisement
+advertising agency
+advertising character
+advertising character portrayer
+advertising slogan
+aesthetic disparagement
+aesthetic praise
+affiliation
+affiliation duration
+affliction
+afghan district
+afghan province
+africa
+age limit
+age of sail historical lube
+agency
+agency budget
+agency enterprise
+agent
+agent-agency relationship
+agent-celebrity representation
+aggregateoffer
+aggregaterating
+aggregation
+agility class
+agoraphobic person
+agricultural location
+agriculture
+air conditioning
+air traffic communication party
+air traffic communication transcript
+air traffic controllers~greater cincinnati airport~november 8,1965
+air traffic dialogue
+air traffic radio operator
+air traffic control tower
+aircraft
+aircraft engine type
+aircraft line
+aircraft owner
+aircraft ownership count
+aircraft accident type
+aircraft designer
+aircraft manufacturer
+aircraft manufacturer extra
+aircraft model
+aircraft model extra
+aircraft model family
+aircraft type
+airline
+airline airport presence
+airline alliance
+airline extra
+airline flight
+airport
+airport shuttle
+airport extra
+airport operator
+airport runway
+airport runway surface
+airport shuttle service
+airport terminal
+airport type
+albanian bashkia
+albanian county
+albanian district
+albanian komuna
+album
+album content type
+albums
+alcohol service
+alcoholic beverage type
+alentejo wines
+algarve wines
+algebraic structure
+algerian commune
+algerian district
+algerian province
+alien abductee
+alien abduction
+all your base
+allograph
+allomorph
+allotment garden
+allotment managing authority
+alloy
+alloy component
+alpha code
+alternative fuel car
+amalgamated association of iron and steel workers
+ambassador
+american civil war military unit
+american football player
+american indian group
+american travellers and voyagers
+american football coach position
+american football conference
+american football division
+american football game
+american football game score
+american football head coach
+american football historical coach position
+american football historical roster position
+american football player
+american football player extra
+american football position
+american football roster position
+american football team
+americas
+amino acid
+ammunition
+ammunition material
+amphora type
+amplifier class
+amplifier design
+amusement park
+amusement park area
+amusement ride
+amusement ride accident
+amusement ride designer
+amusement ride manufacturer
+amusement ride theme
+amusement ride type
+analog interconnect
+anatomical structure
+anatomical structure
+ancient greece
+ancient rome
+andorran parish
+angolan council
+angolan province
+animal
+animal captivity
+animal disease
+animal disease cause
+animal disease conditions
+animal disease documentation
+animal disease host
+animal disease triangle
+animal drug
+animal synopsis
+animal breed
+animal control service
+animal gender
+animal group name
+animal owner
+animal ownership
+animal shelter
+animal slaughtering and processing facility
+animal training
+animal-specific-name relationship
+animate
+anime director
+anime ova
+anime ova performance
+anime ova soundtrack
+anime studio
+anime title
+anime series
+anime/manga character
+anime/manga creator
+anime/manga franchise
+anime/manga genre
+annotated query
+annotation
+annotation category
+annotation index
+annual container volume
+annual teus
+annual tonnage
+annual tons
+anspruch / begehren
+answer
+answer mapping
+antarctic expedition
+antarctic expeditions
+antarctic outpost
+antique car
+antique shop
+antique time period
+antonym
+antonym relation
+aperture
+aperture range
+apocalypses believed
+apocalypses imagined
+apocalypses scientifical
+apocalyptic beliefs
+apocalyptic proponent
+apocalyptic scale
+apocalyptic work of fiction
+apology
+app
+app developer
+app franchise
+app genre
+app market
+app variant
+apparel classification
+apparel store
+apparel store audience
+apparel store service
+apparent dimension
+apparent mass
+appeal
+appellate court
+appellate court judgement
+appellation
+appliance repair
+appliance retailer
+application
+application related to faceted browsing
+application band
+application band cvt
+application version
+appointed official
+appointed role
+appointee
+appointer
+appointment
+appointment nomination
+appointment nominee
+appraisal discipline
+appraiser
+approach
+appropriate technology
+apps development
+aqueduct
+arab media source
+arab media sources
+arcane knowledge
+arcane knowledge group
+archdiocese
+archery range
+archery type
+architect
+architectural designer
+architectural structure function
+architectural structure function tenure
+architectural structure operator
+architectural structure owner2
+architectural structure ownership2
+architectural contractor
+architectural structure owner
+architectural style
+architecture firm
+architecture firm partner
+archive
+area code
+area of expertise
+area served
+argentine commune
+argentine department
+argentine province
+argentinian autonomous city
+argentinian department
+argentinian province
+argument
+argument of correlation
+argument of non-correlation
+armed force
+armed force in fiction
+armed force represented in fiction
+armed force
+armed force alliance tenure
+armenian province
+armored vehicle
+armorial grant
+armory show artist
+armory show artwork
+arms control treaty
+aromate
+arrangement
+arranger
+arrest
+arrest warrant issuer
+arrest warrants
+art
+art form
+art gallery
+art gallery missoula
+art period/movement
+art series
+art subject
+art acquisition method
+art gallery
+art owner
+art supplies
+artery
+article category
+article index document
+articles
+articulated dump truck
+artificial cytoplasm
+artificial cytoplasm types
+artificial island
+artificial satellite
+artificial satellite - earth orbiting
+artificial satellite family
+artificial satellite family member
+artisan
+artist
+artist(s) &amp; band(s)
+artist/festival relationship
+artista
+artiste
+artists
+artists managed
+artwork
+artwork catalog entry
+artwork/location relationship
+artwork/owner relationship
+asia
+asphalt/aggregate/concrete
+assembly of people
+assertion
+assessment
+assessment category
+assessment resource
+asset
+asset owner
+asset ownership
+assisted living facility
+asterism
+asteroid
+asteroid family
+asteroid group
+asteroid spectral type
+astrologer/psychic
+astrological house
+astrological planet
+astrological sign
+astronaut
+astronomer
+astronomical discovery
+astronomical discovery status
+astronomical discovery technique
+astronomical observatory
+astronomical survey/project organization
+astronomical location
+asymmetric encryption algorithm
+atheist
+athlete
+athlete extra
+athlete salary
+athletics area
+athletics championships
+athletics championships series
+athletics championships competition
+athletics championships competition/athlete relationship
+athletics marathon
+athletics mascot
+athletics medal
+athletics organization
+athletics series
+athletics brand
+athletics competition
+athletics competition/athlete relationship
+athletics country
+athletics discipline
+athletics discipline type
+athletics event
+athletics meeting
+athletics session
+atmosphere layer
+atoll of tokelau
+atomic mass
+attacker
+attraction
+attribute
+attribution
+attribution namespace
+attribution template
+attribuciok
+attribucios fokozatok
+auction
+auction event services
+auction service
+auction type
+audio
+audio equipment
+audio equipment manufacturer
+audio recording
+audio recording contribution
+audio recording contributor
+audio recording location
+audio recording role
+audio recording sample
+audio release
+audio book reader
+audio release
+australasia
+australian member of parliament
+australian rules footballer
+australian state
+australian suburb
+australian territory
+australian aboriginal council
+australian borough
+australian city
+australian community council
+australian community development trust
+australian district council
+australian external territory
+australian local government area
+australian municipality
+australian music award
+australian music festival
+australian organization
+australian rural city
+australian shire
+australian state
+australian suburb
+australian territory
+australian town
+austrian municipality
+austrian political district
+austrian state
+austrian statutory city
+author
+author extra
+authority of svalbard and jan mayen
+authors
+auto accident lawyer
+auto detailing
+auto detailing services
+auto parts store
+automated software action
+automaton
+automobile company
+automobile make
+automobile model
+automobile model year
+automobile service
+automobile accident
+automobile accident cause
+automobile generation
+automobile tinting service
+automotive class
+automotive designer
+automotive service
+automotive service
+automotive services
+autonomous region of finland
+autonomous region of the philippines
+averagepayment
+aviation incident
+aviation incident/aircraft relationship
+aviation waypoint
+aviophobic person
+award
+award honor
+award judge
+award judging term
+award nomination
+award nominee
+award presenting organization
+award winner
+award category
+award category extra
+award ceremony
+award discipline
+award nomination
+award won
+award-nominated work
+award-winning work
+awards
+azerbaijani city
+azerbaijani rayon
+bart station
+bcr
+bisac equivalent subject
+bisac sub heading
+bisac subject heading
+bksystem
+bmm
+bmmp
+brm lob
+bv: diagnostic
+bv: drug delivery technology
+bv: geography
+bv: investment round
+bv: journal article
+bv: medical condition
+bv: phase of development
+bv: product
+bv: research group
+bv: therapeutic
+bv: therapeutic molecule
+bv: venture investor
+baby supplies
+baby supply store departments
+baby supply store services
+bach composition
+backgroundcolor
+bad people who have killed people
+bad people who led countries
+bad people who make "music"
+bad people who ran companies
+bad people who are celebrities
+bahraini governorate
+bail bonds
+bairada wines
+baked good
+bakery
+ball
+ballet
+ballet book
+ballet by region
+ballet character
+ballet choreographer
+ballet company
+ballet competition
+ballet composer
+ballet dance
+ballet dancer
+ballet equipment
+ballet festival
+ballet film
+ballet master
+ballet notation system
+ballet occupation
+ballet rank
+ballet school
+ballet style
+ballet technique
+ballet terminology
+balletwear
+banco de datos
+band
+bangladeshi district
+bangladeshi division
+bank branch
+bank services
+banned substance
+banned work
+banned person
+banned thing
+banning agency
+bar association
+barangay of the philippines
+barbadian parish
+barber shop
+barber shop service
+barbie doll
+barbie label or edition
+barbie theme
+barcode
+barcode system
+barcoded item
+barony
+barrio of buenos aires
+barrio of puerto rico
+barter system
+baseball coach
+baseball coaching position
+baseball division
+baseball historical managerial position
+baseball historical roster position
+baseball league
+baseball manager
+baseball player
+baseball position
+baseball roster position
+baseball stadium
+baseball team
+baseball team stats
+basketball coach
+basketball conference
+basketball division
+basketball historical coach position
+basketball historical roster position
+basketball player
+basketball player career stats
+basketball player stats
+basketball position
+basketball roster position
+basketball team
+basketball team stats
+bassist
+bathing installations
+battery
+battery technology
+battery type
+battery cell type
+battery shape format
+battery size
+battery size cell variation
+batting statistics
+batting cage
+battle
+battle result
+battlespace
+battlestar
+beach access
+beach volleyball player
+bear
+beaufort wind force
+beauty salon
+beauty school
+beauty school field of study
+beauty shop
+beauty shop services
+bed
+bed event
+bed and breakfast
+bed and breakfast
+beer
+beer style category
+beer container
+beer containment
+beer country / region
+beer production
+beer style
+begrippenkader item
+beiras wines
+belarusian district
+belarusian region
+belgian arrondissement
+belgian municipality
+belgian province
+belgian region
+belief
+belizean constituency
+belizean district
+bell
+bell foundry
+benedictine abbeys
+beninese department
+beninese sub-prefectures
+beninese urban circumscriptions
+beverage
+beverage type
+bhutanese district
+bhutanese gewog
+bhutanese municipality
+bhutanese town
+bibs author
+bibs location
+bibs publisher
+bibs topic
+bibs work
+bicycle component
+bicycle component group
+bicycle component material
+bicycle geometry
+bicycle model
+bicycle model year
+bicycle production
+bicycle wheel position
+bicycle wheel rim
+bicycle manufacturer
+bicycle model
+bicycle services
+bicycle type
+bicycle wheel
+bike shop
+bike shop specialty
+bill
+billiard games
+billionaire
+bingo parlor
+bio2rdf
+bio2rdf file format
+bio2rdf knowledge atlas about human and mouse
+bio2rdf rdfizer
+bio2rdf's sources file format
+biodiversity hotspot
+bioenergy production
+biofluid
+biohacker
+bioinformatics database from banff manifesto
+biological classification
+biological parasite
+biological parasite host
+biological parasite host group
+biological pathway
+biological sample
+biomimicked object
+biomimicking object
+biomolecule
+biosafety facility
+bipropellant rocket engine
+bird conservation region
+bird band size
+bird band type
+bird conservation region
+bird move
+bird taxa
+birding gear
+birdwatching hotspot
+birdwatching term
+bishop
+bit depth sample rate
+blacklisted
+blacklister
+bladed weapon
+bladed weapon
+blended spirit
+blended spirit style
+blessed list
+block cipher
+block cipher mode of operation
+blog
+blogger
+blogging
+blood bank
+blood type
+blood type
+blood type system
+bluetooth chipset
+bluetooth device
+bluetooth profile
+blunt weapon
+bokconcept
+bokelement
+board member title
+board stance
+boardrider stance
+boat disposition
+boat fate
+boating supplies
+boating supplies categories
+body color
+body of water
+body part
+body style
+body of water extra
+body piercing
+boisson
+bolivian department
+bolivian province
+bollywood films
+bond ally
+bond clothing
+bond evil henchman
+bond film
+bond gadget
+bond girl
+bond gun
+bond homage
+bond locale
+bond movie villain
+bond quip
+bond theme song
+bond type
+bond vehicle
+bond watch
+bone
+book
+book binding
+book character
+book edition
+book edition extra
+book edition series
+book edition/author credit
+book extra
+book/author credit
+booking
+booklet
+bookmarks
+books
+books about urban legends
+bookstore
+bookstore type
+boolean
+boone county kentucky
+booska-p.com
+bootleg album
+bootleg source
+bootlegger
+bore x stroke
+borg technology
+borggaard beach
+borough
+borough of trinidad and tobago
+borscht belt comedian
+bosnian commune
+bosnian county
+botanical garden
+bottle designer
+bottled water
+bout performance
+bovine muscle
+bowl game
+bowl game stadium
+bowling alley
+bowling variant
+boxer
+boxing stance
+boxing weight division
+boxing decision
+boxing match
+boxing sanctioning body
+boxing title
+boxing title tenure
+braddock,pa.
+brain structure
+brand
+brand distribution relationship
+brand colors
+brand extension
+brand slogan
+brazilian federal district administrative region
+brazilian federal district
+brazilian federative unit
+brazilian mesoregion
+brazilian microregion
+brazilian municipality
+brazilian region
+brazilian state
+breadcrumb
+breakfast
+breakfast cereal box
+breakfast cereal box feature
+breakfast cereal brand
+breakfast cereal flavor
+breakfast cereal ingredient
+breakfast cereal manufacturer
+breakfast cereal mascot
+breakfast cereal style
+breakfast cereal theme
+breakup
+breakwater
+bred breed
+breed
+breed group
+breed origin
+breed registration
+breed registry
+breeding status
+breeding location
+breeding taxon
+brew pub
+brewery / brand of beer
+bridal shop
+bridal shop lines
+bridal shop services
+bridge
+bridge inventory rating
+bridge league
+bridge maintenance tenure
+bridge operating rating
+bridge player
+bridge player partnership
+bridge player teammates
+bridge rating analysis method
+bridge scoring system
+bridge tournament
+bridge tournament location
+bridge tournament standings
+bridge type
+bridge disaster
+bridge disaster cause
+bridge extra
+bridged location
+british politician guests
+british royal family
+british travellers and voyagers
+broadband technology
+broadcast
+broadcast advisory
+broadcast artist
+broadcast content
+broadcast distributor
+broadcast genre
+broadcast producer
+broadcast role
+broadcast station class
+broadway shows
+brothel
+brothel class
+bruneian district
+bruneian mukim
+budget
+budget justification
+budget submission
+budget data
+bug / feature request
+build
+building
+building address
+building floor
+building location
+building occupant
+building resident
+building tenancy
+building tenant
+building complex
+building element category
+building function
+building supplies services
+building2
+buildings
+bulgarian municipality
+bulgarian oblast
+bulgarian planning region
+bulgarian region
+bulgarian settlement
+bunker
+buoy
+buoy type
+burkinabe province
+burkinabe region
+burlesque performer
+burmese district
+burmese division
+burmese state
+burundian colline
+burundian commune
+burundian province
+business
+business case
+business center
+business improvement area
+business location
+business operation
+business operations
+business policy
+business process
+business rule
+business segment
+business service
+business and organization
+business operation extra
+butterfly
+button
+bilgisayar ve ogretim teknolojileri
+cd player
+cedam wonder of the underwater world
+chgk location
+chgk player
+chgk question author
+chgk reader
+chgk referee
+cimis weather data
+cms
+co2 emission
+cpic
+cpu design
+cpucount
+csa coverage area
+csa distribution location
+csa distributor
+csa product
+csa supplier
+cw-radio
+cabinet member
+cabinet position
+cable television service
+cable/satellite availability
+caddie
+calendar
+calendar published by
+calendar system
+calendar system directionality
+calendars published
+california historical landmark
+calling
+callsign duration
+cambodian district
+cambodian municipality
+cambodian province
+camera
+camera color filter array type
+camera compressed format
+camera digital zoom capability
+camera dimensions
+camera film format
+camera format
+camera iso capability
+camera image ratio
+camera image stabilization
+camera image stabilization type
+camera lens
+camera manufacturer
+camera resolution
+camera sensor manufacturer
+camera sensor size
+camera sensor type
+camera series
+camera storage type
+camera uncompressed format
+camera viewfinder type
+camera accessory
+camera shop service
+camera store
+cameroonian department
+cameroonian region
+caminho
+camp security provision
+campaign
+campaign location
+campaign organizer
+campaign supporter
+campground
+campground amenities
+campsite
+canadian census division
+canadian indian reserve
+canadian judge
+canadian member of parliament
+canadian province
+canadian territory
+canadian aboriginal group
+canadian county
+canadian lawyer
+canadian province
+canadian territory
+canal
+canal lock
+canal network
+canal pumping station
+cancelled film
+cancelled films
+cancer center
+cancer center constituent
+cancer center type
+cancer subtype
+candidate sense
+candle shop
+candy shop
+candy bar
+candy bar manufacturer
+canine agility association
+canine agility dog
+canine agility event
+canine agility handler
+canine agility judge
+canine agility team
+cannabis club
+canonical version
+canoodled
+canton of luxembourg
+capacity
+cape verdian county
+cape verdian parish
+capital
+capital &amp; labor
+capital category
+capital of administrative division
+car alarm retailer
+car audio retailer
+car dealership
+car rental
+car wash
+car wash category
+car with electricity-only capability
+card club
+cardinal direction
+care bears character
+care bears character category
+care bears film
+care bears tv episode
+care bears tummy symbol
+care bears villain
+cargo bed
+cargo moved by year
+carnegie steel company
+carpels position
+carpet and flooring supplier
+carpet cleaning
+carpet cleaning services
+carribean cathedrals
+carrie furnaces
+cartoon robot
+cartridge
+case
+cases
+casino
+casino show
+casino game
+casino owner
+casino restaurant
+casino theme
+casted artwork
+casual style
+casualties
+casualties type
+casualties type in fiction
+cat breed
+cat temperament
+cataloged composer
+cataloged composition
+cataloged instance
+cataloged instance extra
+catastrophic injury attorney
+catch phrase
+category
+category introspection
+category quality
+categoria
+catering service
+cathedrals in austria
+cathedrals in belgium
+cathedrals in england
+cathedrals in france
+cathedrals in germany
+cathedrals in italy
+cathedrals in poland
+cathedrals in portugal
+cathedrals in russia
+cathedrals in scandinavia
+cathedrals in spain
+cathedrals in the united states
+cathedrals of holland (netherlands)
+cattery
+cattery type
+cause
+cause of death
+cause of lawsuit
+cause of loss
+cavalcade
+cave gallery
+cave painting
+cayman islands district
+ceasefire
+celebration
+celebration subject
+celebrity
+celebrity favorite food
+celebrity impressionist
+celebrity spokesperson
+celestial object
+celestial object age
+celestial object category
+celestial object composition
+celestial object extra
+celestial object with coordinate system
+cemetery
+central african autonomous commune
+central african economic prefecture
+central african prefecture
+central african subprefecture
+central bank
+ceramic
+cereal grain
+certificate
+certification
+certification body
+certification name
+certification partner
+certification program
+certification region
+certification subject
+certified product
+certified organization
+certified person
+certified thing
+certifying organization
+championship
+championship event
+championship title
+championship title reign
+championship type
+change
+changing thing
+channel access method
+chanson
+chapter
+character
+character designer
+character gender
+character occupation
+character power
+character rank
+character species
+character theme
+character mention
+character's reality
+character's skill
+charitable field
+charity
+charity evaluation
+charity evaluator
+chartering institution
+check cashing service
+check cashing service kind
+checklist
+checklist bird
+checklist bird data
+cheese
+cheese certification
+cheese milk source
+cheese texture
+chef
+chefs
+chemical bond
+chemical classification
+chemical compound
+chemical element
+chemical element discoverer
+chemical reaction equilibria
+chemical reaction kinetics
+chemical reaction mechanism
+chemical series
+chemical color
+chemical compound extension
+chemical compound extra
+chemical odor
+chess color
+chess game
+chess game outcome
+chess game participation
+chess move
+chess player
+chicken breed
+chicken egg color
+chicken egg laying characteristics
+chicken primary use
+chief of police
+chief of police tenure
+children
+children's book
+chilean province
+chilean region
+china shop
+chinese travellers and voyagers
+chinese autonomous county
+chinese autonomous prefecture
+chinese autonomous region
+chinese autonomous region traditional eighteen
+chinese city district
+chinese city shi
+chinese county
+chinese county district
+chinese county level city
+chinese county-level city
+chinese danwei
+chinese ethnic group
+chinese league
+chinese municipality
+chinese prefecture
+chinese prefecture-level city
+chinese province
+chinese province traditional eighteen
+chinese sheng
+chinese shixiaqu
+chinese shixiaxian
+chinese special administrative region
+chinese subdistrict
+chinese town
+chinese township
+chiropractic office
+chiropractor
+chivalric office
+chivalric order founder
+chivalric order member
+chivalric order membership
+chivalric order officer
+chivalric order officer tenure
+chivalric order relationship
+chivalric rank
+chivalric rank gender equivalence
+chivalric rank precedence
+chivalric title
+chivalric title gender equivalence
+choreographer
+christmas carol
+christmas character
+christmas decoration
+christmas dish
+christmas film
+christmas song
+christmas tradition
+chromosome
+chronicle
+church
+churches
+cidade
+cincinnati/northern kentucky international airport
+cipher
+cipher design element
+cipher structure
+circle of mali
+circuit
+circuit layout
+circus
+circus attraction type
+circus performance type
+circus performer
+cistercian abbeys
+cited quotation source
+cited work
+cities and towns
+cittaslow supporter
+cittaslow town
+city
+city name
+city street
+city in fiction
+city of trinidad and tobago
+city shape
+city with dogs
+city/town/village
+civil engineer
+clairton works
+clan
+clan cat
+clan rank
+clan gathering
+class equivalence mapping
+class of game
+class specification
+classic car
+classic movie stars
+classic road bicycling race
+classic road bicycling race type
+classification system
+classification code
+classification publication
+classification system
+classified
+cleaning service
+cleaning service type
+click
+click double
+client
+clinical trial intervention
+clinical trials article
+clinical trial
+clinical trial contact
+clinical trial facility
+clinical trial location
+clinical trial official
+clinical trial sponsorship role
+clinical trials agency
+clinical trials sponsorship
+clique type
+clone
+cloned character
+close resemblence
+closed bug / feature request
+clothing size
+cloud
+cloud classification
+club
+club interest
+cluster of orthologous groups
+clutch
+clutch size
+coach performance
+coach/athlete relationship
+coaching position
+coat of arms
+coat of arms bearer
+cocido
+cocktail
+cocktail drinkware
+cocktail garnish
+cocktail ingredient
+code generation
+code category
+coding region
+coding region-containing nucleotide
+coffee
+coffee beverage
+coffee brand
+coffee preparation tool
+coffee shop in neighborhood
+collaboration
+collaboration topic
+collaborative participation
+collaborator
+collaborator role
+collectable item
+collection
+collection extent
+collection line
+collection season
+collection type
+collection activity
+collection category
+collection item
+collection of columns
+collection ownership
+collective
+collective focus
+collective member
+collective membership
+collector
+college football team
+college prep school
+college dean
+college master
+college/university
+college/university extra
+colleges and universities
+collegiate buildings
+collision type
+colombian corregimientos departamentales
+colombian corregimientos departamentales m
+colombian department
+colombian department plain
+colombian intendancy
+colombian municipality
+colombian municipality plain
+colombian special district
+colonial date-time
+colony
+color
+colors
+column
+column article
+column authorship duration
+column frequency duration
+column genre
+column periodical duration
+column publisher
+column syndicate
+column syndicate duration
+columnist
+combine participant
+combining character
+comedian
+comedy club
+comedy genre
+comedy group
+comedy group founder
+comedy group member
+comedy group membership
+comedy venue
+comedy writer
+comet
+comet group
+comic book character
+comic book colorist
+comic book creator
+comic book editor
+comic book fictional universe
+comic book genre
+comic book inker
+comic book issue
+comic book letterer
+comic book penciler
+comic book publisher
+comic book series
+comic book story
+comic book story arc
+comic book writer
+comic story printing
+comic strip
+comic strip character
+comic strip creator
+comic strip creator duration
+comic strip creator role
+comic strip genre
+comic strip syndicate
+comic strip syndicate duration
+comic book shop
+comic book shop services
+commemorative event
+comment
+common dimension
+common metadata
+commoner
+commoning
+commoning cafe
+commoning capital
+commoning concept
+commoning event
+commoning nutrition
+commoning organizations
+commoning outcomes
+commoning people
+commoning technology
+commoning village
+commons
+commune of buenos aires
+commune of french polynesia
+commune of greenland
+commune of liechtenstein
+commune of luxembourg
+commune of mayotte
+commune of monaco
+commune of montenegro
+commune of new caledonia
+commune of saint-pierre and miquelon
+commune of the faroe islands
+community centre
+community centre
+community garden
+community noticeboard
+community orchard
+community resource
+comoran autonomous island
+compactor
+companies
+company
+company barterer
+company name
+company-brand relationship
+company-product relationship
+company-product-line relationship
+company/ make relationship
+comparable aircraft relationship
+compass direction
+competency
+competency container
+competency path
+competition
+competition type
+competitive cyclist
+competitive space
+competitive eater
+competitive space mediator
+competitor
+competitor match relation
+competitor/competition relationship
+competitor/country relationship
+completer of unfinished work
+completion criterion
+completion of unfinished work
+complex organism
+complexity
+complexity variable
+complexity class
+component
+component city of the philippines
+component manufacturing
+composer
+composition
+composition type
+compound drug
+compound leaf type
+computational problem
+computer
+computer architecture
+computer designer
+computer emulator
+computer game bundle
+computer game contribution
+computer game contributor
+computer game credit
+computer game graphics
+computer game media
+computer game media type
+computer game memorabilia
+computer game network
+computer game perspective
+computer game platform model
+computer game platform release
+computer game release
+computer game theme
+computer manufacturer/brand
+computer peripheral
+computer peripheral class
+computer processor
+computer product line
+computer science subfield
+computer scientist
+computer technology
+computer consulting
+computer consulting service type
+computer crime victim
+computer infection
+computer infection type
+computer networking
+computer networking service type
+computer repair
+computer security service
+computer security service type
+computer store
+computer store services
+computers
+computing platform
+concept
+concept category
+concept developer
+concept type
+concept/developer relationship
+concepts d'iconologia 2.0
+concert
+concert film
+concert performance
+concert performance role
+concert performance venue
+concert set list
+concert venue
+concert tour
+concretisering
+concurrency model
+condiment
+condition
+condition prevention factors
+conditions
+conducted ensemble
+conducting tenure
+conductor
+conference
+conference series
+conference event
+conference facility
+conference proceedings
+conference series
+conference sponsor
+conference subject
+conference venue
+conference presentation
+confidence level
+config node
+config param
+conflict result
+congolese arrondisement
+congolese commune
+congolese department
+congolese district
+congolese province
+congolese zone
+congregation
+conjugate
+conlang
+conlang type
+connectivity technology
+connector
+conservation legislation
+conservation list
+conservation status designation
+conservation activity
+conservation deliverable
+conservation donor
+conservation donor deliverable
+conservation donor expectation
+conservation goal
+conservation performance measure
+conservation plan
+conservation program
+conservation program role
+conservation project
+conservation project import
+conservation project lead
+conservation threat
+consignment store
+console collection record
+consoles
+consortium
+constellation
+constellation bordering relationship
+constituency
+constituency of lesotho
+constituency of namibia
+constituent country of denmark
+constitution
+constitutional amendment
+constitutional amendment proposer
+constitutional convention
+constitutional convention delegate
+constitutional governments of portugal
+constraint
+constraint item
+construction
+construction project
+construction project category
+construction services
+construction services type
+consulting services
+consumable object
+consumer
+consumer company
+consumer product
+consuming api
+consuming api format
+consuming api license
+contact
+contact category
+contact product
+contactor category
+contaminant
+contemporary history
+content
+content curation
+content import
+content license
+content strategy
+content template
+content source
+content type
+content usage
+contentrating
+contents
+contestant
+context name
+continent
+continents
+contraindication
+contribution
+controlled topic set
+convenience store
+convention leader
+convention leadership
+convention speaker
+convention speech
+convention venue
+convict
+convict fleet
+convict transport
+convicted criminal
+cookietime3000
+cooking equipment manufacturer
+cooking material producer
+cooking material supplier
+cooling system
+coordinated program
+coordinated project
+copy rule
+copy shop
+copy shop service
+coral reef
+core component
+coro uma
+coronal mass ejection
+coronation
+corporate headquarters
+corrected is a assumption
+corresponding entity relationship
+corvette logos
+cosm
+cosmetic store
+costa rican canton
+costa rican province
+costume
+costume shop
+costume styles
+cotermination
+cottage
+coulrophobic person
+council of guyana
+council of lesotho
+counseling field
+counseling service
+counties, parishes and boroughs,
+countries
+countries in fiction
+country
+country musical groups
+country club
+country extra
+country of origin
+county of american samoa
+county of croatia
+county of iceland
+county of south sudan
+coupon codes
+courier service
+courier transport
+course
+course of action
+course provider
+court
+court decision
+court jurisdiction area
+court reporting stenography
+court-courthouse relationship
+courthouse
+coworking space
+craft
+craft supplies
+craft supplies categories
+cranial nerve
+crankset
+crawler loader
+crawler pipe layer
+crawler tractor
+creationist
+creative work
+creator of object
+credit bears
+credit union
+crew membership
+crew role
+criado em
+cricket administrative body
+cricket batting stroke
+cricket bowler
+cricket bowler stats
+cricket bowling pace
+cricket bowling technique
+cricket coach
+cricket coach tenure
+cricket delivery type
+cricket league
+cricket match
+cricket match type
+cricket player
+cricket player debut
+cricket player stats
+cricket roster
+cricket roster batting
+cricket roster bowling
+cricket roster extras
+cricket roster keeping
+cricket series
+cricket series event
+cricket stadium
+cricket team
+cricket team stats
+cricket tournament
+cricket tournament event
+cricket umpire
+cricket umpire panel
+cricket umpire panel membership
+cricket form
+cricket player extra
+cricket position
+cricket roster
+cricket team extra
+crime
+crime accusation
+crime method
+crime type
+crime victim
+crimebusters era character
+criminal conviction
+criminal defendant
+criminal offense
+criminal defence attorney
+criminal offense
+criminal organization
+criminal procedure status
+criminal prosecution attorney
+criminal trial
+crop model
+cross reference topic
+cross section shape
+cross walk
+crowd control techniques
+cryptid
+cryptid alternative
+cryptid area of occurrence
+cryptid classification
+cryptid evidence
+cryptid expedition
+cryptid hunter
+cryptid observation location
+cryptid observer
+cryptid reporter
+cryptid survey location
+cryptographer
+cryptozoologist
+crystalline material
+cuban municipality
+cuban province
+cueillete of jersey
+cuisine
+culinary technique
+culinary measure
+culinary tool
+cultivar
+cultivar group
+cultivar developer
+cultivar origin
+cultivar parent
+cultivar purpose
+cultivar type
+cultural origin
+culture
+cultured plant
+cup sizes
+curation state
+currency
+currency exchange
+currency sub-unit
+current area record
+current coaching tenure
+current events
+current series record
+current organism classification
+customer
+cutie mark
+cutting
+cycle route
+cycle route connection
+cycle route network
+cycling brand
+cycling discipline
+cycling end locations
+cycling event
+cycling historical roster position
+cycling location
+cycling official
+cycling organisation
+cycling organization member
+cycling organization membership
+cycling product
+cycling roster position
+cycling route
+cycling sponsor
+cycling start location
+cycling team
+cycling team owner
+cycling team role
+cycling team staff
+cycling team staff position
+cycling terrain
+cycling performance
+cycling team based at
+cyclist
+cyclone-affected area
+cytogenetic band
+czech district
+czech municipality
+czech oblast
+czech region
+dac
+daoju
+dc agent
+dc coverage
+dc format
+dc language
+dc location
+dc period of time
+dc publisher
+dc resource
+dc rights
+dc type
+dhfl propery services limited
+diy
+dj medium
+dna
+drg
+dvds
+dwts episode
+dwts appearance
+dx-radio
+daily
+daily stats
+dam
+dam failure
+dam failure cause
+dam reservoir use
+dam structure category
+damage-causing event
+danmu
+dance
+dance company
+dance event
+dance form
+dance group
+dance group member
+dance group membership
+dance style
+dance venue
+dance movie
+dance movie genre
+dance movie performance
+dance studio
+dance style
+dance tv show
+dancer
+dancer chorus member
+dangerous activity
+danish travellers and voyagers
+danish land
+danish municipality
+danish parish
+danish region
+darkness device
+dartmoor artists
+dartmoor authors
+dartmoor castles
+dartmoor mines
+dartmoor organizations
+dartmoor personalities
+dartmoor pubs
+dartmoor reservoirs and dams
+dartmoor rivers
+dartmoor settlements and villages
+dartmoor songs and music
+dartmoor tors
+darwin core metadata source
+darwincore basisofrecord
+darwincore catalognumber
+darwincore collectioncode
+darwincore collectiondates
+darwincore collector
+darwincore globaluniqueidentifier
+darwincore informationwithheld
+darwincore institutioncode
+darwincore modificationdate
+darwincore remarks
+data mob project
+data project
+data project type
+data structure
+data structure operation
+data task
+data task category
+data task status
+data tool
+data collection method
+data contributor
+data project
+data provider
+data recovery service
+data recovery service type
+data recovery services
+data structure measurement
+data to import
+data upload conversation record
+database
+database description
+database financial supporter
+database forum
+database host
+database manager
+database topic
+database website
+dataset
+date
+date comparison operator
+date founded
+date of birth
+date of ordination
+date of birth
+date of death
+date with note
+date/time
+dated
+dated btu
+dated float
+dated integer
+dated money value
+dated percentage
+dated cubic meters
+dated date
+dated days
+dated emission intensity
+dated index value
+dated internet speed
+dated kg of oil equivalent
+dated kilowatt-hour
+dated location
+dated location break-up
+dated location joining
+dated location merger
+dated location split
+dated location succession
+dated location test
+dated metric ton
+dated ratio
+dated residential gender
+dated time interval
+dating service
+datum
+datalas modja
+day of week
+day of year
+day care
+daylife topic
+daylife topics
+deactivated satellite
+deadhead lifestyle
+deadwood character influcence person
+death-causing event
+debate
+deceased fictional character
+deceased organism
+deceased person
+deceased character
+deceased person with uncertain date of death
+decision or motivated action
+decision-maker
+declaration of war
+decommissioned satellite
+dedicated work
+dedicatee
+dedication
+dedicator
+defendant
+defense attorney
+defense system
+definition
+definition authority
+defunct country
+defunct organization
+defunct sports team
+defunct country mediator
+degree
+degrees
+deity
+delegate result
+delete
+delete task
+delivery
+delivery option
+dell feds
+dell products feed
+demonstration event/athlete relationship
+deneme
+deneme1
+dental association
+dental office
+dental specialty
+dentist
+department
+department of chad
+department of mauritania
+department of niger
+department of the ivory coast
+department store
+dependency
+dependency of guernsey
+dependency of mauritius
+derivative work
+description
+design pattern
+designer
+designer-label association
+desired application
+desired result
+dessert
+destroyed structure
+destroyed or damaged bridge
+destroyed ship
+destruction method
+destruction method2
+detail
+details
+detective
+developer
+developer/variant relationship
+development hell
+development status
+diacritic
+diagnostic sign
+diagnostic test
+diagnostic test sign
+diagnostics rule
+diagram
+diaper service
+diatonic triad
+diesel multiple unit class
+diesel locomotive class
+diet
+diet creator
+diet follower
+diet of organism classification
+dietary restriction
+dieter thomas kuhn
+diffusion
+digital camera
+digital camera brand
+digital interconnect
+digital interface
+digital marketing
+digital strategy
+digital object identifier
+dike
+dime novel author
+dime novel character
+dime novel genre
+dime novel issue
+dime novel location
+dime novel publisher
+dime novel series
+dime novel story
+dime novel subject
+dimension
+dimensions
+dinner theater
+dinosaur
+dinosaur diet
+dinosaur location
+dinosaur locomotion
+dinosaur taxon
+diocese
+diplomatic guests
+directive
+director
+directors
+disability
+disability organization
+disabled person
+disaster
+disaster survivor
+disaster type
+disaster victim
+disaster-affected structure
+discipline
+discontinued characters
+discount store
+discounts
+discovery
+disease
+disease stage
+disease cause
+disease caused by assassination in ways which appear natural
+disease or medical condition
+disease prevalence
+disease vector
+dish
+dish mention
+dishes
+dishonor
+dishonored person
+dismissal type
+disney product
+disney product distribution venue
+disney product edition
+disney product special feature
+disney product theme
+disney ride
+disney ride ticket
+disney ride ticket membership
+displaced persons camp
+disputed location
+disputed location claimant
+dissertation
+dissertation title
+distilled spirit
+distilled spirit type
+distillery
+distinction
+distribution company
+distributor
+district of american samoa
+district of anguilla
+district of botswana
+district of cyprus
+district of hong kong
+district of kyrgyzstan
+district of laos
+district of lesotho
+district of luxembourg
+district of macau
+district of malawi
+district of mauritius
+district of mozambique
+district of nauru
+district of palestine
+district of saint helena
+district of serbia
+district of sierra leone
+district of sao tome and principe
+district of turks and caicos islands
+district of wallis and futuna
+district of zimbabwe
+district of the bahamas
+district of the french southern territories
+district of the philippines
+disturbance frequency
+disturbance relationship
+disturbance type
+disused station
+divination technique
+divinity
+divinity child relationship
+divinity mate relationship
+divinity-human child relationship
+divinity-human mate relationship
+djibouti region
+do not merge mediator
+dock
+docking facility
+doctor
+document
+document class
+documentary editing project
+documentary edition
+documentary editions series
+documentation type
+documented object
+documented breeding location
+documented migration location
+documented nonbreeding location
+documented priority species
+documented resident location
+does not exist
+dog apparel
+dog breed
+dog coat color
+dog food
+dog size
+dog temperament
+dog weight
+dog breed
+dog/city relationship
+domain
+domain category
+domain category display column
+domain profile
+domestic animal breeder
+domesticated animal
+dominant cover
+dominant property
+dominican muncipal district
+dominican municipality
+dominican parish
+dominican province
+dominion heads of state or representatives
+doorlopende leerlijn
+doppleganger
+double act
+double act comic
+double act straight man
+douro wines
+drafted athlete
+drama
+draq queen title
+drehort:
+drinking game
+drinking establishment
+drinking establishment licensee
+drinking establishment type
+driveline
+driver
+driving range
+driving school
+drought tolerance
+drug
+drug enforcement-related
+drug ingredient
+drug prevention-related
+drug treatment-related
+drug administration route
+drug administration route extra
+drug brand
+drug brand extra
+drug class
+drug dosage flavor
+drug dosage form
+drug extra
+drug form shape
+drug formulation
+drug formulation category
+drug formulation extra
+drug in fiction
+drug ingredient
+drug label section
+drug legal status
+drug manufacturer
+drug mechanism of action
+drug physiologic effect
+drug pregnancy category
+drug pregnancy category additions
+drug pregnancy category extra
+drug regulating authority
+drug strength
+drug therapeutic equivalence relationship
+drummer
+dry cleaner
+dry cleaning solvent
+dubbing actor
+dubbing performance
+duplicate collection
+duquesne steel works
+duquesne,pa.
+dutch travellers and explorers
+dutch constituent country
+dutch municipality
+dutch overseas territory
+dutch province
+dwarf planet
+dynasty
+dao wines
+e-commerce service
+e-commerce services
+ec kit test location
+ehv type
+ems agency
+ems medical director
+esrb rating
+ew article category
+ew media
+earth observing satellite
+earth orbiting satellite
+east timorese district
+east timorese subdistrict
+eating place
+eccentric person
+eco fuel
+ecological survey design
+economic and monetary union
+ecoregion
+ecosystem
+ecozone
+ecuadorean canton
+ecuadorean province
+edgar allan poe's family
+edgar thomson steel works
+edible plant
+edible schoolyard
+editor title
+editorial tenure
+education
+education board
+educational institution
+educational institution campus
+educational institutions
+educational short film
+educational aim
+educational domain
+educational institution extra
+educational level
+educational sector
+egg size
+egyptian media
+egyptian governorate
+egyptologist
+eidos
+eindterm
+el blog de uruguayo incoherente
+elder care facility
+elder care service
+elected government positions held
+elected official
+election campaign
+election campaign extra
+election candidate
+election certifier
+election contest
+election contest extra
+election event
+election poll
+election poll score
+election results
+election with polls
+electoral college
+electoral college elected office
+electric locomotive class
+electric multiple unit class
+electric train class
+electric vehicle model
+electric current type
+electric hybrid car
+electric locomotive class
+electric motor
+electric power distributor
+electric system
+electrical generator
+electrical material
+electrical service
+electrical service scope
+electrical service type
+electricity production
+electromagnetic radiation
+electron affinity
+electronics repair
+electronics shop
+element
+elevating motor scraper
+email contact
+embroidery service
+embroidery service type
+emergency room
+emergency law
+emergency room
+emirian emirate
+emission testing service
+emission testing service classification
+empire
+employee
+employee referral
+employer
+employer in fiction
+employment agency
+employment agency services
+employment tenure
+encyclopediadramatica article
+end
+endangered species
+endorsed product
+endorsee
+endorsing newspaper
+endorsing person
+endowed organization
+energy consuming object
+energy storage method
+engagement level
+engenharia de computacao
+engine
+engine fuel
+engine type
+engine category
+engine cooling method
+engine designer
+engine energy source
+engine performance
+engine specifications
+engine type
+engineer
+engineering chartership
+engineering discipline
+engineering firm
+engineering institute membership grade
+engineering person
+engineering project
+engineering firm
+engineering project phase
+engineering service
+engineering service sector
+english administrative county
+english civil parish
+english metropolitan borough
+english metropolitan borough city
+english metropolitan borough plain
+english metropolitan county
+english non metropolitan county
+english non metropolitan district
+english non-metropolitan county
+english non-metropolitan district
+english region
+english unitary authority
+english unitary authority city
+english unitary authority county
+english unitary authority plain
+engraving method
+engraving service
+enterprise segment
+enterprise service
+entertainers
+entity
+entity appearing in media asset
+entity hint
+entity used in trade statistics
+entscheidung
+enumeration
+enumeration kind
+environmental issue
+environmental issue cause
+epice
+epidemic
+episode
+episode with song
+episode-character relationship
+equal code
+equation
+equation part
+equestrian disciplines
+equipment
+equipment rental
+equpment
+eritrean region
+eritrean subregion
+erotica in media
+error code
+error message
+estado
+estadosnome
+estadosuf
+estilodeciclismo
+estonian county
+estonian linn
+estonian municipality
+estonian vald
+estrategia
+ethiopian state
+ethiopian zone
+ethnicity
+ethnicity in fiction
+europe
+event
+event series
+event theme
+event category
+event feed
+event feed format
+event in fiction
+event in fiction
+event in mythology
+event of disputed occurance
+event planner
+event planning services
+event planning tasks
+event presenter
+event producer
+event promoter
+event represented in fiction
+event(s) interpreted as miraculous or paranormal
+eventcategory
+evento iniciador
+events
+everyday life
+evidence
+examination
+example
+exception
+exception status
+excerpt
+excerpted work
+exchange
+exchange rate
+execute program
+executed person
+execution
+execution type
+exemplar
+exercise
+exercise requirements
+exercise facilities
+exercise programs
+exhibit
+exhibit 300
+exhibit 53
+exhibit 53 recordset
+exhibition
+exhibition curator
+exhibition producer
+exhibition run
+exhibition sponsor
+exhibition subject
+exhibition venue
+existing british colonies, dominions and protectorates
+exists
+exitevent
+exoplanet
+exoplanet catalogue
+experience
+experiment
+experimental systems
+expert search
+explained thing
+explanation
+explanation of motive
+explorer
+explosion
+explosion cause
+explosive substance
+exposure
+expression
+expression about existence
+expression of impossibility
+expression of moral disapproval
+expression of moral support
+expression of possibility
+extended restaurant
+extended institution
+extended university
+extension
+exterior color
+exterior pressure washing services
+external
+external influencer
+extinct taxon
+extinct taxon time period
+extraterrestrial location
+eye color
+eye color
+egitim teknolojileri
+f-stop
+fai class
+fbi most wanted fugitive
+fda otc drug monograph part
+fgdc altitude coordinate system
+fgdc altitude datum
+fgdc altitude system
+fgdc bounding coordinates
+fgdc browse graphic
+fgdc citation
+fgdc contributor
+fgdc data quality
+fgdc depth datum
+fgdc depth system
+fgdc distribution
+fgdc entity and attribute
+fgdc identification
+fgdc keyword
+fgdc keyword1
+fgdc lat long
+fgdc location keyword
+fgdc metadata
+fgdc metadata reference
+fgdc point of contact
+fgdc security
+fgdc source media
+fgdc spatial data organization
+fgdc spatial reference
+fgdc temporal keyword
+fgdc vertical datum
+fgdc attribute accuracy
+fgdc cross reference
+fgdc data environment
+fgdc description
+fgdc direct spatial reference
+fgdc geographic resolution
+fgdc lineage
+fgdc local planar
+fgdc originator
+fgdc planar coordinate system
+fgdc planar distance and bearing
+fgdc planar encoding and units
+fgdc point and vector object type
+fgdc positional accuracy
+fgdc process step
+fgdc progress
+fgdc raster object
+fgdc raster object type
+fgdc source data
+fgdc status
+fgdc time period
+fgdc unit of geographic coordinates
+fgdc vertical coordinate system
+fifa world cup
+fm
+fm terrestrial broadcast facility
+fabric
+fabric and sewing supplies
+fabric and sewing supplies specialty
+fabrizio betti
+facebook greenpal
+facebook page
+facet
+faceted browsing actor
+faceted browsing feature
+faceted browsing feature support
+faceted browsing result view support
+faceted browsing widget
+faceted browsing widget support
+fach
+fact
+faculty
+faculty adviser
+fairway wood
+fairy tale
+fairy tale author
+fairy tale collection
+fairy tale origin
+fall of wicket
+family
+family friendly
+family guy episode
+family guy reference
+family member
+family name
+family planning service
+famous corvette drivers
+famous deadheads
+famous motorcycles
+famous university alumni
+famous examples
+famous object
+fandom
+fantasy football game
+farm
+farmed oyster
+farmers market
+farmers market attendee
+farmers' market
+farmers' market vendor
+fashion choice
+fashion accessory
+fashion and fragrance award
+fashion category
+fashion designer
+fashion house
+fashion journalism
+fashion label
+fashion model
+fashion school
+fashion week
+favorite foods
+feast day
+feature
+feature film stats
+featured artist
+federal agency
+federal budget
+federal enterprise
+fedora software project
+feed
+feed category
+feed item
+feed link
+feed person
+feeds
+fence construction and repair
+fermentation base
+ferramenta bpms
+festival
+festival in neighborhood
+festivals
+feudal title
+feudal location
+fiber
+fiction
+fiction-based fandom
+fictional calendar system
+fictional character
+fictional character creator
+fictional clone
+fictional clone creator
+fictional creature
+fictional date/time
+fictional deceased character
+fictional impersonator
+fictional inhabitation
+fictional inhabitation type
+fictional inhabiting character
+fictional killer
+fictional love child
+fictional murder victim
+fictional object
+fictional object class
+fictional object destroyer
+fictional object destruction method
+fictional organization founder
+fictional organization type
+fictional plant
+fictional setting
+fictional spacecraft
+fictional spacecraft class
+fictional spacecraft class feature
+fictional spacecraft designer
+fictional spaceship crewman
+fictional spaceship crewman posting
+fictional spaceship lineage
+fictional universe
+fictional universe with triggers
+fictional character
+fictional employment tenure
+fictional hybrid creature
+fictional job title
+fictional twin
+fictional twins
+fictional universe
+fictional universe creator
+fictional watch
+fief
+fief ownership
+field of study
+field of study extra
+fieldconcern
+fight song
+fijian division
+fijian province
+file characteristic
+file characteristic category
+file format
+file format genre
+file format policy
+file on disk
+files and images
+film
+film musicals
+film ranch
+film ratings
+film ratings provider
+film actor
+film archive
+film art director
+film casting director
+film character
+film cinematographer
+film collection
+film company
+film company role or service
+film costumer designer
+film crew gig
+film crewmember
+film critic
+film cut
+film cut type
+film director
+film distribution medium
+film distributor
+film editor
+film extra
+film featured song
+film festival
+film festival event
+film festival focus
+film festival sponsor
+film festival sponsorship
+film format
+film genre
+film job
+film music contributor
+film performance
+film producer
+film production designer
+film ranch owner
+film rating
+film rating system
+film regional release date
+film screening venue
+film series
+film set
+film set decorator
+film song
+film song performer
+film song relationship
+film story contributor
+film subject
+film theorist
+film with tall ships
+film writer
+film-film company relationship
+film-film distributor relationship
+filmer
+filming dates
+filming location
+films
+fin dimensions
+fin placement
+fin setup
+final approach...the witnesses
+final fantasy character class
+final fantasy monster
+final fantasy villain
+finance
+financial market
+financial market category
+financial market operator
+financial market operator tenure
+financial market product category
+financial planning
+financial support identifier
+financial support provider
+financials
+finished work
+fire
+fire cause
+fire department
+fire department staffing
+fire station
+fire station service area
+fire station services
+fire suppression method
+firearm type
+firefighter
+fireplace equipment
+fireplace equipment categories
+fireworks shop
+first
+first achievement
+first achievement category
+first family
+first responders and witnesses to twa flight 128
+first stage regulator
+fish
+fishery
+fishery location
+fishing supplies
+fishing activity
+fishing method
+fit
+fitness center
+fitness center
+fixed asset
+fixes
+flag
+flag judgment
+flag kind
+flag source
+flag status
+flag vote
+flag referent
+flag use
+flagged content
+flail weapon
+flash developer
+flavonoid
+flavonoid subclass
+flea market
+flight crew of twa flight 694
+flight itinerary
+floating point number
+floating point range
+floating point statistic
+flood
+flood cause
+flooding body of water
+floor coverings
+floral shop
+floral shop services
+floristic alliance
+floristic association
+flower orientation
+flower shape
+flower symmetry
+fly
+flying site
+focal land cover
+focal location
+focal taxa
+focus
+focus of corrected assumption
+foilage texture
+folding of macromolecules
+foliage porosity
+folk song
+foo
+food
+food product
+food truck proprietor
+food bank
+food certification
+food concept
+food cooperative
+food delivery service
+food energy information
+food extra
+food festival
+food festival subject
+food garden
+food preservation equipment
+food preservation method
+food producing region
+food product
+food product distributor
+food product retailer
+food quantity unit
+food wholesaler
+food-web member
+football coach
+football coaching position
+football competition
+football disciplinary action
+football disciplinary punishment
+football goal
+football league
+football league participation
+football league season
+football league system
+football match
+football organization
+football pitch
+football player loan
+football player match participation
+football player substitution
+football player transfer
+football position
+football referee
+football roster position
+football scoring event
+football team
+football team management tenure
+football team manager match participation
+football player
+football player extra
+football player stats
+football team
+football team extra
+football team manager
+football world cup
+footnote
+force
+force strength
+force strength in fiction
+forecast
+forecast zone
+foreign api
+foreign api extension
+foreign api key
+foreign api provider
+foreign key property
+foreign language adaptation
+forest garden
+forestry
+forestry equipment
+form of government
+form of attack
+form of energy
+formal dress
+formal grammar
+formal language
+formal wear events
+formal wear rentals
+former belgian colonies
+former british colonies and dominions
+former danish colonies and protectorates
+former dutch colonies and protectorates
+former french colonies
+former german colonies
+former italian colonies
+former portuguese colonies
+former soviet union states
+former spanish colonies
+former and current norwegian overseas territories
+forms of yoga
+formula
+formula 1 car
+formula 1 constructor's championship standing
+formula 1 driver
+formula 1 driver's championship standing
+formula 1 grand prix
+formula 1 race standing
+formula 1 season
+formula 1 team
+formula 1 team membership
+fort
+forty-yard dash time
+forum post
+forward sortation area
+fossil site
+fossil specimen
+founding figure
+foundry castings
+four pillars drug strategy-related
+foursquare location
+fragrances
+franchise
+franchisee
+fraternity/sorority
+fraternity/sorority
+fraternity/sorority type
+free book
+free settler
+freebase api http header
+freebase api argument
+freebase api argument format
+freebase api argument type
+freebase api service
+freebase api service argument
+freebase api service category
+freebase api service status
+freebase app listing
+freebase application
+freebase apps help topic
+freebase apps help topic status
+freebase apps help topic tag
+freebase commons nomination
+freebase data task
+freebase labs project
+freebase query
+freebase task
+freebase tip
+freebase tip category
+freebase commons votes
+freebase cross reference
+freebase data upload status
+freebase database upload candidate
+freebase interest group
+freebase task status
+freebase wiki article
+freight
+freight service
+freight shipment classification
+french department
+french region
+french travellers and voyagers
+french arrondisement
+french canton
+french commune
+french department
+french municipal arrondisement
+french overseas collectivity
+french overseas department
+french overseas region
+french overseas territory
+french region
+french special collectivity
+frequency bandwidth
+freshwater fish
+friend
+friendship
+fruit
+fruit seed abundance
+fruit source
+fruit distribution location
+fruit harvesting event
+fruit harvesting group
+fruit harvesting site
+fuel
+fuel delivery method
+fuel economy
+fuel economy source
+fuel source
+fuel capacity
+fuel consumption
+fuel delivery method
+fuels
+fugitive
+fun
+function
+fund provider
+fundamental interaction
+funding
+fundraiser
+funeral home
+funeral services
+fungus
+furnace category
+furnaces
+furniture store
+furniture store type
+frsat
+gcmd keyword
+gcmd keyword1
+gh: approaches
+gh: companies
+gh: diagnostic type
+gh: focus areas
+gh: nonprofits
+gh: technologies
+giscience event
+gta game
+gta radio station
+gta vehicle
+gta weapon
+gtincode
+gabonese department
+gabonese province
+gadget
+gadget category
+gadget connectivity
+gadget connector
+gadget dimensions
+gadget screen
+galactic cluster
+galactic filament
+galactic group
+galactic interaction
+galactic interaction status
+galactic interaction type
+galactic shape
+galactic supercluster
+galaxy
+galaxy classification code
+gallery
+gambian district
+gambian region
+gambit
+gambler
+game
+game developer
+game mechanic
+game passing statistics
+game receiving statistics
+game rushing statistics
+game song key holder
+game designer
+game expansion
+game genre
+game publisher
+game theory game
+gameplay mode
+gamer
+games based on wham-o products
+gamma ray radiation
+garage door installation
+garden
+garden designer
+garden feature
+garden festival
+garden style
+garden tool
+garden type
+gardening hint
+gardening task
+garment
+gas station
+gas station services
+gay porn
+gear ratio
+gender
+gender enrollment
+gender group
+gender identity
+gender or age specific animal name
+gendered topic
+gene
+gene caballero
+gene group
+gene group membership
+gene group membership evidence
+gene ontology data source
+gene ontology group
+gene ontology group membership evidence
+gene ontology group membership evidence type
+gene ontology group type
+general discussion
+general contractor
+general election
+generation
+genetic sequence
+genetic test
+genome
+genome build
+genome curator
+genomic locus
+genre
+geo
+geo accommodation feature
+geo hint
+geocode
+geographic coordinate system
+geographic scope
+geographical feature
+geographical feature category
+geographical issue
+geographical scope
+geologic time period
+geologic time period extinct taxa
+geologic time period uncertainty
+geological process
+geological formation
+geometric dimension
+geometric property
+geometry
+georgian city
+georgian district
+georgian region
+geotagged image
+german travellers and voyagers
+german borough
+german city
+german district
+german government district
+german independent city
+german regierungsbezirk
+german rural district
+german state
+german urban district
+gesetz
+ghanaian district
+ghanaian metropolitan district
+ghanaian municipal district
+ghanaian ordinary district
+ghanaian region
+ghost
+gift card
+gift card category
+gift card issuer
+gift basket supplier
+gift shop
+given name
+glacier
+glacier status
+glacier terminus
+glacier type
+glider aircraft
+glider model
+global properties
+globla group enterprise
+glossary
+glyph
+go competition
+go organization
+go player
+goal
+godchild
+godparent
+golden book author
+golden book series
+golden books illustrator
+golf course
+golf course architect
+golf facility
+golf facility access
+golf course
+golf shot type
+golfer
+golfer extra
+golfer/caddie relationship
+good
+good beer guide edition
+google health
+google local
+google play category
+governing body of protected sites
+government
+government agencies affected
+government agency
+government agency extra
+government agreements
+government issued permit
+government office or title
+government permit type
+government position held
+government program
+government service
+government service audience
+government service channel
+government service duration
+government service type
+government office category
+government office location
+government position held extra
+governmental body
+governmental jurisdiction
+governments who debase
+governor
+governorate of kuwait
+governorate of palestine
+govt jurisdiction extra
+grade level
+graffiti crew
+graffiti piece
+graffiti writer
+grammatical aspect
+grammatical case
+grammatical category
+grammatical gender
+grammatical mood
+grammatical number
+grammatical person
+grammatical tense
+grand tour
+grand touring racing car
+granule
+grape variety
+grape variety composition
+graph api property hints
+grapheme
+graphic design service
+graphic design specialty
+graphic novel
+graphic novel artist
+graphic novel colorist
+graphic novel publisher
+graphic novel series
+graphic novel writer
+greater cincinnati airport
+greek deity
+greek hero
+greek loanword
+greek municipal unit
+greek municipality
+greek mythology
+greek periphery
+greek prefecture
+greek super-prefecture
+greek town
+green car
+greenpal lawn care
+greenpal lawn care twitter
+greenpal lawn care youtube
+grenadian parish
+grip
+grocery stores
+grocery store
+grocery store specialty
+ground retaining method
+group
+group class
+group qualifying teams
+group/competitor relationship
+grouped topic
+growing specimen
+growth habit
+grupo de iniciador local
+guam village
+guatemalan department
+guatemalan municipality
+guest musical performer
+guidebook
+guidebook series
+guild
+guinean prefecture
+guinean region
+guinean subprefecture
+guitar
+guitarist
+gun
+gun shop
+gun type
+gymnophobic person
+h-alpha
+hc - hereditary cataracts
+hcahpsanswer
+hcahpsmeasure
+hcahpsquestion
+hcahpssurvey
+heat member
+hilcc id
+html layout engine
+hud county place
+hud foreclosure area
+hud hmfa
+hud nonmetro fmr area
+hud section 8 area
+hvac service
+habitat
+habitat publication
+habitat suitability rank
+hack day project
+hadron
+hair color
+hair color
+hair removal
+hair removal treatments
+haitian arrondissement
+haitian commune
+haitian department
+hall of fame
+hall of fame discipline
+hall of fame inductee
+hall of fame induction
+hall of fame induction category
+handball disciplinary action
+handball disciplinary punishment
+handball league
+handball league season
+handball match
+handball match timeout
+handball organization
+handball player
+handball player match participation
+handball position
+handball referee
+handball roster position
+handball team
+handball team match participation
+handedness
+handheld system
+handyman
+hangout
+harbor type
+harbour
+hardiness zone
+hardly strictly bluegrass artist
+hardly strictly bluegrass festival
+hardly strictly bluegrass performance
+hardly strictly bluegrass stage
+hardness scale
+hardness specification
+hardness specification
+hardness test
+hardware
+hardware technology
+hardware and building supplies
+hardware and building supply specialty
+harm reduction-related
+harvest
+hash function
+haunted places
+haute couture
+hazardous material
+head coach fired by al davis
+head shop
+health
+health food store
+heath care provider
+heisman winner that has played for the raiders
+help area
+help center
+help section
+help topic
+help topic audience
+help topic relationship
+helynevek
+heraldic brisure
+heraldic charge
+heraldic charge tincture
+heraldic compartment
+heraldic coronet
+heraldic mantling
+heraldic ordinaire tincture
+heraldic ordinary
+heraldic supporter
+heraldic tincture
+heraldic torse
+heraldic variation of the field
+heraldic variation of the field tincture
+heraldic crest
+heraldic helm
+heraldry granting body
+heya
+heya/wrestler relationship
+hierarchy pattern category
+hierarchy schema pattern
+high lord
+high-performance concern
+highlevelfunctions
+highlight
+highway system
+hill
+historia
+historic buildings
+historic ship
+historical coaching tenure
+historical cycling roster position
+historical marker/memorial
+historical argument
+historical event
+historical event mention
+historical period
+history
+history model
+hoax
+hoax demystification
+hoax demystifier
+hoax location
+hoaxter
+hobby
+hobby shop
+hobbyist
+hockey player
+hockey stadium
+hockey team
+hogwarts house
+holding
+holiday
+holiday category
+holiday period
+holographic technology
+home furnishing store specialty
+home furnishings
+home inspection service
+home remodeling
+home remodeling services
+homeless-related organization
+homeless-related podcast
+homeless-related website
+homepage
+homestead steel works
+homestead, pa.
+homonym
+honduran department
+honduran municipality
+hong kong district
+honorary degree
+honorary degree recipient
+honour
+honoured person
+hormone
+horse
+horse breed
+horse riding
+horse race
+horse race form
+horse race type
+horse racing venue
+horse-owner relationship
+horse-trainer relationship
+hospital
+hospital ownership
+hospital ownership status
+hospitalization
+host
+host of oscar show
+hostage situation
+hostel
+hot tub
+hot wheels cars
+hot wheels series
+hotel
+hotel ameneties
+hotel booking system
+hotel brand
+hotel brand owner
+hotel grade
+hotel grading authority
+hotel guest visit
+hotel operator
+hours
+house
+house founder
+house lord
+house lordship
+house master
+house seat
+house weapon stint
+house master tenure
+household pest
+how to
+hugmyndir
+hull configuration
+hull type
+hull material
+human language
+human child of divinity
+human mate of divinity
+human measurement
+human stampede
+human stampede cause
+humanoid cylon
+humanoid cylon model
+hungarian capital city
+hungarian county
+hungarian urban county
+hunting supplies
+hybrid
+hybrid tea
+hybrid animal
+hybrid fruit
+hybrid parent classification
+hybrid parent gender
+hybrid parentage
+hybrid sport
+hydraulic excavator
+hypervelocity star
+i-kiribati island council
+i-kiribati uninhabited island
+iata airline designator
+icao airline designator
+icd-9-cm classification
+ids
+ign video game version
+ign video game version locale
+ign video game version release
+isbn
+ismir04
+iso country
+ist occurrence
+it budget
+iucn category
+ice hockey coach
+ice hockey conference
+ice hockey division
+ice hockey player
+ice hockey position
+ice hockey previous roster position
+ice hockey roster position
+ice hockey team
+ice skating activities
+ice skating rink
+iconclass
+iconic grateful dead art
+icones d'iconologia 2.0
+id
+idea
+identifier
+identifier issuer
+identity
+idiom
+ifcaddress
+ifcaddresstypeenum
+ifcbuilding
+ifcelementcompositionenum
+ifcobject
+ifcobjectdefinition
+ifcobjectplacement
+ifcorganization
+ifcperson
+ifcpostaladdress
+ifcproduct
+ifcproductrepresentation
+ifcrelaggregates
+ifcrelassigns
+ifcrelassignstocontext
+ifcrelassignstoproduct
+ifcrelassociates
+ifcrelcontainedinspatialstructure
+ifcreldefinesbyobject
+ifcreldefinesbyproperties
+ifcreldefinesbytype
+ifcrelnests
+ifcrelreferencedinspatialstructure
+ifcrelservicesbuildings
+ifcroot
+ifcspatialelement
+ifcspatialstructureelement
+ikariam building
+ikariam building level
+ikariam cost
+ikariam research
+ikariam research category
+ikariam resource
+ikariam resource category
+ikariam resource quantity
+ikariam ships
+ikariam unit
+illustrator
+image
+image aspect ratio
+image stabilization capability
+image scanner
+imager
+immunizations
+impact strength specification
+impersonated fictional character
+impersonated celebrity
+impersonated ethnicity
+impersonated family
+impersonated individual
+impersonated organization
+impersonated profession
+impolite uri
+import export service
+import export service type
+importance of macromolecular crowding
+important person
+important topics
+imports and exports
+imports/exports by industry
+impostor
+imprisonment
+impromptu lubes people might use without, like, dying
+inanimate
+inaugural speech
+inauguration
+inauguration quotation
+inauguration speaker
+incarceration
+incompatible types
+independent agency of the united states government
+independent city of the philippines
+index score
+index item
+index manager
+indian tribes that lewis &amp; clark encountered
+indian city
+indian district
+indian division
+indian state
+indian sub-division
+indian subdistrict
+indian union territory
+indication
+indicator lamp
+indirect election
+individual barterer
+indonesian city
+indonesian municipality
+indonesian province
+indonesian regency
+indonesian subdistrict
+indoor accommodation
+industrial commodity
+industrial laundry service
+industrial laundry service type
+industry
+industry standard
+industry standard focus
+industry standard status
+infectious disease
+infectious disease
+infidelity
+inflorescence
+influence node
+influencer
+influencer category
+influencing organization
+influenza sample
+influenza subtype
+informal biological grouping
+information
+information source
+infrared radiation
+infrastructure
+infused spirit
+infused spirit style
+ingredient
+ingredients
+inhabited fictional character
+inhoud
+injured person
+injury
+injury treatment
+injury-causing event
+inkjet printer
+inn
+innovation
+innovative work
+innovator
+input category
+input category value
+input field
+input method
+inscription auto entrepreneur
+inspection finding
+inspection procedure
+inspection report
+inspector
+inspiration
+instance
+instance of game theory game
+institution
+instrument
+instrument operating mode
+insulator
+insurance
+insurance service
+insurance type
+integer
+integer range
+integer ratio
+integer statistic
+integers
+integrated amplifier
+integrated camera
+integrated inspection report
+integrated tool carrier
+integrity claim
+integrity index
+intellectual games club
+intellectual games clubs participation
+intellectual games competition
+intellectual games participant
+intellectual games season
+intellectual games team
+intellectual property
+intellectual property license
+intention
+intentional community
+intentional community type
+interactioncategory
+interactions
+interest
+interior
+interior design service
+interior pressure washing services
+interment site
+internal influencer
+international patent category
+internet
+internet business
+internet marketing
+internet protocol
+internet stream
+internet video
+internet video actor
+internet video broadcaster
+internet video character
+internet video creator
+internet video crew gig
+internet video crew role
+internet video crewmember
+internet video director
+internet video episode
+internet video genre
+internet video performance
+internet video producer
+internet video producer credit
+internet video production role
+internet video regular performance
+internet video season
+internet video series
+internet video series crew gig
+internet video series producer credit
+internet video writer
+internet connection method
+internet forum
+internet forum administration
+internet forum administrator
+internet forum topic
+internet marketing service
+internet marketing service type
+internet meme
+internet service provider
+intersection
+intervention category
+interview
+interviewee
+interviewer
+introduced species
+introduced species info
+intezmenyek
+invention
+inventor
+inverse relationship
+investment
+investment round
+investment broker
+investment scheme
+investment service type
+investment services
+investments
+iranian county
+iranian province
+iraqi province
+irish politician
+irish province
+irish county
+irish province
+iron
+islamic travellers and voyagers
+island
+island group
+island of saint kitts and nevis
+island region of the caribbean netherlands
+isotope
+isotope decay
+israel
+israeli district
+israeli musician
+israeli subdistrict
+issue
+issue type
+issue extra
+issuer
+it may lubricate but you are likely to regret it
+italian travellers and voyagers
+italian autonomous province
+italian autonomous region
+italian commune
+italian comune
+italian frazione
+italian loanword
+italian province
+italian region
+item
+item cost
+item description
+item feature
+item image
+item resource
+jamaican parish
+janitorial services
+janitorial services type
+japanese name
+japanese area
+japanese branch administration
+japanese city
+japanese city/town
+japanese county
+japanese designated city
+japanese district
+japanese prefecture
+japanese special ward
+japanese subprefecture
+japanese ward
+java script libraries
+javascript fragment
+jazz
+jazz album
+jean measurement
+jeans
+jerusalem
+jewelry collection
+jewelry piece
+jewelry shop
+jewelry type
+jewish cemetery
+jewish cemetery use
+jewish community
+jewish community existence period
+jewish studies collection
+jewish studies field
+jewish studies periodical
+jewish studies research unit
+jewish studies researcher
+jewish settlement
+jewish settlement type
+job request
+job title
+jockey
+joint venture
+joke
+jones &amp; laughlin steel company
+jordanian province
+jordanian sub-district
+jour
+journal
+journal article
+journal editor
+journal publication
+journalist
+judaica owner
+judge
+judges score
+judicial tenure
+judicial title
+jump height card
+junkyard
+jurisdiction
+kp
+kwconnection
+kwrelcategory
+kwrelation
+kwsentence
+kwtopic
+kagiso
+kagiso serves as an online and local resource for citizens and businesses in gauteng. it facilitates
+kazakhstani city
+kazakhstani maslikhat
+kazakhstani province
+kazakhstani rayon
+keel type
+kennel
+kennel club
+kennel type
+kentucky / boone county
+kenyan district
+kenyan province
+kerndoel
+key
+key application
+key concept
+key contribution
+key contributor
+key violation
+keyword thesaurus
+keyz
+kickstarter project
+kid icarus: uprising ar card
+kind of episode
+kind of pyramid
+kind of rivalry
+kingdom
+kingdom of wallis and futuna
+kitchen
+kitchen supplies
+klausur
+knot
+knot component
+knot field
+knot type
+knowledge asset
+knowledge base article
+knowledge based
+knowledge organization system
+kommentar
+l-2-hga
+land learning centre
+lc
+lcc end
+lcc start
+leed certification
+leed certified corporate headquarters
+leed rating system
+leed registered building
+leed registration and certification
+lego basis
+lego element
+lego element design
+lego model
+lego model designer
+lego part listing
+lego set
+lego theme
+letsystem
+lmds spectrum
+labeled
+labor
+labour dispute
+labour dispute cause
+labour dispute type
+lake
+lake type
+land cover class
+land cover classification system
+land manager
+landfill
+landform class
+landing zone
+landscape plant
+landscape architect
+landscape design
+landscape project
+landscaping service
+language
+language creator
+language dialect
+language family
+language regulator
+language writing system
+language writing type
+language edition
+language in fiction
+language written in
+languoid
+languoid class
+lancamento
+lap record
+lap record holder
+lap record vehicle
+large dog breed
+last.fm musician
+latex-safe lube
+latex-unsafe lube
+latitude
+latvian municipality
+latvian republican city
+launch
+launch payload
+launch site
+launch site
+laundromat
+laundromat services
+laundry service
+law
+law enforcement agency
+law enforcement officer
+law firm
+law society
+lawsuit
+lawyer
+lawyer guests
+lawyer type
+lead agency or organization
+leadenhalluk.com
+leadership
+leadership convention
+leadership role
+leaf retention
+leaf arrangement
+leaf base
+leaf insertion
+leaf margin
+leaf margin form
+leaf position
+leaf shape
+leaf tip
+leaf venation
+lean angle
+learner
+learning objective
+learning objective level
+learning resource
+learning trajectory
+learning objective
+lebanese county
+lebanese province
+leergebied / vak
+legal case
+legal dispute
+legal system
+legal aid
+legal aid practices
+legal case
+legal case/party relationship
+legal defence
+legal entanglement
+legal field
+legal issue
+legal right
+legal signatory
+legal subject
+legal system
+legislative assembly
+legislative position held
+legislative committee
+legislative committee membership
+legislative committee title
+legislative election results
+legislative matter
+legislative matter type
+legislative session
+legislator
+legs earned
+length range
+length floating point range statistic
+length of time statistic
+length statistic
+lens classification
+lens family
+lens hood
+lens mount
+lens mounting type
+lens series
+lens version
+lesson
+letter
+letter of marque
+letter, cabaniss papers
+level of administrative area
+levels of care
+lexical name
+lexical category
+liability
+liberian county
+liberian district
+libraries
+library
+library category
+library edition
+library system
+library system tenure
+librettist
+libyan district
+licence
+licence requirement
+license
+license permission
+license prohibition
+license usage
+licensed object
+licensee tenure
+licensing work
+liege lord
+life science database
+life science external reference
+life science namespace
+life science sparql endpoint
+life science software
+lifetime batting statistics
+lift tenure
+lift type
+lifting &amp; material handling
+ligament
+ligature
+light attributes
+light characteristic
+light color range
+light sequence
+lighthouse
+lighthouse construction material
+lights out program
+limousine service
+lineage member
+lingerie shop
+linguagem
+linguistic hint
+link
+linktv video
+linked data
+linked data website
+linked data website mapping
+linkedin profile
+linux kernel configuration option
+linux kernel release
+linux kernel release candidate
+liquor store
+liquor store type
+list
+list entry
+list category
+listed site
+listed serving size
+listing type
+lists
+literary genre
+literary school or movement
+literary series
+literary technique
+literature subject
+literature for children
+literature of the discoveries
+lithuanian city municipality
+lithuanian county
+lithuanian district municipality
+lithuanian municipality
+litigant
+litigation role
+litigation role
+little golden books
+live album
+lived with
+loader backhoe
+lobbying client
+lobbying session
+lobbyist
+local business
+local name
+local business
+local council of malta
+local currency
+local currency area
+local food area
+local food promoter
+local food resource types
+localbusiness
+localbusinesscategory
+localized uri
+locally famous person
+location
+location extra
+location in fiction
+location in neighborhood
+location in mythology
+location intersection
+location of biosafety facility
+location of events
+location of proposed structure
+location on top of something buried
+location parking
+location represented in fiction
+location union
+location with mains power
+location/symbol relationship
+lock
+lock location
+lock system
+locksmith
+locksmith specialties
+locomotive
+locomotive builder
+locomotive class
+locomotive class/operator relationship
+locomotive owner
+locomotive ownership
+lodging amenity
+logo
+logogram
+london theatre stars
+london borough
+london city borough
+london royal borough
+long list nomination
+long-list nominee
+long-listed work
+longitude
+longitudinal study
+longitudinal study wave
+lontar collection
+look-alike
+loom fiber orientation
+lost artwork
+lost character
+lost episode
+lost work
+lottery
+lottery game
+loudspeaker
+lube
+luxury car
+lyricist
+legume
+m:tg tribal card
+marta rail station
+mfsa
+mg
+mla operator
+mla location
+mla location tenure
+mla specialization
+mlp generation
+mops group
+mql error
+msrp
+mst3k episode
+mst3k short
+macedonian municipality
+macedonian region
+machine learning algorithm
+machine learning model class
+machine readable string
+machine shop
+machine shop services
+magazine
+magazine issue
+magazine genre
+magazine import
+magazine photo
+magazine photo appearance
+magazine photo model
+magazine photo type
+magazines
+magic artist
+magic block
+magic card
+magic card cycle
+magic card listing
+magic color
+magic color indicator
+magic cost
+magic deck
+magic deck builder
+magic deck card
+magic developer
+magic double-faced card
+magic flip card
+magic payment
+magic payment element
+magic plane card
+magic printing
+magic rarity
+magic scheme card
+magic set
+magic spanning card
+magic spanning card segment
+magic split card
+magic split card segment
+magic symbol
+magic token
+magic type
+magic vanguard card
+magic spell
+magic trick
+magician
+magnetic moment
+mailing list
+mailing list subject
+main equipment
+main series book
+mains power
+maintenance profile
+maison de disque
+major appliance
+malady
+malady mention
+malaysian district
+malaysian division
+malaysian federal territory
+malaysian state
+man-made object
+man-made thing
+managed artist
+manga author
+manga illustrator
+manga publisher
+manga title
+manga series
+manifestation
+manmade object
+manual
+manual software action
+manufactured component
+manufactured component category
+manufactured component instance
+manufactured drug form
+manufacturer
+manufacturing plant
+manufacturing plant\model relationship
+manufacturing location
+manufacturing plant operation
+manufacturing plant production
+manuscript
+map shop
+map projection
+map projection property
+map projection system
+map projection type
+map shop categories
+mapping program
+marijuana strains
+marina
+marina facilities
+marine creature
+marine terminal
+maritime museum
+market index
+market share
+market size
+marketing
+marketing services
+marketing services specialties
+marriage
+marriage (of fictional characters)
+marriage/union type
+married to
+marshall islands municipality
+martial art
+martial art category
+martial artist
+martial arts certification
+martial arts organization
+martial arts qualification
+martial arts studio
+mascot
+mass data load
+mass data operation
+mass transportation system
+mass transportation system operator
+mass statistic
+massage
+massage service
+massdeaths
+masters thesis
+match
+match competitor
+match type
+match/boxer relationship
+match/competitor relationship
+material
+material composition
+material enumeration
+material coefficient of thermal expansion specification
+material in fiction
+material specific heat capacity specification
+material strength specification
+material strength term
+material thermal conductivity specification
+mathematical model types
+mathematical concept
+mathematical operator
+mathematical operator type
+mathematical symbol
+mathematician
+mathematics
+mattress store
+maturamkaisitlang
+maturity
+mayo clinic
+meal
+meal type
+meal/dish
+meal/dish relationship
+meaning of notable word
+means
+means of propulsion
+measure
+measured ratio
+measured body part
+measured material
+measured person
+measured radiation band
+measurement system
+measurements
+measuring instrument
+meat product
+meat product boneless category
+meat processing activity
+meat processing company
+media
+media coverage
+media format
+media rights holder
+media type
+media asset
+media asset subject
+media format
+media franchise
+media genre
+media genre equivalent topic
+media mention
+media package
+media release
+media release content
+median lethal dose
+medic one program
+medical equipment
+medical term
+medical treatment
+medical condition in fiction
+medical device
+medical insurance
+medical laboratory
+medical office
+medical specialty
+medical supplies
+medical trial
+medical trial design
+medical trial health authority
+medical trial phase
+medical trial sponsor
+medical trial type
+medicinal plant
+medline plus
+meedan source
+meeting
+meeting focus
+meeting organizer
+meeting participant
+melee weapon
+member
+member of parliament
+member of recovery accountability and transparency board
+membership organization
+menu
+menu item
+menu provider
+menu section
+merge
+merge task
+meta
+meta-tagged event
+metacritic topic stub (for uri templating)
+metadata keyword
+metadata keyword1
+metadata topic cross reference
+metal foundry
+metaweb framework
+meteor shower
+meteor shower observation
+meteorite
+meteorite source
+meteorite classfication
+meteorological service
+meter
+metering type
+method of demise
+method of infectious software transmission
+metric
+metric member
+metropolitan area
+metropolitan area anchor
+metropolitan area category
+mexican federal district
+mexican federal district borough
+mexican food ingredient
+mexican municipality
+mexican state
+miami
+microdata type
+microdata type category
+micronesian municipality
+micronesian state
+microwave radiation
+midi excavator
+migration location
+migratory taxon
+miles or kilometers
+milestone
+military aircraft use
+military character
+military character service
+military combatant
+military combatant group tenure in fiction
+military combatant group in fiction
+military combatant in fiction
+military command
+military command in fiction
+military commander
+military commander in fiction
+military conflict
+military conflict in fiction
+military guests
+military person
+military resource
+military service
+military theater
+military unit in fiction
+military unit represented in fiction
+military alliance
+military casulaties in fiction
+military combatant group
+military post
+military post extra
+military post use
+military posting
+military rank
+military rank in fiction
+military resource in fiction
+military unit
+military unit extra
+military unit place of origin
+military unit place of origin in fiction
+military unit posting
+military unit size designation
+military unit size designation in fiction
+mine
+mined material
+mineral
+mineral  water and mineral springs in germany
+mineral authority
+mineral discoverer
+mineral group
+mineral supergroup
+mineral water and mineral springs in algeria
+mineral water and mineral springs in austria
+mineral water and mineral springs in china
+mineral water and mineral springs in england and wales
+mineral water and mineral springs in france
+mineral water and mineral springs in greece
+mineral water and mineral springs in italy
+mineral water and mineral springs in poland
+mineral water and mineral springs in the usa
+mineral water, mineral springs and geothermal springs in armenia
+mineral water, mineral springs and geothermal springs in iceland
+mineral water, mineral springs and geothermal springs in the czech republic
+mineral water and mineral springs in portugal
+mineraloid
+mini excavator
+mini golf course type
+miniature golf course
+mining
+mining extraction method
+minuteman era character
+miracle
+misc.
+mission
+mission segment
+mission service
+mission destination
+mission statement
+mixed drink
+mlsservice
+morst author
+morst keyword
+morst reference
+morst scan
+mobile excavator
+mobile computer
+mobile computer feature
+mobile home retailer
+mobile operating system
+mobile operating system release
+modding community
+model
+model view
+model year
+model year style
+model year trim
+modeling language
+modeling agency
+modeling specialty
+modelling tool
+models &amp; computational tools
+moderatoren:
+modified topic
+module
+moldovan autonomous territory
+moldovan city
+moldovan district
+moldovan territorial unit
+molecular entity
+monarch
+monastery
+monetary fund
+monetary range
+money value
+monster
+monster creator
+monster gender
+monster species
+monstrous act of creation
+monstrous attack
+monstrous attributes
+monstrous clime
+monstrous diet
+monstrous imperative
+monstrous source
+monstrous works of fiction
+monstrously fatal flaw
+month
+monthly return of offenses known to the police
+moon
+moral advocate
+moral agent
+moral argument
+morally disputed action
+moroccan prefecture
+moroccan province
+moroccan region
+morpheme
+mortgage loan
+mortgage service
+mosaic broadcaster
+mosaic country
+motel
+motivation
+motivation process
+motor
+motor grader
+motor scraper
+motorcycle accident lawyer
+motorcycle internet forum
+motorcycle internet forum thread
+motorcycle blog
+motorcycle blog entry
+motorcycle body style
+motorcycle brake
+motorcycle carburetor
+motorcycle condition
+motorcycle dealer
+motorcycle dealership
+motorcycle design style
+motorcycle distinguishing feature
+motorcycle drive type
+motorcycle engine generic description
+motorcycle gas consumption
+motorcycle gear (product)
+motorcycle gear manufacturer
+motorcycle gear subtype
+motorcycle gear type
+motorcycle generation
+motorcycle magazine
+motorcycle make
+motorcycle manufacturer
+motorcycle model
+motorcycle model number
+motorcycle model year
+motorcycle owner
+motorcycle paint color
+motorcycle part
+motorcycle part manufacturer
+motorcycle part number (manufacturer )
+motorcycle part number (retailer)
+motorcycle part retailer
+motorcycle product review
+motorcycle race
+motorcycle racing team
+motorcycle ride report
+motorcycle section
+motorcycle series
+motorcycle transmission
+motorcycle video
+motorcycle w/ option package msrp
+motorsport race
+motorsport racing class
+motto
+mountain
+mountain classification jersey holder
+mountain listing
+mountain age
+mountain pass
+mountain range
+mountain type
+mountaineer
+move
+movement
+movements
+movie
+movie crew
+movie release
+movie terms
+movie theaters
+movie theater
+movie theater classification
+movie theater screen format
+movie theatre
+movie theatre chain
+movie theatre sound systems
+movies
+movies featuring wham-o products
+moving service
+moving service specialty
+mr. irrelevant
+multi terrain loader
+multi-part musical release
+multi-event recurring sports competition
+multi-event tournament
+multi-star system class
+multifunction printer
+multigraph
+multigraph phoneme usage
+multigraph size
+multipart tv episode
+multiple unit class
+multiple star system
+municipality of bermuda
+municipality of cyprus
+municipality of finland
+municipality of greenland
+municipality of iceland
+municipality of mongolia
+municipality of puerto rico
+municipality of qatar
+municipality of sao tome and principe
+municipality of aland islands
+muppet show guest star
+muppet show guest stars
+muscle
+muscle car
+museum
+museum director
+museum ship
+museums
+music
+music album
+music artist
+music catalog entry
+music festival
+music genre
+music halls
+music recording
+music service
+music artist extra
+music catalog
+music catalog creator
+music festival event
+music festival tour
+music group
+music manager
+music publication
+music recording extra
+music release extra
+music school
+music school subject
+music shop
+music video
+music video character
+music video choreographer
+music video crewmember
+music video director
+music video genre
+music video gig
+music video job
+music video network
+music video performance
+music video performer
+music video subject
+musicbrainz
+musical album
+musical album type
+musical artist
+musical contribution
+musical director
+musical form
+musical game
+musical game song
+musical group
+musical group membership
+musical movement
+musical performance role
+musical recording
+musical release
+musical release component
+musical soundtrack
+musical track (detailed view)
+musical artist
+musical chord
+musical game/song relationship
+musical genre
+musical group
+musical group membership
+musical instrument
+musical instrument company
+musical scale
+musical tribute act
+musical voice
+musicalcontent
+musicalstyle
+musical credits
+musician
+mutation
+my musical universe
+my spectacle universe
+myfirsttype
+mysophobic person
+myth/legend
+mythical creature
+mythical creature location
+mythical group
+mythical group member
+mythical group membership
+mythical person
+mythological art subject
+mythological character
+mythological object
+mythology
+mythology origin location
+mythology source
+musicas
+musteri
+musteri temsilcisi
+musteri iliskileri yonetimi
+mutargyak
+muveszek
+nascar driver
+nascar race
+nascar racing organization
+nascar racing organization owner
+nascar venue
+nascar race instance
+nascar race result
+nascar sponsor
+nbi designated level of service
+nbi inventory route
+nbi responsible agency
+nbibridge
+nbiroad
+ncaa basketball final four broadcaster
+ncaa basketball team
+ncaa basketball tournament
+ncaa basketball tournament game
+ncaa basketball tournament round instance
+ncaa tournament region
+ncaa tournament seed
+nces school
+ndt code
+nfl game
+ngo
+nistor ionel
+nlcd 1992 classes
+nps classification
+nrcs wildlife leaflet
+nris listing
+nail salon
+nail salon services
+name
+name variation relationship
+name history
+name source
+name suffix description
+name-changed topic
+named mythical creature
+named mythical creature extended family
+named mythical creature marriage
+named mythical creature sibling relationship
+named person
+namesake
+namespace
+namespace hints
+naming information
+national anthem
+national championship jersey holder
+national forest
+national library
+national park of new zealand
+national anthem of a country
+natural location
+natural gas production
+natural or cultural preservation agency
+natural or cultural site designation
+natural or cultural site listing
+natural satellite
+naturalist's observations
+near-earth object
+near-earth object classification
+nebula
+negation
+neighborhood
+neighbourhood house
+neolithicingredient
+nepalese district
+nepalese region
+nepalese zone
+nerf dart
+nerf gun
+nerve
+nest construction
+nest level
+nest predator
+nest shape
+netflix genre
+netflix title
+network
+network service
+new age studio kmstudio
+new age, classic online radio
+new age, classic, easy listening instrumental, contemporary
+new drug application
+new schema
+new south wales corps member
+new york city borough
+new zealand city
+new zealand district
+new zealand region
+new zealand regional council
+new zealand self administering territory
+new zealand special territorial authority
+new zealand state in free association
+new zealand territorial authority
+new zealand unitary authority
+new7wonders foundation finalist
+new7wonders foundation wonder
+news
+news story
+news topic
+news article
+news-report
+news-reported event
+news-reporting organisation
+newsagent
+newspaper
+newspaper endorsement
+newspaper issue
+newspaper owner
+newspaper circulation
+newspaper circulation area
+newspaper edition type
+newspaper price
+nicaraguan autonomous region
+nicaraguan department
+nicaraguan municipality
+nigerian local government area
+nigerian state
+night club
+nightclub
+nightclub promoter
+nightclub residency
+niveau
+nix derivation
+nlandscape
+nobel honor
+nobel prize winner
+nobel subject area
+nobel prize winner
+nobility guests
+noble house
+noble person
+noble rank
+noble rank gender equivalence
+noble title
+noble title gender equivalency
+noble title tenure
+node
+nominated type
+nomination metadata
+nomination page metadata
+non smoking rooms
+non-agent
+non-cited violation
+non-fictional footage
+non-profit classification
+non-profit designation
+non-profit extra
+non-profit registration
+nonbreeding location
+nonbreeding taxon
+nonprofit funding
+nonprofit funding source
+nonprofit organization
+normalized dog temperament
+north korean province
+northern irish county
+northern irish district
+northern kentucky
+northern mariana islands municipality
+norwegian county
+norwegian dependency
+norwegian integral overseas territories
+norwegian municipality
+not lube
+notability hints
+notable
+notable object
+notable paths
+notable weapon
+notable event participants
+notable skateboard trick
+notary public
+notation
+note
+noth london
+noun
+novelist
+nuclear powerplant
+nuclear reactor coolant
+nuclear power station
+nuclear reactor
+nuclear reactor status
+nuclear reactor type
+nudibranch
+number
+number of rooms
+number of stars
+numbered special edition
+numeral system
+numeric specification
+nutrient
+nutrient extra
+nutrition
+nutrition fact
+nutrition information
+ocl support
+os compatibility
+osgb36
+ost occurrence
+ova episode
+oath of fealty
+object
+object profile
+objective
+objetivo
+observance
+observance founder
+observance host location
+observation
+observation type
+observation satellite
+observatory
+observed property
+occupancy
+occupation
+occupational category
+occupational division
+occupational group
+ocean observatory
+oceanographic research vessel
+odometer reading
+offensive coaching tenure
+offensive content type
+offer
+offering
+office supplies
+officers
+official performance
+official website
+official symbol
+official symbol variety
+official website owner
+oil field
+oil capacity
+oil production
+oil spill
+oil spill cause
+old wives tales
+olympic torch relay
+olympic torchbearer
+olympic athlete
+olympic athlete affiliation
+olympic athlete/competition relationship
+olympic athlete/demonstration competition relationship
+olympic bidding city
+olympic city bid
+olympic demonstration competition
+olympic discipline
+olympic event
+olympic event competition
+olympic games
+olympic host city
+olympic mascot
+olympic medal
+olympic medal (demonstration)
+olympic participating country
+olympic torch relay location
+olympic venue
+omani district
+omani governorate
+online catalog to jewish studies collection
+online classical radio
+online gaming id
+online gaming network
+online guide to jewish studies collection
+online jewish studies item
+online project
+onomasia
+onsite child care
+ontology
+ontology attribute
+ontology attribute mapping
+ontology class
+ontology class mapping
+ontology instance
+ontology instance mapping
+ontology namespace
+open times
+opening times
+opera
+opera character
+opera company
+opera designer
+opera designer gig
+opera designer role
+opera director
+opera genre
+opera house
+opera libretto
+opera producer
+opera production
+opera production staff gig
+opera production staff role
+opera production staffmember
+opera recording
+opera role
+opera and music
+opera character voice
+opera singer
+operating room
+operating system
+operating system developer
+operation
+operation arity
+operational
+opinion collection
+opinion holder
+opportunity
+opposite
+opposite relationship
+optical material
+optical instrument
+optical shop
+optician
+option
+option package
+option package
+option/ build relationship
+option/trim relationship
+optional value
+options
+optometrist
+optometrist office
+or constraint
+orbit
+orbit - geosynchronous
+orbit type
+orbit centricity classification
+orbit descriptions
+orbit eccentricity classification
+orbit inclination classification
+orbit synchronicity classification
+orbital relationship
+orbital period
+orbited body
+orchard
+orchard contents
+orchard developer
+orchestra
+orchestral work
+order
+order of chivalry
+order of chivalry category
+organic object
+organic search
+organic thing
+organism
+organism classification
+organism classification placement
+organism classification rank
+organism observation
+organism part
+organism structure
+organizador de iniciador local
+organization
+organization category
+organization location
+organization member
+organization relationship
+organization advisor
+organization committee
+organization committee membership
+organization committee title
+organization extra
+organization founder
+organization governorship
+organization in fiction
+organization leader
+organization leadership
+organization legal structure
+organization member
+organization membership
+organization merger
+organization name change
+organization partnership
+organization scope
+organization sector
+organization spin-off
+organization termination type
+organization type
+organizational unit
+organizational certification
+organizations
+origami model
+original idea
+original sentence
+originator catalog entry
+originator of jewish studies collection
+ornithological society
+osborn family member
+oscar award show
+oscar venue
+oscar winner who refused award
+other adaptations
+ottoman empire
+outcome
+outcomeofcare
+outdoor accommodation
+outdoor activities
+outdoor additions
+outlet shop
+outlook
+overlapping code
+overturned conviction
+owned animal
+owner
+owner of famous object
+owner of intellectual property
+ownership
+oxford churches
+oxford theatres
+oyster
+oyster bar
+oyster farm
+oyster size
+p2p protocol
+p2p software
+pif partner
+pov character
+purl
+pyo site
+page three girl
+pagination
+paid support
+paintball field
+painted cave
+painter
+painting service
+painting service type
+pakistani capital territory
+pakistani centrally administered area
+pakistani division
+pakistani province
+pakistani territory
+palauan state
+paleoingredient
+palestine
+panamanian comarca
+panamanian district
+panamanian province
+pankaj
+papal regalia, insignia and perks
+papua new guinean district
+papua new guinean province
+papua new guinean region
+parade
+parade in neighborhood
+paraguayan department
+paraguayan district
+parasite group
+parasitism
+parasitism type
+parent institution of judaica owner
+parent jewish studies collection
+parish of antigua and barbuda
+parish of bermuda
+parish of guernsey
+parish of jersey
+parish of macau
+parish of montserrat
+parish of saint kitts and nevis
+parish of saint vincent and the grenadines
+parish of the isle of man
+park system
+park in neighborhood
+parking
+parking facility
+parking orbit satellite
+parks
+parliament
+parliamentary session
+parliamentary election
+parliaments
+parodied subject
+parody
+part 1 offense
+part of saint helena, ascension and tristan da cunha
+part of a tall ship
+partial containment relationship
+participant
+participated event
+participation
+participation group
+participation role
+particle spin
+particle-antiparticle
+partners in flight score
+partnership
+partnerships
+party
+party attendance
+party choice
+party host
+party supplies
+party attendance
+party, festival, or celebration event
+passing
+passing as
+passive candidate
+passport service
+pastor
+patent
+patent assignee
+patent application status
+patent office
+patented item
+path author
+path step
+patient record
+patrocinador iniciador
+patron
+patron-client relationship
+patronage product
+patronage sector
+pattern theorem
+pawn shop
+payment
+payment type
+peace treaty
+pedigreed animal
+peer relationship
+pen name
+people
+percent specification
+percentage range
+performance
+performance or entertainment event
+performance venue
+performed song
+performer
+performer, entertainer, or presenter
+performing art
+perfume and cosmetics
+perfumer
+periodic table block
+periodical
+periodical format
+periodical format period
+periodical frequency
+periodical online edition
+periodical publication date
+periodical publisher
+periodical publisher period
+periodical subject
+periodical editor
+permaculture principle
+permaculture element
+permaculture element function
+permaculture element need
+permaculture element product
+permaculture ethic
+permaculture system
+permission
+person
+person or being in fiction
+person accused of a crime
+person extra
+person impersonated on snl
+person name honorary title
+person name suffix
+person nickname
+person or entity appearing in film
+person sign
+person who died of an unusual death
+person with name
+person with uncertain date of birth
+person/deity with alleged paranormal power
+persona
+personal endorsement
+personal appearance role
+personal best
+personal certification
+personal film appearance
+personal film appearance type
+personal gender identity
+personal name
+personal name element
+personal name type
+personal training
+personne
+personnel
+peruvian province
+peruvian region
+pest
+pest control
+pest control services
+pest impact
+pesticide
+pesticide class
+pesticide target
+pet
+pet apparel
+pet apparel company
+pet apparel company product
+pet apparel manufacturer
+pet diagnostic test
+pet disease cause
+pet disease risk factor
+pet disease symptom
+pet disease treatment
+pet gender
+pet owner
+pet ownership
+pet supply
+pet boarding
+pet care
+pet care service
+pet disease or medical condition
+pet grooming
+pet services
+pet store
+pet with medical condition
+petal arrangement
+petroleum product class
+ph.d. candidate
+ph.d. thesis
+pharaoh
+pharmacy
+phase
+phase of matter
+phobia
+phone
+phone number
+phone open times
+phone sandbox
+phone service
+phoneme
+phonogram
+photograph
+photographed event
+photographer
+photographer specialization
+photographic technique
+photovoltaic power station
+physical input
+physical magic card
+physical domain
+physical therapist
+physical therapy office
+physical therapy service
+physical therapy treatment
+physically instantiable
+physician
+physiognomy
+piano service
+pickup location
+picture framing
+picture framing services
+pictures
+pieces
+pier
+pier use
+piercing
+piercing artist
+piercing jewelry
+piercing location
+pilot
+pinball machine
+pinball machine basis
+pinball machine designer
+pinball machine manufacturer
+pinball machine type
+pinball simulation
+pipe maker
+pipe tobacco
+pipe tobacco component
+pipe tobacco form
+pipeline
+pipeline accident
+pipeline transported substance
+piracy event
+pirate
+piston configuration
+piston engine
+pitch medium
+pitchperson
+place
+place lived
+place mention
+place of exile
+place of publication period
+place of interment
+place of worship
+place of worship historical use
+place with neighborhoods
+places
+places visited eastward by lewis &amp; clark
+places visited westward by lewis &amp; clark
+plaintiff
+planet
+planet extra
+planetarium
+planetarium projector
+planetary classification
+planetographic coordinate
+planetographic coordinate system
+planets
+planets in fiction
+planned event
+planned future event
+plant
+plant anaerobic tolerance
+plant category
+plant disease
+plant disease cause
+plant disease conditions
+plant disease host
+plant disease triangle
+plant duration
+plant event
+plant fertilization requirements
+plant growth form
+plant growth rate
+plant legal status
+plant list
+plant morphology
+plant propogation method
+plant shape
+plant tolerance
+plant toxicity
+plant disease documentation
+plant form
+plant lifecycle
+plant nursery
+plant/ model year relationship
+planted plant
+plaque
+plaque commemorated person
+plaque installing organization
+plaque person relationship
+plaque dedication
+plastic
+plat
+platform
+play
+play off qualifier
+play off results
+player
+player game statistics
+player passing statistics
+player receiving statistics
+player rushing statistics
+player that al davis signed to a ridiculous contract and then released before they finished their first season
+playing card deck type
+playing card game
+playing card game play direction
+playmate
+playwrights
+plopquiz
+plot
+plot event
+plugin
+plumbing service
+plural topic
+plural form
+plural topic
+pluralization rule
+pluralized expression
+plutoid
+pocket style
+podcast
+podcast feed
+podcaster
+podium placement
+poem
+poem character
+poet
+poetic meter
+poetic verse form
+poets
+point of diversion
+point of interest
+points competition jersey holder
+pokemon basis
+poker variant
+pokemon
+pokemon type
+pole weapon
+police station
+police department
+police station
+polish city of county right
+polish county
+polish province
+polite uri
+political appointer
+political district
+political issue
+political party tenure
+political promise
+political promiser
+political ideology
+political organization
+political organization membership
+political party
+political party extra
+political rebellion or revolution
+politician
+politicians of the monarchy
+poll respondent category
+polled area
+polled entity
+pollination method
+pollination type
+pollinator
+polling authority
+polyclinic
+polymath
+polytope
+polytope element
+politicas
+ponente iniciador
+pony type
+pool
+pool type
+pool hall
+popular result
+popularity
+population estimate
+population estimate adjustment factor
+population estimate source
+population growth rate
+population rate
+population size
+port authority
+port of call
+port of call operator
+portuguese political parties
+portuguese travellers and voyagers
+portuguese autonomous region
+portuguese district
+portuguese municipality
+pose
+position
+position in debate
+possession
+possible correlation
+possible future event
+possibly correlated thing
+post office
+post office service
+postage stamp
+postal code
+potential impact
+potential olympian
+potential reward
+potential cabinet member
+power amplifier
+power outage type
+power plant operator
+power outage
+power outage cause
+power plant type
+power plug standard
+power plug standard type
+power station
+practical problem
+practice
+practice scope
+practice type
+practice jurisdiction
+practicer of diet
+prayer
+prayer book
+pre 1920 movies
+preamplifier
+precedence
+predation
+predation type
+predicate value constraint
+predicate path
+predicate path component
+predicate relation
+predicate used in life science
+predicted traffic rate
+prehistoric remains
+presentation acknow
+presentation background
+presentation demo
+presentation discussion
+presentation implementation
+presentation motivation
+presentation objective
+presentation reference
+presented work
+preservable food
+presidential delegate vote tally
+presidential nominee
+presidents of portugal
+pressure washing service
+pressure washing system
+previous organism classification
+previous organism classification rank
+price
+prima ballerina assoluta
+primal cut
+primalingredient
+primary candidate
+primary services
+primary display
+primary election
+prime ministers of portugal
+printed description of jewish studies collections
+printer
+printing service
+printmaking event
+printmaking organization
+printmaking supply source
+printmaking technique
+printmaking term
+printmaking tools
+priories
+priority
+priority level
+priority source
+prison
+prison security class
+prison system
+prison type
+prisoner
+privacy claims
+privacy index
+privately owned vehicle
+privately owned motorcycle
+pro football hall of fame member that has played for the raiders
+probability distribution
+probable date
+probe
+procedure
+proceedings
+process
+process index
+process actor
+process server
+process server services
+process state
+processofcare
+processor
+processor manufacturer
+processorspeed
+produce
+produce availability
+produced event
+producer
+product
+product choice
+product endorsee
+product endorsement
+product endorser
+product placed brand
+product placement
+product placing media
+product promoted
+product recall
+product category
+product designer
+product extension
+product ingredient
+product line
+product line extension
+product theme
+product with ingredients
+productcategory
+productgood
+producttobereceived
+production company
+production period
+produit laitier
+profession
+profession ranking
+professional dancer
+professional sports team
+professional wrestler
+professional wrestling manager
+professional wrestling match
+professional field
+program coordination
+program coordinator
+program financial support
+programming language
+programming language designer
+programming language developer
+programming language paradigm
+programming languages
+project
+project funder
+project meeting
+project phase
+project proposer
+project coordinator
+project focus
+project item
+project participant
+project participation
+project role
+projected coordinate system
+promise category
+promised jurisdiction
+promised project funding
+promo codes
+promoted product
+promoted event
+pronounciation
+pronunciation
+prop
+property
+property constraint
+property hints
+property management firms
+property mapping
+property path
+property sematary
+property value assignment
+property alias
+property equivalence mapping
+property specification
+proposal
+proposal agent
+proposed infrastructure project
+proposed project focus
+proposed project option
+proposed project report
+proposed project stakeholder
+proposed structure
+proposed structure designer
+proposition
+proposition election
+proposition issue
+propulsion technology
+prosecutor
+prostitute
+prostitute employment tenure
+prostitution service
+protected namespace
+protected site
+protected species
+protected species status
+protected site category
+protected site extra
+protection status
+protein
+protest
+protest type
+protester
+protocol
+protocol provider
+provenance
+provenienciaadat
+proverb
+provider
+province
+province of equatorial guinea
+province of laos
+province of madagascar
+province of mongolia
+province of mozambique
+province of new caledonia
+province of sierra leone
+province of western sahara
+province of zimbabwe
+province of the maldives
+province of the philippines
+provisional governments of portugal 1974-76
+pret-a-porter
+psychedelic plant
+pub
+pub owner
+pub owner tenure
+pubmed article
+pubmed author
+public art
+public insult
+public library
+public library system
+public figure with medical condition
+public relations service
+public relations specialization
+public speaker
+public speaking event
+public type schema change
+public utility service area
+publication
+publications
+published work
+publisher
+publisher extra
+publisher/imprint tenure
+puerto rican municipality
+pump-selected apps
+pump-selected discussions
+punctuation
+punishment
+purok of the philippines
+purpose
+putter
+puzzle
+puzzle creator
+puzzle event instance
+puzzle event type
+puzzle form
+pyramid
+pyramid base dimensions
+pyramid owner
+pyramid site
+pyramid status
+qos
+qualification results
+qualified value
+qualifier
+quality
+quark
+quarter of saint lucia
+query
+query annotation
+query annotation type
+query hints
+question
+questionable content character
+quotation
+quotation source
+quotation subject
+quotation addressee
+quotation and page number
+quotations
+rdf dataset
+rdf linkset
+redflame interactive
+rf design
+rfid book
+rfid company
+rfid iso standarts type
+rfid reader device
+rfid reader type
+rfid readers
+rfid solutions
+rfid standarts
+rfid tag device
+rfid tag type
+rfid topic
+rna
+rpf person
+rv hookup
+rv brand
+rv dealer
+rv hookup
+rv model
+rv park
+race
+race car
+race car constructor
+race car designer
+race track
+race results
+racecourse-horse race dates
+racehorse
+racing circuit designer
+racquet club
+radio name
+radio service
+radio station
+radio station format
+radio affiliation duration
+radio episode segment
+radio format
+radio network
+radio program
+radio program episode
+radio station owner
+radio subject
+radio wave radiation
+radioactive decay mode
+radioactive waste dump
+raiders quarterback that has thrown for over 3,000 yards passing in a season
+rail accident
+rail accident cause
+rail gauge
+rail network
+railway
+railway operator
+railway terminus
+railway type
+railway-gauge relationship
+railway-operator relationship
+railway-type relationship
+rally
+ranch
+range hint
+ranged weapon
+ranked item
+ranked list
+ranked list compiler
+ranker db page
+ranking
+rarity class
+rarity classification system
+rate or density
+rating
+rating authority
+ratingsystem
+rational
+ravenloft domain
+rawstring property
+rdfized database
+reaction engine
+reading
+real estate
+real estate feature
+real estate agency
+real person
+real place
+real ship
+real written work
+real-life superhero
+real-life superhero organization
+real-person fandom
+reality
+reality tv contestant
+reality tv season
+realm
+realtor specialty
+realtor type
+recalled product
+rechtsfolge
+recipe
+recipe collections
+recipe dish
+recipe ingredient
+recipe author
+recipe collection
+recipe ingredient
+recipeingredients
+recipes
+reclaimed land
+recommendations
+record
+record producer
+record label
+record management offerings
+record management services
+recorded music medium
+recorded music retailer
+recorded work
+recording
+recording engineer
+recording contribution
+recording release
+recording studio
+recording studio gear
+recovered artwork
+recovery act agency
+recovery act award
+recovery act recipient
+recovery act sub-recipient
+recovery act sub-recipient award
+recreational drug
+recreational sports
+recruiting services
+rectangle size
+recurring competition
+recurring event
+recurring event extra
+recurring event in fiction
+recurring event represented in fiction
+recurring festival or celebration
+recurring horse race
+recurring money value
+recurring music festival
+recurring observance
+recurso
+recurso iniciador
+recycable material
+recycling
+recycling category
+recycling centre
+recycling method
+recycling point
+recycling scheme
+recycling service
+red shift
+redirect
+reduction method
+reference
+reference ellipsoid
+reference ellipsoid type
+reference source
+reflect
+refugee camp
+refugee camp administration
+refugee encampment period
+regiao
+regiment
+region
+region of chad
+region of equatorial guinea
+region of finland
+region of guinea-bissau
+region of guyana
+region of iceland
+region of kyrgyzstan
+region of madagascar
+region of malawi
+region of mali
+region of malta
+region of mauritania
+region of mauritius
+region of namibia
+region of niger
+region of trinidad and tobago
+region of the faroe islands
+region of the ivory coast
+region of the philippines
+regional scene
+regional food
+regional food source
+registry entry value
+registry key
+registry key value type
+regiao
+regular nightclub night
+regulation
+regulatory authority
+regulatory authority
+regulatory code
+regulatory code chapter
+regulatory code paragraph
+regulatory code part
+regulatory code section
+regulatory code subpart
+regulatory code title
+regulatory document
+regulatory footnote
+regulatory region
+rehab
+rehab facility
+rehab stay
+rehab facility
+reincarnation
+rejected app
+rejection
+related topic
+related topics
+relation
+relational knowledge asset
+relationship
+relationship type
+relationships
+relative speed
+release
+release track
+relevant literature
+religion
+religion choice
+religion percentage
+religious jurisdiction
+religious jurisdiction category
+religious leader
+religious leader tenure
+religious leadership role
+religious leadership title
+religious organization
+religious organization leadership
+religious personalities
+religious practice
+religious text
+religious title jurisdiction
+religious concept
+religious order
+replica
+report
+report issuing institution
+reporter
+repository model
+repository size
+represented by icon
+request
+rescue ship
+research cruise
+research organization
+research project
+research study
+research location
+research topic
+researcher
+residence period
+resident
+resident musical artist
+resident artist
+resident location
+resident taxon
+residential building
+residential college
+residential hall
+resistivity specification
+resolution
+resolved by
+resource
+resource use and conservation
+resource topic index
+response ability
+response data type
+responsibility for periodical
+responsible body for printed judaica
+restaurant
+restaurant choice
+restaurant patio
+restaurant webpage
+restaurant webpage type
+restaurant amenities
+restaurant in neighborhood
+restaurant seating
+restaurant supplies
+restaurant-chef association
+restaurante
+restaurants
+restricted object
+restriction
+restrictions
+restroom access
+result show spoof
+result view
+resume
+retail inventory line
+retail line
+retail stores
+retail bank
+retail data
+retail location
+retail location accessibility
+retail location clientele
+retail location credit allowed
+retail location goods state
+retail location sales type
+retail outlet
+retail payment type
+retailer
+reuse method
+review
+review flag
+reviewed topic
+reviewed work
+revision control software
+revision identifier
+revolutionary
+ribatejo wines
+rigging type
+riot
+risk
+risk factor
+rite of passage
+rival
+rivalry
+rivalry spoils
+river
+rivers visited by lewis &amp; clark
+road
+road bicycle race finish type
+road bicycle race abandonment
+road bicycle race climate
+road bicycle race climbs
+road bicycle race sprints
+road bicycle racing event
+road bicycling race
+road bicycling race abandonment cause
+road bicycling race crash
+road bicycling race general classification jersey holder
+road bicycling race mountains classification
+road bicycling race classification
+road bicycling race climate condition
+road bicycling racing podium placement
+road cycling one-day race
+road cycling race breakaway
+road cycling race finish
+road end
+road race profile
+road race stage
+road junction
+road orientation
+road traffic survey location
+road type
+robbery
+rock art culture
+rock art landmark
+rock art period
+rock art region
+rock truck
+rock type
+rocket
+rocket fuel
+rocket function
+rocket manufacturer
+rocket stage
+rocket status
+rocket engine
+rocket engine cycle
+rocket engine designer
+rocket engine development status
+rocket engine fuel
+rocket engine manufacturer
+rocket engine oxidizer
+rogue traders
+roguelike game
+role in meeting
+roller coaster
+roller coaster material
+roller coaster propulsion system
+roller coaster train configuration
+roller derby association
+roller derby bout
+roller derby coach
+roller derby league
+roller derby official
+roller derby player
+roller derby player plosition
+roller derby team
+roller derby track specification
+roller derby track type
+roller rink
+rolling stock tenure
+roman deity
+roman hero
+roman mythology
+romanian county
+romantic involvement
+romantic relationship
+romantic relationship type
+roofing service
+roofing service type
+room
+room service
+room type
+rootstock
+rootstock type
+rose breeder
+rose nursery
+rose as symbol
+rose color
+rose-related events
+roses
+rosetta document
+round the world races
+round-trip engineering
+round-trip engineering support
+route of infection transmission
+routed drug
+royal guests
+royal line
+rugby club
+rugby club tenure
+rugby coach
+rugby coaching tenure
+rugby player
+rugby position
+rule
+rules line
+ruleset
+run rating
+run rating symbol
+runescape item
+runnings of indy 500 in which a corvette was pace car
+rural district of botswana
+russian travellers and voyagers
+russian autonomous oblast
+russian autonomous okrug
+russian federal city
+russian federal district
+russian federal subject
+russian krai
+russian oblast
+russian raion
+russian republic
+rwandan district
+rwandan province
+reunion island arrondisement
+sa sad
+sa textual
+sa2 archdriver
+sa2 archpattern
+sa2 concrete scenario
+sa2 decomposition
+sa2 element
+sa2 quality attribute
+sa2 sad
+sa2 tactics
+sa2 textual
+sa2 view
+sa3 architectural pattern
+sa3 architecture driver
+sa3 concrete quality scenario
+sa3 functional requirement
+sa3 module
+sa3 quality attribute
+sa3 software architecture document
+sa3 tactics
+sa3 textual
+sa3 view
+sa3 view2
+sacd player
+saf forest cover type
+saf region
+sdts point and vector object type
+sdts terms description
+selex conditions
+selex experiment
+selex method
+sem
+seo
+shce021709
+showmethedetail
+si swimsuit model
+si swimsuit model appearance
+si swimsuit cover
+skos concept
+skos concept scheme
+skos exact match relation
+skos relation
+slr lens
+snl actor
+snl cast member
+snl character
+snl episode
+snl five timer
+snl host
+snl movie spin-off
+snl movie spin-off cast performance
+snl musical guest
+snl musical performance
+snl recurring impression
+snl season
+snl season tenure
+snl sketch episode
+snl sketch episode performance
+snl sketch series
+snl sketch series regular performance
+snl sketch special performance type
+sparql endpoint
+sparql endpoint namespace
+sparql function
+sparql query type
+sparql results format
+sparql endpoint provided by bio2rdf
+sparql technology
+sro operator
+sro owner
+ssb
+saas participant
+safety rating
+safety rating source
+safety test
+safety-rated material
+sagittal crest of skull human newborn
+sail
+sail type
+sail training organization
+sail training vessel
+sailing handicap rating
+sailing handicap system
+sailing regatta
+sailing ship
+sailing ship class
+sailing ship type
+sailor
+saint
+saint patronage
+saint relics
+sale item
+sales
+salinty tolerance
+salvadoran department
+salvadoran municipio
+sammarinese municipality
+samoan district
+sample set
+sample set category
+sampled audio recording
+sampling technique
+sampling campaign
+sampling protocol
+san francisco dj
+san francisco dj residency
+san francisco dj or event collective
+san francisco drag queen
+san francisco drag queen title
+san francisco event local  guest dj appearances
+san francisco personalities
+san francisco promoter
+san francisco record label
+san francisco scene event
+san francisco scene event location
+san francisco scene event type
+san francisco mayor
+san francisco neighborhood
+satellite
+satellite - geostationary
+satellite operator
+satellite orbit type
+satellite orbit, asynchronous
+satellite orbit, synchronous
+satellite type
+satellite communication band
+satellite galaxy
+satellite image product
+satellite imagery
+satellite mission
+satellite radio service
+satellite sensor
+satellite type
+sats aktivitesi
+saudi arabian governorate
+saudi arabian parish
+saudi arabian region
+scale
+scattered disc object
+scene group
+scenic byway
+scenic byway authority
+scenic byway program
+schemes (linguistics)
+scholarly financial support
+scholarly work
+scholastic library
+school
+school administrative office
+school category
+school district
+school extra
+school in fiction
+school magazine
+school mascot
+school newspaper
+school sports team
+school sports team extension
+school/constituency relationship
+schools
+schuljahr
+science project
+science or technology company
+science subject
+scientific category
+scientific synonym
+score
+score scale
+scoreboard quarter
+scottish clan
+scottish clan sept
+scottish clan status
+scottish clan status period
+scottish burgh
+scottish council area
+scottish district
+scottish island area
+scuba certification agency
+scuba certification category
+scuba certification course
+scuba manufacturer
+scuba tank
+seafood
+seafood guide
+seafood guide publisher
+seafood rating
+seafood sustainability category
+search engine marketing
+search engine optimization
+search experience optimization
+search marketing
+season
+seasonal month
+seasonal time
+seat result
+second stage model
+secret society
+secret society founder
+secret society member
+secret society membership
+secretarial service type
+secretarial services
+sector
+sector primario
+sector secundario
+sector terciario
+sector of guinea-bissau
+sector type
+secular buildings
+security force
+security index
+security alarm service
+security service
+seedling vigor
+segment
+segment architecture
+segment maturity
+segment milestone
+segment priority
+segmentation
+seiyu performer
+self storage
+self storage facility
+self storage services
+semantic relation
+semantic search
+semantic predicate
+semantic relationship
+semantic scheme
+semanticparametermappings
+senator
+senegalese department
+senegalese region
+sensor status
+sensor type
+sentence
+sentence duration
+sentiments d'iconologia 2.0
+sequence of tv episode segments
+sequence schema pattern
+sergio cicogna
+serial installment
+serial killer
+serial killing period
+serialization format
+serialized work
+series editor
+service
+service class
+service endpoint
+service maturity
+service priority
+service specification
+service band cvt
+service clientele
+service rate
+service rating
+servicegood
+services
+serving size
+set
+set decoration
+set kind
+setlist
+settlement founder
+setubal peninsula wines
+severity
+sewage treatment plant
+sexual orientation
+sexual orientation phase
+seychellois district
+shade tolerance
+shadow tiddler
+shaft
+shakespeare
+shape
+shaped city
+shaping the mutation
+sharable thing
+shared lodging
+shareholder
+sharing location
+sharing method
+sharing model
+sharing relationship
+sharing site
+sharing system
+sheading of the isle of man
+shell
+shelter type
+sherlock holmes place
+sherlock holmes story
+ship
+ship builder
+ship class builder
+ship crew role
+ship crew tenure
+ship crewmember
+ship designer
+ship passenger
+ship passenger journey
+ship powerplant
+ship powerplant system
+ship allegiance
+ship berth class
+ship class
+ship extra
+ship mention
+ship owner
+ship ownership
+ship type
+ship's guns
+shipping operation
+shipping receiving services
+ships and boats used
+shipwreck
+shipwreck cause
+shipwreck event
+shoe repair service
+shoe store
+shooting range
+shopping choice
+shopping center
+shopping center owner
+short non-fiction
+short non-fiction variety
+short story
+shovel
+shutter speed
+shutter speed range
+shuttle
+sibling relationship
+sibling relationship (of fictional characters)
+sibling schema pattern
+siding construction
+siding type
+signage services
+signal modulation mode
+significance level
+significant file characteristics
+significant person
+silent movie stars
+silicone toy-safe lube
+silicone toy-unsafe lube
+similar automobile models
+similar automobile models
+simple merge task
+simpsons writer
+simulator types
+singapore district
+singing group membership
+single handed sailors
+single room occupancy hotel
+site listing category
+site type
+site of execution
+siteid
+sitio of the philippines
+situation
+skateboard
+skateboard contest
+skateboard trick
+skateboard trick inventor
+skateboard trick type
+skateboarder
+skateboarder/trick relationship
+skateboarding brand
+skateboarding location
+skateboarding movie
+skateboarding obstacle
+ski area
+ski area owner
+ski area ownership
+ski lift
+ski lift manufacturer
+ski lodge
+ski run
+ski equipment retailer
+ski resort
+skid steer loader
+skill
+skill level
+skill category
+skill equipment
+skill output
+skill provider
+skilled person
+skilled role
+skin care service
+skin care treatment
+skylander element
+skylander entity
+skylander figure
+skylander series
+skyscraper
+slice
+slide rule
+slide rule scales
+slip and fall lawyer
+slovak district
+slovak region
+slovenian commune
+slovenian region
+slovenian urban commune
+small dog breed
+smarthistory artwork
+smartphone
+smoker
+smoking allowance
+smoking rooms
+smoking apparatus
+snips attribution
+snogging
+snow removal service
+snowboard competition
+snowboarder
+social housing provider
+social media
+social security disability lawyer
+social set
+social set leader
+social set member
+social set primary member
+social movement
+societes d'iconologia 2.0
+soft namespace
+software
+software action
+software bug
+software category
+software compatibility
+software component
+software configuration change
+software configuration detail
+software developer
+software domain
+software engineer
+software environment
+software genre
+software license
+software product milestone
+software project (doap)
+software symptom
+software technology
+software ticket status
+software development
+software development platform
+software exploit
+software tool
+software use
+software used in a nix derivation
+soil texture
+soil category
+soil class
+soil description
+soil type
+soiltexture class
+solar cell class
+solar flare
+solid material
+solo wrestler or team
+solomon island province
+solomon island ward
+solubility
+solubility relationship
+solution or strategy
+somalian district
+somalian region
+song
+song performance
+song performer
+song in glee
+song in the state
+song performance
+songs
+songs featured
+songs referencing wham-o products
+songwriter
+songwriters
+soum of mongolia
+sound
+sound drama performance
+sound drama title
+sound effect
+sound reproduction standard
+soundtrack
+source feature taxa
+source of legal authority
+source organism
+south african district
+south african metropolitan
+south african province
+south korean capital metropolitan city
+south korean city
+south korean county
+south korean metropolitan city
+south korean province
+south korean special autonomous province
+south korean special city
+south west london
+south of the river
+sovereign domain
+sovereign state
+sovereignty
+spa
+spa category
+spa classification
+spa operator
+spa operator tenure
+spa physical treatments
+spa water treatments
+space agency
+space mission
+space station
+space vehicle
+space mission extra
+space program
+space program sponsor
+spacecraft
+spacecraft manufacturer
+spacecraft extra
+spaceport
+spanish travellers and voyagers
+spanish autonomous city
+spanish autonomous community
+spanish comarca
+spanish cuisine dishes
+spanish municipality
+spanish place of sovereignty
+spanish province
+spare part
+spatial context
+spatial database
+speaker cable
+speaker technology
+speaker type
+special attack
+special tv performance type
+special film performance type
+special hours
+special music video performance type
+special thingy performance type
+species
+species described by lewis &amp; clark
+species discovered by lewis &amp; clark
+species introduction reason
+species location
+species mention
+specific performance
+specified members
+spectral type
+spectral allocation cvt
+spectral line
+speech or presentation
+speech topic
+speedway
+spirit
+spirit aging
+spirit bottler
+spirit product manufacturer
+spirit-producing region
+spoken word
+sponsor
+sponsored recipient
+sponsoring organization
+sponsorship
+sport
+sport club
+sport club coach
+sport club owner
+sport club player
+sport country
+sport medal
+sport extra
+sporting goods store
+sports association
+sports car
+sports equipment
+sports facility
+sports league award
+sports league award type
+sports league award winner
+sports league championship
+sports league championship event
+sports league draft
+sports league draft pick
+sports league draft round
+sports league pick in round
+sports league season
+sports team
+sports team location
+sports team owner
+sports team season record
+sports coach
+sports competitor
+sports draft pick
+sports event
+sports facility
+sports facility extra
+sports governing body
+sports league draft
+sports league participation
+sports mascot extra
+sports mascot type
+sports official
+sports official tenure
+sports played
+sports position
+sports projectile
+sports record
+sports record area
+sports record series
+sports record type
+sports record unit
+sports recurring event
+sports team
+sports team captain
+sports team captain tenure
+sports team coach
+sports team coach tenure
+sports team extra
+sports team manager
+sports team manager position
+sports team manager tenure
+sports team member
+sports team member appearance
+sports team roster
+sports team roster extra
+sports tournament
+sportsassociation
+sportsdraft
+sportsevent
+sportsmatch
+sportsperiod
+sportsplayer
+sportsrank
+sportsrecord
+sportsscore
+sportsseries
+sportsstatistic
+sportsteam
+spot coffee
+spree killer
+spree killing
+sri lankan district
+sri lankan division
+sri lankan province
+stables
+stadium
+staff
+staff project involvement
+stage road race type
+stage theme
+stamen petal arrangement
+standard business segment
+standard enterprise segment
+standard organization
+standard sense
+standardized test
+stannary towns
+star
+star shaped cities and citadels in austria
+star shaped cities and citadels in belgium
+star shaped cities and citadels in brazil
+star shaped cities and citadels in denmark
+star shaped cities and citadels in france
+star shaped cities and citadels in germany
+star shaped cities and citadels in holland
+star shaped cities and citadels in india
+star shaped cities and citadels in italy
+star shaped cities and citadels in portugal
+star shaped cities and citadels in switzerland
+star shaped cities and citadels in uruguay
+star shaped cities and citadels of italy
+star shaped cities and citadels of the usa
+star system
+star cluster
+star system body
+star system body extra
+starbase
+starship
+starship armament
+starship class
+stat
+stat set
+stat property
+state
+state character
+state episode
+state performance
+state sketch
+state insect
+state of south sudan
+state of emergency
+state of emergency declaration
+state symbols
+stateagon
+statement
+statement name
+states and provinces
+stationary shop
+statistical analysis method
+statistical test
+statistical region
+statistical region extra
+statistics agency
+stats
+statute
+stay
+steam locomotive class
+steam locomotive fuel type
+steam locomotive wheel configuration
+stimulus reporting feed
+stimulus request community
+stimulus request project
+stimulus request status
+stimulus requester
+stock exchange
+stock listing
+stockmarketindex
+stolen item
+storage type
+storage facility
+store departments
+strategy
+strategy is destiny
+stream
+stream cipher
+street press index
+street press index coverage type
+street food
+strength
+strength classification
+strength specification
+string
+structural composition
+structural engineer
+structural material
+structural steel designation
+structural steel profile
+structural system category
+structure
+structure facade material
+structure damaging event
+structure destroying event
+structure extra
+structures in fiction
+student
+student organization
+student publication
+student radio station
+student:teacher ratio
+studied medical condition
+studio album
+studio musician
+studios and companies
+study
+stuff processing method
+stuff processing organization
+style
+style code
+style measurement
+sub-region of finland
+subatomic mass
+subatomic particle
+subatomic particle composition
+subatomic particle family
+subatomic particle generation
+subdistrict of botswana
+subdivision of french polynesia
+subject
+subject authority
+subject matter
+subject matter authority
+subject matter topic
+subject of debated possibility
+subject of diet
+subject of festival
+subject of joke
+subject of protest
+subject of strange ebay item
+subjects
+submarine dive
+subservice band cvt
+subsidized year
+substance
+substance abuse
+substance abuse problem
+substance abuse treatment center
+subzone
+sucrerie
+sudanese district
+sudanese state
+suggestion
+summary statistic
+sumo division
+sumo rank
+sumo wrestler
+sumo wrestler/division relationship
+sumo wrestler/rank relationship
+sunken city
+super bowl
+supercouple
+superfund site
+supermodel
+supernova
+supertopic
+support
+support incident
+support personnel
+supporting players
+supranational body
+surf brand
+surf break
+surf film
+surf heat round
+surface region
+surfboard fin
+surfboard shaper
+surfer
+surfing region
+surgeon
+surgical instrument
+surgical instrument mention
+surinamese district
+surinamese ressort
+surplus store
+surprisingly short people
+surprisingly tall people
+survival rate
+survivor contestant
+survivor episode
+survivor finish
+survivor location
+survivor placement
+survivor season
+survivor tribe
+survivor tribe membership
+survivor winner
+survivors of flight 128
+swazi constituency
+swazi region
+swedish travellers and voyagers
+swedish county
+swedish municipality
+swimming pool
+swimming pool, spa, and sauna supplies
+swimming pool
+swimming pool service offerings
+swimming pool services
+swiss canton
+swiss commune
+swiss constituency
+swiss district
+swiss town
+syd barrett pink floyd release
+symbiotic relationship
+symbol
+symbol system
+symbolism
+symbolized concept
+symptom
+symptom change
+symptomstates
+synagogue
+synagogue in north america
+synagogue in the united states
+synagogue use
+synonym set
+synopsized animal
+synset with property
+syntactic category
+synthesizer
+syrian district
+syrian province
+system
+system of nobility
+system-order relationship
+system-rank relationship
+system-title relationship
+systems
+tv actor
+tv channel
+tv character
+tv director
+tv documentaries
+tv dubbing performance
+tv episode
+tv episode location
+tv episode music
+tv genre
+tv location
+tv network
+tv personality
+tv producer
+tv producer term
+tv producer type
+tv program
+tv program creator
+tv program duration at network
+tv program location alias
+tv program location name
+tv program adaptation
+tv rating
+tv rating system
+tv regular performance
+tv season
+tv station
+tv type
+tv writer
+tv actor extra
+tv character extra
+tv crew gig
+tv crew role
+tv crewmember
+tv episode
+tv episode dubbing performance
+tv episode extra
+tv episode performance
+tv episode personal appearance
+tv episode segment
+tv episode segment extra
+tv episode song relationship
+tv producer episode credit
+tv program extra
+tv program guest
+tv program-writer relationship
+tv regular personal appearance
+tv segment guest appearance
+tv segment performance
+tv segment personal appearance
+tv segment sequence extra
+tv segment song relationship
+tv ship appearance
+tv show
+tv show with tall ships
+tv signal type
+tv song
+tv song performer
+tv soundtrack
+tv star dubbing performance
+tv station owner
+tv subject
+tv terrestrial broadcast facility
+tv theme song
+tvepisode
+tvseason
+tvseries
+twa flight 128
+twa flight 128 flight crew
+twa flight 128 historical marker/memorial
+twa flight 594 historic marker
+twa flight 694
+twa flight 694 memorial
+table
+table tennis manufacturer
+table tennis player
+tactic
+tag
+tailor
+taiwanese county
+taiwanese county administered city
+taiwanese direct-controlled municipality
+taiwanese district
+taiwanese municipality
+taiwanese province
+taiwanese provincial city
+taiwanese special municipality
+taiwanese township
+tajikstani city
+tajikstani hukumat
+tajikstani raion
+tajikstani region
+talent agency
+talent agency specialties
+tall ship
+tall ship event
+tall ship event instance
+tall ship in film
+tall ship on tv
+tall ship rig
+tanning salon
+tanning services
+tanzanian district
+tanzanian region
+tartan
+task
+task profile
+task status
+tatort team
+tatort team membership
+tattoo artist
+tattoo parlor
+tax preparation
+taxation system
+taxi service
+taxi stand
+taxon
+taxon traits
+taxon with sequenced genome
+taxonomic authority
+taxonomic history
+taxonomy source
+tea
+tea type
+teacher
+team
+team inning batting stats
+team manager
+team performance
+team gender
+team sports event
+team/training ground relationship
+team/venue relationship
+teams
+technical report
+technologies d'iconologia 2.0
+technology
+technology class
+tecnologia
+telecom
+telecom towers
+telecommunication services
+telescope
+telescope platform
+telescope principle type
+telescope type
+tema
+temperature specification
+template
+template role
+tennis grip style
+tennis match
+tennis match type
+tennis player
+tennis tournament
+tennis tournament champion
+tennis tournament championship
+tennis player extra
+term
+territory of svalbard and jan mayen
+territory of united states minor outlying islands
+terrorist
+terrorist attack
+terrorist organization
+test
+test match special commentary relationship
+test match special commentary role
+test match special commentator
+test result
+test type
+test type 1
+test card
+test card creator
+test results
+testobject
+testtype
+testifying person
+testing
+testing group
+testing tool
+text
+text encoding
+text reference
+textile
+textile drapability
+textile fiber
+textile manufacturing process
+textile pattern
+textile surface quality
+textile thickness
+textile treatment
+textile weave
+textile weave variation
+thai district
+thai province
+thai region
+the children of twa flight 128
+the city and east london
+the colbert report episode
+the dynamic firm
+the pursuit for a memorial....
+the pursuit of a memorial...
+the west end
+the wire beat
+the wire character
+the witcher
+the agile and dynamic enterprise
+the smart organization
+thetypes
+theater
+theater actor
+theater character
+theater choreographer
+theater company
+theater designer
+theater designer gig
+theater designer role
+theater director
+theater genre
+theater producer
+theater production
+theater production staff gig
+theater production staff role
+theater production staffmember
+theater role
+theater group
+theater group membership
+theater supplies
+theatrical composer
+theatrical lyricist
+theatrical orchestrator
+theme
+theorem
+theoretical argument
+theory
+thermal expansion specification
+thermalprintcolour
+thesis
+they use that as glue, actually
+thing
+thing of disputed existence
+thing of expressed value
+thing used as weapon
+things bought from
+thingy
+thingy actor
+thingy character
+thingy crew gig
+thingy crew role
+thingy crewmember
+thingy director
+thingy performance
+thingy producer
+thingy producer credit
+thingy producer role
+thingy writer
+thisis50
+thoroughbred racehorse
+thoroughbred racehorse breeder
+thoroughbred racehorse color
+thoroughbred racehorse origin
+thoroughbred racehorse owner
+thoroughbred racehorse sex
+thoroughbred racehorse trainer
+thread style
+threat
+thrift store
+tickersymbol
+ticket agency
+tiddler
+time mediation schema pattern
+time zone
+time interval
+time span
+tipo de recurso
+tire store
+title
+title company
+titled thing
+tobacco products
+tobacco shop
+toboggan hill
+togolese region
+tomb
+tomb excavator
+tomb owner
+tonality
+tonearm
+tongan island group
+tool
+tools
+top level domain
+top level domain registry
+top level domain sponsor
+top level domain status
+top level domain type
+top level recipe
+top scorer
+topic
+topic set
+topic cross reference
+topic extra
+topicredirect
+topico
+torg article
+torg product
+torg product's article
+tornado
+touch gesture
+toupee and wig retailer
+tour
+tour manager
+tour operator
+tour operator
+tourist attraction
+tournament
+tournament competitor
+tournament group
+tournament match
+tournament participating competitor
+tournament result
+tournament round
+tournament stage
+tournament system
+tournament team
+tournament date
+tournament event
+tournament event competition
+tournament event competitor
+tower
+tower shape
+towing offerings
+towing service
+town
+town council of botswana
+town of kyrgyzstan
+town of the isle of man
+town twinning
+toy line
+toy store
+track and field athlete
+track classification
+tract
+trade union
+trading card
+trading card company
+trading card printing
+trading card set
+trading card superset
+traffic survey
+traffic survey vehicle category
+trail
+trail shape
+trailhead
+train class
+train class family
+train accident type
+training topic
+trans-neptunian object
+trans-neptunian region
+transformation
+transgender person
+transit line
+transit service type
+transit stop
+transit system length
+transit vehicle type
+transition hub
+transition initiative
+transition initiative type
+transition community
+translated work
+translation
+translator
+transmission
+transmission classification
+transmission type
+transport operator
+transport terminus
+transportation
+transportation company
+transportation mode
+transportation stop
+transporter technology
+travel agent
+travel destination
+travel destination monthly climate
+travellers
+treatment
+treatment location
+treatment plan
+treaty
+tree
+tree service
+tree shape
+triad
+trial
+triathlete
+triathlon distance
+triathlon race
+triathlon race event
+triathlon result
+trigger
+trigger occurence
+triggery material
+trim level
+trip
+tropes (linguistics)
+trophy shop services
+trophy supplier
+tropical cyclone
+tropical cyclone category
+tropical cyclone season
+troubleshooting action
+truck trim level
+truss classification
+trypanophobic person
+tras os montes wines
+tugasakhir
+tulip division
+tulip festival
+tunisian delegation
+tunisian governorate
+tunnel
+tunnel use
+tunnel bore
+tunnelling method
+turkish district
+turkish province
+turkish region
+turkmen province
+turntable
+tussendoel
+tutoring service
+tuvaluan island group
+twin
+twin type
+twinned town
+twins
+type
+type hints
+type ii radio burst
+type instrument
+type kind
+type list
+type profile
+type project
+type project mediator
+type projects
+type role
+type series
+type status
+type of admin area, mapping
+type of administrative area
+type of bond girl
+type of exhibition
+type of morpheme
+type of snl five timer
+type of snl cast member
+type of snl sketch
+type of software exploit
+type of statistical data
+type of strength
+type of urban legend
+type of agent
+type of argument
+type of automobile accident
+type of conference
+type of criminal organization
+type of demise
+type of diet
+type of disability
+type of dish
+type of ecosystem
+type of event
+type of festival, party, or celebration
+type of fictional setting
+type of fire
+type of flammable thing
+type of fort
+type of infectious agent
+type of injury
+type of injury-causing event
+type of joke
+type of law enforcement agency
+type of law enforcement officer
+type of legal system
+type of lock
+type of morally disputed activity
+type of motivation
+type of movie theatre
+type of museum
+type of paranormal ability
+type of paranormal event
+type of performance
+type of place of worship
+type of planetographic feature
+type of porn
+type of power outage cause
+type of public presentation
+type of refugee camp
+type of robbery
+type of rugby
+type of shoe
+type of skateboard trick
+type of skateboarding location
+type of skateboarding obstacle
+type of snowboarding
+type of tax
+type of thing
+type of tornado
+type of trial
+type ofecological interaction
+type/domain equivalent topic
+typeface
+typeface classification
+typeface commissioner
+typeface creator
+typeface family
+typeface foundry
+types of waste
+titulo
+u.s. congressperson
+u.s. presidential nominating convention
+u.s. virgin islands district
+u.s. virgin islands subdistrict
+u.s. county
+u.s. federal district
+u.s. independent city
+u.s. state
+ufc event
+ufc fighter
+ufo encounter
+ufo observer
+ufo shape
+ufo sighting location
+uk grid reference location
+uk constituent country
+uk crown dependency
+uk overseas territory
+uk postcode
+uk statistical location
+uml diagram type
+uml tool
+uml version
+uri
+uri template
+uri property
+url
+us census designated place
+us census tract
+us core based statistical area
+us county
+us federal district
+us fuel economy
+us indian reservation
+us metropolitan division
+us national park service site
+us patent category
+us patent type
+us president
+us presidential campaign
+us representative (current)
+us road category
+us senator (current)
+us state
+us state governor (current)
+us territory
+us vice president
+us vice presidential campaign
+us congressional district
+us territory
+usb device
+ubicacion iniciador
+ugandan city council
+ugandan county
+ugandan district
+ugandan municipality
+ukraine autonomous republic
+ukraine oblast
+ukraine raion
+ukrainian autonomous republic
+ukrainian independent city
+ukrainian miska rada
+ukrainian misto
+ukrainian oblast
+ukrainian raion
+ultimate classification
+ultimate division
+ultimate historical roster position
+ultimate level
+ultimate player
+ultimate position
+ultimate region
+ultimate roster position
+ultimate team
+ultraviolet radiation
+unbuilt 100m london buildings
+uncommon topic
+uncommon property
+underground object
+underground station
+understory cover
+underwater archaeologist
+underwater expedition
+underwater human habitat
+underwater object
+unfinished films
+unfinished work
+union
+unit
+unit of textile
+unit of volume
+unit profile
+unit of absorbed dose
+unit of absorbed dose rate
+unit of acceleration
+unit of amount concentration
+unit of amount of substance
+unit of angular acceleration
+unit of angular frequency
+unit of area
+unit of brake specific fuel consumption
+unit of capacitance
+unit of cargo capacity
+unit of catalytic activity
+unit of catalytic concentration
+unit of charge
+unit of conductance
+unit of conductivity
+unit of current density
+unit of data size
+unit of data transmission rate
+unit of density
+unit of dose equivalence
+unit of electric charge density
+unit of electric current
+unit of electric field strength
+unit of electric flux density
+unit of energy
+unit of energy density
+unit of exposure
+unit of force
+unit of fuel economy
+unit of heat capacity
+unit of illuminance
+unit of inductance
+unit of inverse temperature
+unit of irradiance
+unit of length
+unit of luminance
+unit of luminous flux
+unit of luminous intensity
+unit of magnetic field strength
+unit of magnetic flux
+unit of magnetic flux density
+unit of mass
+unit of molar energy
+unit of molar heat capacity
+unit of molar mass
+unit of molar volume
+unit of moment of force
+unit of permeability
+unit of permittivity
+unit of plane angle
+unit of population
+unit of population number
+unit of potential
+unit of power
+unit of pressure
+unit of radiance
+unit of radiant intensity
+unit of radioactivity
+unit of resistance
+unit of resistivity
+unit of solid angle
+unit of specific energy
+unit of specific fuel consumption
+unit of specific heat capacity
+unit of specific volume
+unit of speed
+unit of surface density
+unit of surface tension
+unit of symbol rate
+unit of temperature
+unit of thermal conductivity
+unit of time
+unit of viscosity
+unit of volumetric flow rate
+unit of volumetric heat capacity
+unit of wavenumber
+unit of confidence
+unit of frequency
+united nations agency
+united nations body
+united nations body head tenure
+united nations body membership
+united nations member state
+united nations resolution
+united states colonies
+united states federal executive department
+university
+university system
+unknown origin satellite
+unmatched geekdo item
+unpublished
+unrealized design
+unreleased films
+unresolved item
+updatedfeeds
+upholstery
+upholstery service
+upholstery service type
+uploadmusicalcontent
+urban legend
+urban legend basis
+urban district of botswana
+urban legend sources
+urban-centric locale
+uruguayan department
+uruguayo incoherente en twitter
+uruguayo incoherente en youtube
+use code
+useful
+user language preference
+user search language preference
+user translation language preference
+ustensile
+utility/hybrid
+uzbek city
+uzbek district
+uzbek province
+vp delegate vote tally
+vpf point and vector object type
+vpf terms description
+vw adapter
+vw adapter 2 data representation
+vw adapter 2 tranformation agent
+vw coordination object
+vw coordination object 2 view
+vw data representation
+vw data representation 2 transformation agent
+vw data representation 2 view
+vw data source
+vw data source 2 adapter
+vw transformation agent
+vw transformation agent 2 data representation
+vw view
+vw view 2 coordination object
+vw visual wiki
+vacation choice
+vacation lodging
+vaccine
+vaccine developer
+vakkern
+vaksubkern
+valeurs d'iconologia 2.0
+validation
+vallee event type
+vallee type of alien encounter
+valuable item
+value
+value notation
+value object
+valvetrain configuration
+vancouver base application
+vancouver-based awards
+vanished theatres
+vanuatuan area council
+vanuatuan municipality
+vanuatuan province
+variable
+variant
+variant name
+variant relationship
+variation of idea
+varna
+vashishth
+vashishth anand saini
+vassal
+vaudeville performer
+vegetation community
+vehicle
+vehicle length
+vehicle weight
+vehicles parked
+vein
+vendor
+vendor configuration
+vendor links profile
+vendor template
+venezuelan municipality
+venezuelan state
+venture funded company
+venture investment
+venture investor
+venue
+venue seating type
+venue type
+verb
+verb group relation
+vermont fresh network partner
+vermont fresh network partner type
+versioned content license
+vessel type
+veterinarian
+veterinary clinic
+veterinary service
+veterinary specialty
+viande
+vibe
+vice presidential nominee
+victims of flight 128
+victims of twa flight 694
+victims of the castleton dc-3
+victoria's secret model
+video
+video blog
+video blogger
+video collection
+video color process
+video game
+video game actor
+video game character
+video game collection owner
+video game collection record
+video game compilation
+video game content descriptor
+video game designer
+video game developer
+video game distribution system
+video game engine
+video game engine developer
+video game engine family
+video game evaluation
+video game event
+video game expansion
+video game genre
+video game mod
+video game performance
+video game performance type
+video game platform
+video game publisher
+video game rating
+video game rating system
+video game region
+video game series
+video game stage
+video game subject
+video game theme
+video game version
+video resource
+video scribing
+video segment
+video type
+video game
+video game extra
+video game release
+video game soundtrack
+video game store
+video host
+video production services
+video production specialties
+video release
+video store
+video store stock
+videotaped event
+viecbuonban
+vietnamese centrally controlled municipality
+vietnamese centrally-controlled municipality
+vietnamese commune
+vietnamese district
+vietnamese precinct
+vietnamese province
+vietnamese provincial city
+vietnamese rural district
+vietnamese town under district
+vietnamese township
+vietnamese urban district
+view generator
+view type
+viewfinder type
+village
+village of niue
+village of the isle of man
+villain fate
+villain objective
+villainous organization
+vineyard
+vingtaine of jersey
+vinho verde
+vintage car
+vintu de jos
+violence
+violent event
+vision
+visual art form
+visual art genre
+visual art medium
+visual artist
+visual arts festival
+visual art support
+visual artwork extra
+visualsystem
+visualsystemtrait
+vocabulary
+vocabulary equivalent topic
+vocal recording contributor
+vocal contribution
+vocal contribution category
+vocal recording
+voice registry
+volcano
+volcano eruption
+volume
+voraussetzung
+vote
+vote value
+vote type
+vote value
+voting district
+w film
+w3c recommendation
+wait service
+war
+warranty
+warship armament
+warship service period
+wash
+wash type
+waste
+waste campaign
+waste disposal authority
+waste hierarchy level
+waste management organisation
+waste management strategy
+waste organisation
+waste processing method
+waste processing method level
+waste removal service
+waste statistical region
+waste type
+waste-treatment method
+watch band material
+watch bezel material
+watch brand
+watch case material
+watch feature
+watch model
+watch repair service
+watch shop
+watch type
+water management organisation
+water tower
+water treatment method
+waterfall
+waterfall type
+watering needs
+waypoint type
+weakness
+weapon
+weather station
+weave
+web annotation service
+web development
+web id collection
+web service
+web service object
+web applications
+web browser
+web browser extension
+web design company
+web design expertise
+web design service
+web development platform
+web development service
+web host operating system
+web host server-side services
+web hosting control panel
+web hosting service
+web hosting services provided
+webisode
+webpage
+website
+website category
+website owner
+website status
+website ownership
+wedding photography
+wedding planning
+wedding venue
+wedge
+weight loss center
+welding service
+welding technology
+welsh principal area
+werk
+westeros region
+wham-o products
+wham-o toy imitations
+wham-o toy product homage
+what monsters are made of
+wheel dozer
+wheel loader
+where to find pot
+white house pet
+white light
+wi-fi service
+wi-fi service
+wifi
+wifi device
+wikipedia category
+wild flowers
+wild fruit
+wild grasses
+wild herbs
+wild medicinal plants
+wild poisonous plants
+wild roses
+wild shrubs
+wild food site
+wilderness area
+wildlife collision program
+wind condition
+wind direction
+wind power risk citation
+wind turbine
+wind turbine power rating
+wind turbine type
+window
+window repair
+window tinting service
+window treatment
+window treatment service
+window washing service
+window washing service type
+wine
+wine award
+wine honor
+wine producer
+wine region
+wine review
+wine scores
+wine sub-region
+wine type
+wine color
+wine merchant
+wine style
+wineries
+winery
+wireless internet
+wireless phone network
+wireless product
+wireless product manufacturer
+wireless protocol
+wireless regulation
+wireless technology
+wireless telephone retailer
+wisdom
+wonder creator
+wonder of the ancient world
+wonder of the industrial world
+wonder of the medieval world
+wood
+woodenbarrel
+word
+word combinations
+word morphology
+word stem
+word gender
+word sense
+work
+work experience
+work of fiction
+work queue
+worked on
+workers' compensation lawyer
+working relationship
+works for
+workshop
+workshop series
+world bridge federation zone
+world cup participation
+world cup qualification group
+world cup qualified squad
+world cup qualifying round
+world cup qualifying team
+world cup spot allocations
+world cup squad
+world cup team
+world mine production
+world wonder
+world cup play off
+world cup player participation
+world cup qualification
+world law
+wrecked ship
+wren's city churches
+wren's country houses
+wrestling move
+written by
+written work
+written works
+written work extra
+written work mention
+written work/author credit
+written works
+wrongfully convicted person
+x-ray binary system
+x-ray radiation
+xmi version
+y10k compliant material
+yale topic
+yale president
+yarn shop
+year
+year granted
+year range
+year of construction
+yearly snowfall
+years
+yemeni district
+yemeni governorate
+yes/no decision tree
+yoga posture
+yoga practice benefit
+yoga studio
+youtube channel
+youth classification jersey holder
+yusho count
+zx spectrum i/o port functionality
+zx spectrum peripheral
+zx spectrum program
+zambian district
+zambian province
+zodiac sign
+zone
+zone of the philippines
+zoo
+zoo animal
+zoo exhibit
+zoo category
+zoo exhibit extra
+zoo extra
+aaaabbbb
+abcdefg
+academic degree
+actor
+actor1
+actor2
+actor3
+adjoining location in mythology
+advanced placement course
+affinity conditions
+affinity experiment
+affinity method
+age
+album
+albums
+allocated band
+amount of the blood
+anarchy
+animal
+antenna
+aoileslie test
+application
+aptamer
+aptamer target
+architecture
+article
+artist
+asfsadf
+assayer
+association
+atari
+athletic extracurricular program
+athletic facility
+athletic program
+athletic program sport
+attack
+attractions
+auctioned service
+audience
+author
+award
+band
+band member
+bank
+beer
+beer type
+beer3
+bicycle manufacturer
+bicycle model
+bicycle type
+bicyle models
+binary star system
+binding solution
+bm:database load
+bm:database format
+bm:database provider
+bm:database statistics
+bm:database tag
+book
+book edition
+book edition refactor
+book multivolume work
+book multivolume work volume
+book original work
+book published work
+book refactor
+book related work
+book transformation
+book transformed work
+brand
+breed of cat
+breeds of dog
+brewery
+budget category
+buffering agent
+bv employment tenure
+carrier
+cars
+catalog number
+catalyse
+ce que je veux
+celeb
+chapter
+chemical compound
+chu yan
+cited in journal
+cited in article
+cites article
+ciudad
+class
+classroom facility
+cldr language
+cldr script
+cldr territory
+clique interest
+coaching faculty
+coat allele
+coat color
+coat locus
+coat locus effect
+coat pattern
+coin
+coin composition
+coin reference
+coin finish
+coin series
+coin type
+collective interaction
+common
+comp
+company
+competition event
+competitive event
+competitive extracurricular program
+computer
+concept
+conference room facility
+cong ty bang keo
+constraint
+content types
+contents
+conventions
+cooperation partner
+country
+country of origin
+course
+course requirement
+crm web application
+crm windows application
+cryptid observation
+curriculum
+customer
+cvt annotation
+cvt role
+data converter
+data growth rate
+database
+dataset
+dateend
+datestart
+debased currency
+delete type
+delivery channel
+deliveryenum
+democracy
+denomination
+description
+descrizione
+design
+detail
+dev tools
+developer
+diagnosis of illness
+diagnosis of ilness
+die axis
+discussion thread
+dissociation constant
+dj
+djurl
+dominio
+doudou-1
+drg
+drink
+drink company
+dsds
+duel
+dumpster edison nj
+dumpster newark nj
+dumpster union nj
+e-book
+e-books
+e-sports athlete
+e-sports clan
+e-sports roster position
+e-sports team
+ebay category
+ebay item
+ebay site
+economy
+ed2k link
+educational audio
+educational game
+educational site
+educational vedio
+eee
+element
+ente
+entity
+entry 1
+equine anatomy
+ericgourmet
+error coin
+espoo
+essential operations
+estado
+event
+event format
+evolves from
+examination drugs
+experiment
+experimental conditions
+experimental outcome
+expression
+extracurricular committee
+extracurricular competition
+extracurricular interest group
+extracurricular performance
+extracurricular program
+extracurricular recital
+f-stop range
+facility
+faculty
+faculty award
+faculty group
+faculty member
+famous alumni
+fatto
+fb item
+feature
+films
+fire department
+fire department staffing
+fire station
+fire station service area
+fire station services
+flan description
+foo type
+form
+format
+framework
+fred
+fuel
+funding
+funding provider
+futbol
+gallery
+gay
+gem
+gemstone
+gender
+genre
+geo
+geography
+gg
+gh
+ghjghjghjghjghj
+googleaddress
+googleorganization
+googleperson
+googleproduct
+googlerating
+googlereview
+googlereviewaggregate
+grade
+grants awarded
+group of the blood
+gsm
+gymnasium facility
+hatom
+hentry
+hnews
+hproduct
+hreview
+hardware
+haspermissions
+health
+hey
+hh
+hint
+historia
+history
+home brew
+home equipment
+home page
+home release
+hook
+hospitalization duration
+host cities
+hotels
+http://titticimmino.com
+http://www.biodiversity.bz/img/iabin eng.jpg
+http://www.istqbinfo.blogspot.com/
+iphone sdk agreement clause
+icon
+icon genre
+id
+ig championship event
+image
+imdb rating
+individual parts
+info
+ingredient
+instance
+interaction
+interaction experiment
+interactor
+ir test type a
+ir test type b
+ir type a
+ir type b
+iraqi band
+iraqi person
+iraqi singer
+isnominated
+issuer
+item
+item 1
+item 2
+item 3
+item 4
+itemprop
+itemprop generator group
+itemprop generator hints
+items
+itemtype
+itemtype generator hints
+jogadores
+jsheo8
+junktype
+kaokao-1
+kaokao-2
+kaokao-3
+katar
+key
+ksiazka
+landform cover relationship
+langinfo
+language
+latitude
+lifts
+linear polymer
+link
+lived with
+location
+locker room facility
+longitude
+makers
+man
+material
+maximum diameter
+meaning
+measured pinnacle
+media companies
+media player
+media type
+media common parodied work
+media common parody
+mediator1
+medical malpractice lawyer
+microfuge tube
+minimal aptamer
+minimum diameter
+mint
+modified nucleic acid
+molecular target
+movement
+moviename
+mtype a
+mtype b
+mtype c
+museum programmes
+museum research
+museum sustainability policy
+music
+musical release
+mw1801 concept000910183313
+mw1801 concept000910183527
+mw1801 concept000910183704
+mw1801 concept000910222707
+mw1801 concept000910232213
+mw1802 concept000910232216
+mw1803 concept000910183531
+mw1803 concept000910183707
+mw1803 concept000910232217
+mw1804 concept000910183532
+mw1805 concept000910183158
+mw1805 concept000910222711
+mw1805 concept000910232956
+mw1806 concept000910232957
+mw1807 concept000910183535
+mw1807 concept000910183713
+mw1807 concept000910232958
+mw1808 concept00 0910183714
+mw1808 concept00 0910222714
+mw1809 concept00 0910183203
+mw1809 concept00 0910232223
+mw1809 concept00 0910233000
+mw1809 concept 01 0910183324
+mw1809 concept 01 0910222714
+mw1810 concept00 0910232224
+mw1810 concept00 0910233001
+mw1810 concept 01 0910222715
+mw1810 concept 01 0910232224
+mw1810 concept 01 0910233001
+mw1811 concept000910183716
+mw1811 concept000910222716
+name
+namen
+new type
+next
+nii
+node
+node type
+noise
+notable for
+nucleic acid
+nucleic acid secondary structure
+numismatic db
+numismatic dealer
+obverse description
+obverse legend
+oclcnumber
+office facility
+office staff
+okladka
+online course
+operating room id
+operation
+operation anesthesis
+operation consultant doctor
+operation nurse
+operation room id
+operation stuff
+operation surgeon
+operation tools
+operator
+opponent sports team
+organisation
+oskwishgames
+ourperson
+owner
+pairwise interaction
+pais
+parameters
+parking facility
+part sources
+partitioning method
+patient name
+patina description
+people
+peptide
+peptide secondary structure
+per time
+performing extracurricular program
+person
+person full name
+phr allergen
+phr blood types
+phr doctor
+phr medication many
+phr medication often
+phr medication record
+phr medication route
+phr medications
+phr patient
+phr prescription
+phr record
+phr sex
+phr wellness record
+phr wellness tracker
+physical examination date
+physicist
+pilota
+plant
+player role
+playing field facility
+plugin
+polity
+population
+predicted secondary structure
+president
+principle
+producer
+producers
+product
+producttobesold
+product property
+product type
+proj-tech
+project
+project-staff
+property
+prova
+prove2
+pub
+pubvisit
+pvc
+qualification criteria
+rarity
+rdf:property
+rdfs:class
+rdfs:resource
+receiver
+recipe
+recording company
+recovery method
+recovery methods
+recruitment
+regulators
+relates
+release date
+release of
+renwu
+required course
+reservationenum
+resource
+restaurants
+reverse description
+reverse legend
+reverse type
+riding figure
+riding style
+router
+rrr
+rubbish
+ruspina web distribution
+s
+sa
+sailboat
+scheduled event
+school
+school alumni
+school award
+school competition
+school competitive event
+school event
+school facility
+school rivalry
+school social event
+school sports team
+sdf
+seasonal schedule
+selection solution
+seller
+sensei
+separation methods
+service band
+shortenedurl
+shows
+similar cryptid classification
+similar mythical creature
+skill
+slogan
+soccer competition
+soccer competition season
+soccer field
+soccer league
+soccer league system
+soccer match
+soccer organization
+soccer player
+soccer position
+soccer referee
+soccer squad
+soccer squad position
+soccer team
+soccer team manager
+society
+softwaer
+solar collector
+south east asia
+spanish province
+spectral band
+spectrum auction
+sport
+sports
+staff
+staff group
+staff member
+station
+statistics
+structure
+structure2
+student
+student award
+student government group
+studentname
+students
+style
+subbinfo
+subinfo
+subservice band
+subsystem
+superinfo
+superluchas
+sww base
+symbol
+symbolic meaning
+synset
+t1
+tack
+tap
+teaching faculty
+team award
+technique
+technokrats
+technology news
+test
+test reverse
+test1
+test5
+test6
+testtype
+testtype2
+testing1
+tgliderjoin
+time
+title
+titticimmino.com
+tmembro
+todas las peliculas
+toning description
+tood
+topic
+topic/film/title
+track
+track type
+tracks
+trade associations
+training faculty
+transmitter
+tvc
+type/film/creator
+type/film/description
+type/film/image
+type/film/location
+type1
+type name
+type of rose
+typetest
+typetest1
+typetest2
+typetest4
+typetest8
+typetest9
+ukemi
+umql property
+university
+vcard
+vcard adr
+vcard adr type
+vcard class
+vcard email
+vcard email type
+vcard impp
+vcard impp type
+vcard label
+vcard n
+vcard org
+vcard tel
+vcard tel type
+vevent
+vevent class
+vevent status
+vevent transp
+value
+veterinary disease or medical condition
+veterinary drug
+video2brain
+videoconferencing
+view
+visualice en:
+weapons
+weather station model
+web company india
+web design in riyadh
+webandrank
+webandrank.com
+webcomic
+website
+website design company
+weight
+wh test type2
+wh test type3
+woman
+word
+words
+written work refactor
+wuzhenyu
+www.iabin.net
+www.mecon.gov.ar
+xibei-type
+xibei-type2
+xibeitype-20120928
+xyzabc
+y:published
+year
+yourgreenpal
+yy
+irtibat
+sirket
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+ 
