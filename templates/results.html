@@ -17,7 +17,7 @@
 {% block mid %}
 {% if results %}
   {% if translated %}
-   <p style="text-align:left">Your query was disambiguated into <i>{{ translated }}</i></p>
+  <p style="text-align:left">Your query was disambiguated into <i>{{ translated }}</i>  in {{ query_time }} seconds from {{ hostname }} </p>
   {% endif %}
   {% for result in results %}
     {% if result.mark == 'x' %}
