@@ -248,7 +248,11 @@ class Expression(Actor):
             results = []
             for c, s, r, v in args:
                 print '%1.3f %1.3f %s' % (s, r, v['wikiname'])
+                if r > 0.90:
+                    print 'Too similar to root'
+                    continue
                 if r > 0.75 and iter==0:
+                    print 'Somewhat similar to root'
                     continue
                 if v['wikiname'] is None:
                     print 'No wikiname'
