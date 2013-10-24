@@ -46,7 +46,7 @@ def index(query="Jurassic Park"):
 if __name__ == '__main__':
     #app.config['PROFILE'] = True
     #app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions = [30])
-    twisted = False
+    twisted = True
     if twisted:
         from twisted.internet import reactor
         from twisted.web.server import Site
