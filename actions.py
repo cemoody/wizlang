@@ -306,7 +306,6 @@ class Expression(Actor):
             return reps
 
     def run(self, query):
-        import pdb; pdb.set_trace()
         start = time.time()
         signs, words = self.parse(query)
         translated, signs, canonizeds, wikinames = self.canonize(signs, words)
