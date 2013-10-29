@@ -47,12 +47,21 @@ def similarity(svec, total):
     sim = np.sum(top / denom, axis=1)
     return sim
 
-@timer
 def normalize(avl):
     vnorm = ne.evaluate('sum(avl**2.0, axis=1)')
     vnorm.shape = [vnorm.shape[0], 1]
     avl = ne.evaluate('avl / sqrt(vnorm)')
     return avl
+
+@timer
+def split(operation, data, i=300):
+    a, b = 0, 0
+    chunk = data.shape[0] / i
+    for j in range(i):
+        b += chunk
+        data[a:b] = operation(data[a:b])
+        a = b
+    return data
 
 def chunks(l, n):
     for i in xrange(0, len(l), n):

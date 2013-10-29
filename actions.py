@@ -146,6 +146,7 @@ class Expression(Actor):
             # w='wikipedia'
             trained = "data" 
             fnw = '%s/vectors.fullwiki.1000.s50.words' % trained
+            fnw = '%s/vectors.fullwiki.1000.s50.5k.words' % trained
             wc2t = '%s/c2t' % './data'
             wt2c = '%s/t2c' % './data'
             # all word vecotor lib VL
@@ -297,6 +298,7 @@ class Expression(Actor):
             return reps
 
     def run(self, query):
+        import pdb; pdb.set_trace()
         start = time.time()
         signs, words = self.parse(query)
         translated, signs, canonizeds, wikinames = self.canonize(signs, words)

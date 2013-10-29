@@ -14,21 +14,23 @@ app = Flask(__name__,  static_folder='static',
             static_url_path='', template_folder='templates')
 
 trained = "/home/ubuntu/data" 
-fnv = '%s/vectors.fullwiki.1000.s50.num.npy' % trained
-fnw = '%s/vectors.fullwiki.1000.s50.words' % trained
+fnv = '%s/vectors.fullwiki.1000.s50.5k.num.npy' % trained
+fnw = '%s/vectors.fullwiki.1000.s50.5k.words' % trained
 ffb = '%s/freebase_types_and_fullwiki.1000.s50.words' % trained
 avl = veclib.get_vector_lib(fnv)
-avl = veclib.normalize(avl)
+#avl = veclib.normalize(avl)
+avl = veclib.split(veclib.normalize, avl)
 if os.path.exists(fnw + '.pickle'):
     aw2i, ai2w = cPickle.load(open(fnw + '.pickle'))
 else:
     aw2i, ai2w = veclib.get_words(fnw)
     cPickle.dump([aw2i, ai2w], open(fnw + '.pickle','w'))
-fb_words = [word.strip() for word in open(ffb).readlines()]
-idx = [aw2i[word] for word in fb_words]
-fvl = avl[idx]
-fw2i = {w:i for i, w in enumerate(fb_words)}
-fi2w = {i:w for i, w in enumerate(fb_words)}
+frac = None
+if frac:
+    end = int(avl.shape[0] * frac)
+    avl = avl[:end]
+    for i in range(end, avl.shape):
+        del aw2i[ai2w[i].pop()]
 
 @app.route('/farthest/<raw_query>')
 #@json_exception
@@ -44,7 +46,11 @@ def farthest(raw_query='{"args":["iphone", "ipad", "ipod", "walkman"]}'):
     N2, N1, vectors = veclib.build_n2(words, avl, aw2i)
     inner, left, right = veclib.common_words(words, vectors, avl, aw2i, ai2w,
                                              N2, N1, blacklist=words)
-    inner_fb, left_fb, right_fb = veclib.common_words(words, vectors, fvl, fw2i, fi2w,
+    fb_words = [word.strip() for word in open(ffb).readlines()]
+    fw2i = {w:i for i, w in enumerate(fb_words)}
+    fi2w = {i:w for i, w in enumerate(fb_words)}
+    idx = [aw2i[word] for word in fb_words]
+    inner_fb, left_fb, right_fb = veclib.common_words(words, vectors, avl[idx], fw2i, fi2w,
                                              N2, N1, blacklist=words, n=1000)
     resp = {}
     resp['N1'] = [float(x) for x in N1]
@@ -121,5 +127,18 @@ if __name__ == '__main__':
         print "Serving port %i" % port
     except:
         pass
-    app.run(host='0.0.0.0', port=port, debug=True, use_reloader=False)
+    use_flask = False
+    if use_flask:
+        app.run(host='0.0.0.0', port=port, debug=True, use_reloader=False)
+    else:
+        from twisted.internet import reactor
+        from twisted.web.server import Site
+        from twisted.web.wsgi import WSGIResource
+
+        resource = WSGIResource(reactor, reactor.getThreadPool(), app)
+        site = Site(resource)
+        reactor.listenTCP(port, site, interface="0.0.0.0")
+        reactor.run()
+        print "Running"
+
     #app.run(host='0.0.0.0', port=port)
