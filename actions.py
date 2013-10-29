@@ -8,9 +8,9 @@ import sets
 import cPickle
 import os.path
 import time
-import sharedmem
 import multiprocessing
 import traceback
+import socket
 from multiprocessing import Manager
 from sets import Set
 import numexpr as ne
@@ -18,8 +18,10 @@ from wiki import *
 from utils import *
 import veclib
 
-backend_url_nearest = r'http://localhost:5005/nearest/'
-backend_url_farthest = r'http://localhost:5005/farthest/'
+#backend_url_nearest = r'http://localhost:5005/nearest/'
+backend_url_nearest = r'http://thisplusthat.me:5005/nearest/'
+#backend_url_farthest = r'http://localhost:5005/farthest/'
+backend_url_farthest = r'http://thisplusthat.me:5005/farthest/'
 
 def eval_sign(query):
     """ This is a dumb parser that assign + or - to every character
@@ -145,32 +147,34 @@ class Expression(Actor):
             # a= 'all'
             # w='wikipedia'
             trained = "data" 
-            fnw = '%s/vectors.fullwiki.1000.s50.words' % trained
             fnw = '%s/vectors.fullwiki.1000.s50.5k.words' % trained
-            wc2t = '%s/c2t' % './data'
-            wt2c = '%s/t2c' % './data'
-            # all word vecotor lib VL
-            self.wc2t = cPickle.load(open(wc2t))
-            self.wt2c = cPickle.load(open(wt2c))
-            print "Loading...", 
-            ks, vs  = [], []
-            for k, v in self.wc2t.iteritems():
-                k = veclib.canonize(k, {}, match=False)
-                ks.append(k)
-                vs.append(v)
-            for k, v in zip(ks, vs):
-                self.wc2t[k] = v
-            print " done."
+            if False:
+                wc2t = '%s/c2t' % './data'
+                wt2c = '%s/t2c' % './data'
+                # all word vecotor lib VL
+                self.wc2t = cPickle.load(open(wc2t))
+                self.wt2c = cPickle.load(open(wt2c))
+                print "Loading...", 
+                ks, vs  = [], []
+                for k, v in self.wc2t.iteritems():
+                    k = veclib.canonize(k, {}, match=False)
+                    ks.append(k)
+                    vs.append(v)
+                for k, v in zip(ks, vs):
+                    self.wc2t[k] = v
+                print " done with veclib"
             # all words, word to index mappings w2i
             if os.path.exists(fnw + '.pickle'):
                 self.aw2i , self.ai2w = cPickle.load(open(fnw + '.pickle'))
             else:
                 self.aw2i , self.ai2w = veclib.get_words(fnw)
                 cPickle.dump([self.aw2i, self.ai2w], open(fnw + '.pickle','w'))
+            print " done with aw2i"
         else:
             # Wikipedia articles and their canonical transformations
-            self.wc2t = preloaded_actor.wc2t #Wiki dump article titles
-            self.wt2c = preloaded_actor.wt2c
+            if False:
+                self.wc2t = preloaded_actor.wc2t #Wiki dump article titles
+                self.wt2c = preloaded_actor.wt2c
             # All vectors from word2vec
             self.aw2i = preloaded_actor.aw2i
             self.ai2w = preloaded_actor.ai2w
@@ -244,7 +248,11 @@ class Expression(Actor):
             results = []
             for c, s, r, v in args:
                 print '%1.3f %1.3f %s' % (s, r, v['wikiname'])
+                if r > 0.90:
+                    print 'Too similar to root'
+                    continue
                 if r > 0.75 and iter==0:
+                    print 'Somewhat similar to root'
                     continue
                 if v['wikiname'] is None:
                     print 'No wikiname'
@@ -306,6 +314,7 @@ class Expression(Actor):
             results, other = self.request(signs, canonizeds)
             reps = self.evaluate(query, translated, wikinames, results, other)
             reps['actor'] = self.name
+            reps['hostname'] = socket.gethostname()
             stop = time.time()
             reps['query_time'] = "%1.1f" %(stop - start)
             return reps

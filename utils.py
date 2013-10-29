@@ -65,7 +65,10 @@ def persist_to_file(original_func):
             ret = None
         if ret is None:
             ret = original_func(*args,**kwargs)
-            json.dump(ret, open(file_name, 'w'))
+            try:
+                json.dump(ret, open(file_name, 'w'))
+            except:
+                print "Failed to cache"
         return ret
     return decorator
 
