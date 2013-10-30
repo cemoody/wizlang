@@ -14,8 +14,8 @@ app = Flask(__name__,  static_folder='static',
             static_url_path='', template_folder='templates')
 
 trained = "/home/ubuntu/data" 
-fnv = '%s/vectors.fullwiki.1000.s50.5k.num.npy' % trained
-fnw = '%s/vectors.fullwiki.1000.s50.5k.words' % trained
+fnv = '%s/vectors.fullwiki.1000.s50.num.npy' % trained
+fnw = '%s/vectors.fullwiki.1000.s50.words' % trained
 ffb = '%s/freebase_types_and_fullwiki.1000.s50.words' % trained
 avl = veclib.get_vector_lib(fnv)
 #avl = veclib.normalize(avl)
@@ -138,7 +138,7 @@ if __name__ == '__main__':
         resource = WSGIResource(reactor, reactor.getThreadPool(), app)
         site = Site(resource)
         reactor.listenTCP(port, site, interface="0.0.0.0")
-        reactor.run()
         print "Running"
+        reactor.run()
 
     #app.run(host='0.0.0.0', port=port)

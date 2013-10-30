@@ -18,10 +18,10 @@ from wiki import *
 from utils import *
 import veclib
 
-#backend_url_nearest = r'http://localhost:5005/nearest/'
-backend_url_nearest = r'http://thisplusthat.me:5005/nearest/'
-#backend_url_farthest = r'http://localhost:5005/farthest/'
-backend_url_farthest = r'http://thisplusthat.me:5005/farthest/'
+backend_url_nearest = r'http://localhost:5005/nearest/'
+#backend_url_nearest = r'http://thisplusthat.me:5005/nearest/'
+backend_url_farthest = r'http://localhost:5005/farthest/'
+#backend_url_farthest = r'http://thisplusthat.me:5005/farthest/'
 
 def eval_sign(query):
     """ This is a dumb parser that assign + or - to every character
@@ -147,7 +147,8 @@ class Expression(Actor):
             # a= 'all'
             # w='wikipedia'
             trained = "data" 
-            fnw = '%s/vectors.fullwiki.1000.s50.5k.words' % trained
+            #fnw = '%s/vectors.fullwiki.1000.s50.5k.words' % trained
+            fnw = '%s/vectors.fullwiki.1000.s50.words' % trained
             if False:
                 wc2t = '%s/c2t' % './data'
                 wt2c = '%s/t2c' % './data'
