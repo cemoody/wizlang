@@ -127,7 +127,7 @@ if __name__ == '__main__':
         print "Serving port %i" % port
     except:
         pass
-    use_flask = False
+    use_flask = True
     if use_flask:
         app.run(host='0.0.0.0', port=port, debug=True, use_reloader=False)
     else:

@@ -128,6 +128,7 @@ def max_similarity(words, checkwords, avl, aw2i):
         resp.append(sim)
     return resp
 
+@timer
 def nearest_word(vector, vector_lib, index2word, n=5, skip=0, 
                  chunk_size=100000, use_ne=True):
     words = []

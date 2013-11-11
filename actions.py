@@ -258,12 +258,16 @@ class Expression(Actor):
                 if v['wikiname'] is None:
                     print 'No wikiname'
                     continue
+                if 'PA474' in v['wikiname']:
+                    print 'skipping pa474'
+                    continue
                 ret = dict(canonical=c, similarity=s)
                 ret.update(v)
                 ret.update(ret.pop('article'))
                 results.append(ret)
             n += 8
             iter += 1
+        print "%i results" % len(results)
         return results, {}
     
     @timer
