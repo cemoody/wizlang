@@ -131,14 +131,16 @@ def max_similarity(words, checkwords, avl, aw2i):
 
 @timer
 def nearest_word(vector, vector_lib, index2word, n=5, skip=0, 
-                 chunk_size=100000, use_ne=True):
+                 chunk_size=100000, use_ne=False, use_shortdot=True,
+                 thresh=0.0):
     words = []
     if use_ne:
         d = ne.evaluate('sum(vector_lib * vector, axis=1)')
         idx = np.argsort(d)[::-1]
         words   = [index2word[i] for i in idx[:n]]
     elif use_shortdot:
-        d = shortdot.shortdot(vector_lib, vector, 50, 0.1)
+        d = np.zeros(vector_lib.shape[0], dtype='f4')
+        shortdot.shortdot(vector_lib, vector, d, 100, thresh)
         idx = np.argsort(d)[::-1]
         words   = [index2word[i] for i in idx[:n]]
     else:
