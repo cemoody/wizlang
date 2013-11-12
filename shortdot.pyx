@@ -21,11 +21,16 @@ def shortdot(
         int A_m = A.shape[1]
         int B_n = B.shape[0]
         double tot = 0.0
+        int skipped = 0
     
     # Initialize the results matrix.
     for i in xrange(A_n):
         for j in xrange(A_m):
             tot += A[i, j] * B[j]
-            if j > 10 and tot < threshold:
-                break
+            if j % 10 == 9:
+                #print i, j, tot
+                if tot < threshold:
+                    skipped += B_n - j
+                    break
         C[i] = tot
+    return skipped

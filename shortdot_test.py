@@ -8,23 +8,24 @@ import shortdot
 import time
 
 rows = 100
-dims = 10
-A = np.random.random((rows, dims)).astype('f4')
-B = np.random.random((dims)).astype('f4')
-C = np.zeros(dims).astype('f8')
+dims = 1000
+A = np.random.normal(size=(rows, dims)).astype('f4')
+B = np.random.normal(size=(dims)).astype('f4')
+C = np.zeros(dims)
 
 n = 500
 start = time.time()
 for i in range(n):
-    shortdot.shortdot(A, B, C)
+    skipped = shortdot.shortdot(A, B, C, -1.0)
 stop = time.time()
-cy = (stop - start) * 1000.0 / n
+print "finished cython, skipped %i"  % skipped
+cy = (stop - start) * 1.0 / n * 1e9
 
 start = time.time()
 for i in range(n):
     np.dot(A, B)
 stop = time.time()
-py = (stop - start) * 1000.0 / n
+py = (stop - start) * 1.0 / n * 1e9
 
-print "cython: %1.3fms" % cy
-print "python: %1.3fms" % py
+print "cython: %1.3ens" % cy
+print "python: %1.3ens" % py
