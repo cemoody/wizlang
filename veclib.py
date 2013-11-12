@@ -7,6 +7,7 @@ import difflib
 import unicodedata
 import numexpr as ne
 import time
+import shortdot
 from sets import Set 
 from utils import *
 
@@ -134,6 +135,10 @@ def nearest_word(vector, vector_lib, index2word, n=5, skip=0,
     words = []
     if use_ne:
         d = ne.evaluate('sum(vector_lib * vector, axis=1)')
+        idx = np.argsort(d)[::-1]
+        words   = [index2word[i] for i in idx[:n]]
+    elif use_shortdot:
+        d = shortdot.shortdot(vector_lib, vector, 50, 0.1)
         idx = np.argsort(d)[::-1]
         words   = [index2word[i] for i in idx[:n]]
     else:

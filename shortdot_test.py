@@ -22,7 +22,7 @@ else:
     A = A.astype('f4')
     B = A[A.shape[0]/2]
     C = np.zeros(A.shape[0]).astype('f8')
-    thresh = 0.1
+    thresh = 0.0
     rows = A.shape[0]
     dims = A.shape[1]
 C = C.astype('f4')
