@@ -7,7 +7,6 @@ import difflib
 import unicodedata
 import numexpr as ne
 import time
-import shortdot
 from sets import Set 
 from utils import *
 
@@ -131,7 +130,7 @@ def max_similarity(words, checkwords, avl, aw2i):
 
 @timer
 def nearest_word(vector, vector_lib, index2word, n=5, skip=0, 
-                 chunk_size=100000, use_ne=False, use_shortdot=True,
+                 chunk_size=100000, use_ne=False, use_shortdot=False,
                  thresh=0.0):
     words = []
     if use_ne:
@@ -139,6 +138,7 @@ def nearest_word(vector, vector_lib, index2word, n=5, skip=0,
         idx = np.argsort(d)[::-1]
         words   = [index2word[i] for i in idx[:n]]
     elif use_shortdot:
+        import shortdot
         d = np.zeros(vector_lib.shape[0], dtype='f4')
         shortdot.shortdot(vector_lib, vector, d, 100, thresh)
         idx = np.argsort(d)[::-1]

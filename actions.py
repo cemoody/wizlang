@@ -149,6 +149,7 @@ class Expression(Actor):
             trained = "data" 
             #fnw = '%s/vectors.fullwiki.1000.s50.5k.words' % trained
             fnw = '%s/vectors.fullwiki.1000.s50.words' % trained
+            fnw = '%s/freebase.words' % trained
             if False:
                 wc2t = '%s/c2t' % './data'
                 wt2c = '%s/t2c' % './data'
@@ -202,7 +203,7 @@ class Expression(Actor):
 
     @persist_to_file
     @timer
-    def canonize(self, signs, words, parallel=True):
+    def canonize(self, signs, words, parallel=False):
         # Get the canonical names for the query
         canon = self.aw2i.keys()
         if parallel:
