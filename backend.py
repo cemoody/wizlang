@@ -9,22 +9,36 @@ import numpy as np
 
 import veclib
 from utils import *
+
+USE_ANNOY=True
  
 app = Flask(__name__,  static_folder='static', 
             static_url_path='', template_folder='templates')
 
 trained = "/home/ubuntu/data" 
 fnv = '%s/vectors.fullwiki.1000.s50.num.npy' % trained
-fnw = '%s/vectors.fullwiki.1000.s50.words' % trained
 ffb = '%s/freebase_types_and_fullwiki.1000.s50.words' % trained
-avl = veclib.get_vector_lib(fnv)
-#avl = veclib.normalize(avl)
-avl = veclib.split(veclib.normalize, avl)
+fnw = '/home/ubuntu/code/wizlang/data/freebase.words'
+
 if os.path.exists(fnw + '.pickle'):
     aw2i, ai2w = cPickle.load(open(fnw + '.pickle'))
 else:
     aw2i, ai2w = veclib.get_words(fnw)
     cPickle.dump([aw2i, ai2w], open(fnw + '.pickle','w'))
+print 'loaded word index'
+
+if USE_ANNOY:
+    import annoy
+    annoy_index = annoy.AnnoyIndex(1000)
+    annoy_index.load("/home/ubuntu/code/wizlang/data/freebase.tree")
+    print 'loaded Annoy Index'
+    avl = annoy_index
+else:
+    avl = veclib.get_vector_lib(fnv)
+    #avl = veclib.normalize(avl)
+    avl = veclib.split(veclib.normalize, avl)
+
+
 frac = None
 if frac:
     end = int(avl.shape[0] * frac)
@@ -67,10 +81,12 @@ def farthest(raw_query='{"args":["iphone", "ipad", "ipod", "walkman"]}'):
 
 @app.route('/nearest/<raw_query>')
 @timer
-def nearest(raw_query='{"args": [[1.0, "jurassic_park"]]}'):
+def nearest(raw_query='{"args": [[1.0, "jurassic_park"]]}', 
+            use_annoy=USE_ANNOY):
     """Given the expression, find the appropriate vectors, and evaluate it"""
     print 'QUERY'
     print raw_query
+    import pdb; pdb.set_trace()
     try:
         query = json.loads(raw_query.strip("'"))
         total = None
@@ -79,7 +95,11 @@ def nearest(raw_query='{"args": [[1.0, "jurassic_park"]]}'):
         args_neighbors = []
         root_vectors = []
         for sign, word in query['args']:
-            vector = avl[aw2i[word]]
+            if use_annoy:
+                vector = annoy_index.get_item_vector(aw2i[word])
+                vector = np.array(vector)
+            else:
+                vector = avl[aw2i[word]]
             root_vectors.append(vector)
             if False:
                 canon, vectors, sim = veclib.nearest_word(vector, avl, ai2w, n=20)
@@ -91,7 +111,8 @@ def nearest(raw_query='{"args": [[1.0, "jurassic_park"]]}'):
             else:
                 total += vector * sign
         total /= np.sum(total**2.0)
-        canon, vectors, sim = veclib.nearest_word(total, avl, ai2w, n=20)
+        canon, vectors, sim = veclib.nearest_word(total, avl, ai2w, n=5, 
+                                                  use_annoy=use_annoy)
         root_sims = []
         for canonical, vector in zip(canon, vectors):
             sims = []
